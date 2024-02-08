@@ -5,6 +5,9 @@ class HistoryController extends BaseController {
   /// SERVICES
   final HistoryService _historyService = HistoryService();
 
+  /// CONTROLLERS
+
+  /// VARIABLES
   final List<Map<String, dynamic>> historyList = [
     {
       'type': 'done',
@@ -47,10 +50,6 @@ class HistoryController extends BaseController {
       'date': '13Dec - 6:30'
     },
   ];
-
-  /// CONTROLLERS
-
-  /// VARIABLES
 
   /// VALIDATION
 

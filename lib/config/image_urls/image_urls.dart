@@ -40,19 +40,32 @@ class AppImages {
   static const String cancel = '$iconsFolder/cancel.png';
   static const String hashtagWhite = '$iconsFolder/hashtag-white.png';
   static const String notifBg = '$iconsFolder/notif-bg.png';
+  static const String notifBgDark = '$iconsFolder/notif-bg-dark.png';
   static const String menuBg = '$iconsFolder/menu-bg.png';
+  static const String menuBgDark = '$iconsFolder/menu-bg-dark.png';
   static const String cancelWhite = '$iconsFolder/cancel-white.png';
   static const String arrowDrop = '$iconsFolder/arrow-drop.png';
+  static const String home = '$iconsFolder/home.png';
+  static const String history = '$iconsFolder/history.png';
+  static const String backArrow = '$iconsFolder/back-arrow.png';
 
   /// IMAGES
   static const String logo = '$imagesFolder/logo.png';
   static const String bgShapeTop = '$imagesFolder/bg-shape-top.png';
   static const String bgShapeBottom = '$imagesFolder/bg-shape-bottom.png';
   static const String signupUserShape = '$imagesFolder/signup-user-shape.png';
+  static const String signupUserShapeDark =
+      '$imagesFolder/signup-user-shape-dark.png';
   static const String userPhoto = '$imagesFolder/user-photo.png';
   static const String enabledInput = '$imagesFolder/enabled-input.png';
   static const String disabledInput = '$imagesFolder/disabled-input.png';
   static const String passwordCircle = '$imagesFolder/password-circle.png';
   static const String passwordTick = '$imagesFolder/password-tick.png';
   static const String floatingBtn = '$imagesFolder/floating-btn.png';
+  static const String newDoctor = '$imagesFolder/new_doctor.png';
+  static const String logoCompanyDark = '$imagesFolder/logo-campany-dark.png';
+  static const String appointmentCircleDark =
+      '$imagesFolder/appointment-circle-dark.png';
+  static const String passwordCircleDark =
+      '$imagesFolder/password-circle-dark.png';
 }

@@ -1,25 +1,24 @@
+import 'package:dio/dio.dart';
+import 'package:reservation/app/auth/login/models/login_response.dart';
+import 'package:reservation/config/api-urls/end_points.dart';
+
 import '../../../../config/interceptor/interceptor.dart';
 
 class LoginService {
-  Future<bool> loginWithEmailAndPassword(String id, String password) async {
-    AppInterceptor.showLoader();
+  Future<LoginResponse?> login({
+    required String id,
+    required String password,
+  }) async {
     Map<String, String> data = {
-      "id": id,
+      "email": id,
       "password": password,
     };
-
-    await Future.delayed(const Duration(seconds: 3), () {
-      AppInterceptor.hideLoader();
-
-      return true;
-    });
-    return false;
-    /* AppInterceptor.dio?.post(EndPoints.LOGIN_URL, data: data).then(
-      (Response response) {
-        if (response.statusCode == 200) {
-          return true;
-        }
-      },
-    );*/
+    Response? response =
+        await AppInterceptor.dio?.post(EndPoints.LOGIN_URL, data: data);
+    if (response != null && response.statusCode == 200) {
+      return LoginResponse.fromJson(response.data);
+    } else {
+      return null;
+    }
   }
 }

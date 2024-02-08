@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reservation/app/auth/registration-success/screens/registration_success_screen.dart';
+import 'package:reservation/config/colors/colors.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';
@@ -16,7 +17,7 @@ class PasswordController extends BaseController
 
   /// VARIABLES
   late AnimationController animationController;
-  RxString passwordStrength = 'Week Password'.obs;
+  RxString passwordStrength = 'weak_password'.tr.obs;
 
   /// VALIDATION
 
@@ -48,22 +49,22 @@ class PasswordController extends BaseController
 
   int calculatePasswordStrength(String password) {
     if (animationController.value < 0.50) {
-      passwordStrength.value = 'Week Password';
+      passwordStrength.value = 'weak_password'.tr;
     } else if (animationController.value < 0.83) {
-      passwordStrength.value = 'Medium Password';
+      passwordStrength.value = 'medium_password'.tr;
     } else {
-      passwordStrength.value = 'Strong Password';
+      passwordStrength.value = 'strong_password'.tr;
     }
     return password.length;
   }
 
   Color getColor(double value) {
     if (value < 0.51) {
-      return Colors.red;
+      return AppColors.primary;
     } else if (value < 0.84) {
-      return Colors.amber;
+      return AppColors.primary;
     } else {
-      return Colors.green;
+      return AppColors.primary;
     }
   }
 
@@ -77,7 +78,7 @@ class PasswordController extends BaseController
   /// SIGN UP METHODS
   handleClickContinue() {
     Get.to(
-      RegistrationSuccessScreen(),
+      () => RegistrationSuccessScreen(),
       transition: Transition.leftToRight,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

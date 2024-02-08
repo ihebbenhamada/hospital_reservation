@@ -31,7 +31,7 @@ class AppointmentSuccessController extends BaseController {
   /// FUNCTIONS
   handleClickContinue() {
     Get.offAll(
-      DashboardScreen(),
+      () => DashboardScreen(),
       transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

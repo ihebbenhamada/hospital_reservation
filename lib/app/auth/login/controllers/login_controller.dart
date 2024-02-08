@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/dashboard/screen/dashboard-screen.dart';
+import 'package:reservation/app/auth/forget-password/screens/forget_password_screen.dart';
 
+import '../../../../config/colors/colors.dart';
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../dashboard/screen/dashboard-screen.dart';
 import '../../signup/screens/signup_screen.dart';
 import '../services/login_service.dart';
 
@@ -72,13 +75,12 @@ class LoginController extends BaseController {
   }
 
   handleClickForgetPassword() {
-    storage.write('from', 'forgetPassword');
-    /*Get.to(
-      () => PhoneNumberScreen(),
-      transition: Transition.leftToRight,
+    Get.to(
+      () => ForgetPasswordScreen(),
+      transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),
-    );*/
+    );
   }
 
   handleClickSignup() {
@@ -91,33 +93,37 @@ class LoginController extends BaseController {
   }
 
   /// SIGN IN METHODS
-  signInWithEmailAndPassword() {
-    if (enabled) {
-      Get.offAll(
-        () => DashboardScreen(),
-        transition: Transition.leftToRight,
-        curve: Curves.ease,
-        duration: const Duration(milliseconds: 500),
-      );
-    }
-    /*_loginService
-          .loginWithEmailAndPassword(emailTextEditingController.value.text,
-              passwordTextEditingController.value.text)
-          .then(
-        (value) {
-          box.write('isLoggedIn', true);
-          if (emailTextEditingController.value.text == 'driver@gmail.com') {
-            box.write('role', 'driver');
-          } else {
-            box.write('role', 'client');
-          }
+  handleClickSignIn() {
+    if (idTextEditingController.value.text.isNotEmpty &&
+        passwordTextEditingController.value.text.isNotEmpty) {
+      _loginService
+          .login(
+              id: idTextEditingController.value.text,
+              password: passwordTextEditingController.value.text)
+          .then((value) {
+        if (value != null) {
+          storage.write('token', value.token);
+          storage.write('user', value.toJson());
           Get.offAll(
-            () => const DashboardScreen(),
+            () => DashboardScreen(),
             transition: Transition.leftToRight,
             curve: Curves.ease,
             duration: const Duration(milliseconds: 500),
           );
-        },
-      );*/
+        } else {
+          print('error');
+        }
+      });
+    } else {
+      Fluttertoast.showToast(
+        msg: "Fill in the credentials",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: AppColors.redLight,
+        textColor: AppColors.white,
+        fontSize: 16.0,
+      );
+    }
   }
 }

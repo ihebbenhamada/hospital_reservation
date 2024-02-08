@@ -5,6 +5,7 @@ import 'package:reservation/widgets/information-input/information-input.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/patient_information_controller.dart';
 
@@ -12,11 +13,13 @@ class PatientInformationScreen extends StatelessWidget {
   PatientInformationScreen({Key? key}) : super(key: key);
 
   final _patientInformationController = Get.put(PatientInformationController());
-
+  final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: _themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -34,7 +37,9 @@ class PatientInformationScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImages.verificationCircle,
+                          _themeController.isDarkMode.value
+                              ? AppImages.appointmentCircleDark
+                              : AppImages.verificationCircle,
                           height: 142.h,
                           width: 142.h,
                         ),
@@ -55,10 +60,10 @@ class PatientInformationScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'Complete Information',
+                        'complete_information_step'.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                           color: AppColors.white,
                         ),
                       ),
@@ -80,7 +85,7 @@ class PatientInformationScreen extends StatelessWidget {
                             .serialTextEditingController,
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
-                        hintText: 'Serial',
+                        hintText: 'serial'.tr,
                       ),
                     ],
                   ),
@@ -90,46 +95,26 @@ class PatientInformationScreen extends StatelessWidget {
                         .patientNameTextEditingController,
                     height: 50.h,
                     width: double.infinity,
-                    hintText: 'Patient Name',
+                    hintText: 'patient_name'.tr,
                   ),
                   35.h.verticalSpace,
                   InformationInput(
                     controller: _patientInformationController
-                        .doctorNameTextEditingController,
+                        .mobileTextEditingController,
                     height: 50.h,
                     width: double.infinity,
-                    hintText: 'Doctor Name',
-                  ),
-                  35.h.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InformationInput(
-                        controller: _patientInformationController
-                            .mobileTextEditingController,
-                        height: 50.h,
-                        width: MediaQuery.of(context).size.width * 0.38,
-                        hintText: 'Mobile',
-                      ),
-                      InformationInput(
-                        controller: _patientInformationController
-                            .dateTextEditingController,
-                        height: 50.h,
-                        width: MediaQuery.of(context).size.width * 0.38,
-                        hintText: 'Date',
-                      ),
-                    ],
+                    hintText: 'phone_number'.tr,
                   ),
                 ],
               ),
             ),
             ReservationButton(
-              text: 'Confirm',
+              text: 'confirm'.tr,
               onClick: _patientInformationController.handleClickConfirm,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'Back',
+              text: 'back'.tr,
               isPrimary: false,
               onClick: _patientInformationController.handleClickBack,
             ),

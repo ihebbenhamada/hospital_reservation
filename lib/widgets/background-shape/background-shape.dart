@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:reservation/config/colors/colors.dart';
 
 import '../../config/image_urls/image_urls.dart';
+import '../../config/theme/theme_controller.dart';
 
 class BackgroundShape extends StatelessWidget {
-  const BackgroundShape({Key? key, required this.child}) : super(key: key);
+  BackgroundShape({
+    Key? key,
+    required this.child,
+    this.backgroundColor = AppColors.white,
+  }) : super(key: key);
   final Widget child;
+  final Color? backgroundColor;
+  final ThemeController themeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.white,
+      backgroundColor: backgroundColor,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -22,6 +31,9 @@ class BackgroundShape extends StatelessWidget {
             child: Image.asset(
               AppImages.bgShapeTop,
               fit: BoxFit.fitWidth,
+              color: themeController.isDarkMode.value
+                  ? AppColors.dark1
+                  : AppColors.blueLight,
             ),
           ),
           Positioned(
@@ -32,6 +44,9 @@ class BackgroundShape extends StatelessWidget {
               AppImages.bgShapeBottom,
               width: double.infinity,
               fit: BoxFit.fitWidth,
+              color: themeController.isDarkMode.value
+                  ? AppColors.dark1
+                  : AppColors.blueLight,
             ),
           ),
           Positioned(

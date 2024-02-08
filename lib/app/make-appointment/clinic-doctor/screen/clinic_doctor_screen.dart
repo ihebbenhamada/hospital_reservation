@@ -5,16 +5,20 @@ import 'package:reservation/app/make-appointment/clinic-doctor/controllers/clini
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 
 class ClinicDoctorScreen extends StatelessWidget {
   ClinicDoctorScreen({Key? key}) : super(key: key);
   final _clinicDoctorController = Get.put(ClinicDoctorController());
+  final ThemeController _themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: _themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -32,7 +36,9 @@ class ClinicDoctorScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImages.verificationCircle,
+                          _themeController.isDarkMode.value
+                              ? AppImages.appointmentCircleDark
+                              : AppImages.verificationCircle,
                           height: 142.h,
                           width: 142.h,
                         ),
@@ -53,10 +59,10 @@ class ClinicDoctorScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'CHOOSE CLINIC & DOCTOR',
+                        'choose_clinic_doctor_step'.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                           color: AppColors.white,
                         ),
                       ),
@@ -70,7 +76,9 @@ class ClinicDoctorScreen extends StatelessWidget {
                       horizontal: 23,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: _themeController.isDarkMode.value
+                          ? AppColors.dark1
+                          : AppColors.white,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
@@ -115,7 +123,9 @@ class ClinicDoctorScreen extends StatelessWidget {
                     height: 60.h,
                     padding: const EdgeInsets.symmetric(horizontal: 23),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: _themeController.isDarkMode.value
+                          ? AppColors.dark1
+                          : AppColors.white,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
@@ -154,45 +164,16 @@ class ClinicDoctorScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  40.h.verticalSpace,
-                  Container(
-                    width: double.infinity,
-                    height: 60.h,
-                    padding: const EdgeInsets.symmetric(horizontal: 23),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Fees: 50\$',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.gray5,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
             ReservationButton(
-              text: 'Next',
+              text: 'next'.tr,
               onClick: _clinicDoctorController.handleClickNext,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'Back',
+              text: 'back'.tr,
               isPrimary: false,
               onClick: _clinicDoctorController.handleClickBack,
             ),

@@ -8,6 +8,8 @@ import 'config/colors/colors.dart';
 import 'config/custom_loading_animation.dart';
 
 void main() async {
+  /// INITIALIZE STORAGE
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   configureGlobalLoader();
   SystemChrome.setSystemUIOverlayStyle(
@@ -20,9 +22,7 @@ void main() async {
 
   /// INITIALIZE FIREBASE
 
-  /// INITIALIZE STORAGE
-  await GetStorage.init();
-  dynamic isUserLoggedIn = await GetStorage().read('isLoggedIn');
+  dynamic user = await GetStorage().read('user');
   dynamic language = await GetStorage().read('language');
 
   if (language == null) {
@@ -33,16 +33,17 @@ void main() async {
   //notification();
 
   /// MAIN FUNCTION
-  runApp(Reservation(
-    isLoggedIn: isUserLoggedIn,
-    language: language,
-  ));
+  runApp(
+    Reservation(
+      isLoggedIn: user != null ? true : false,
+      language: language,
+    ),
+  );
 }
 
 void configureGlobalLoader() {
   EasyLoading.instance
     ..animationStyle = EasyLoadingAnimationStyle.opacity
-    ..displayDuration = const Duration(milliseconds: 5000)
     ..indicatorType = EasyLoadingIndicatorType.circle
     ..loadingStyle = EasyLoadingStyle.custom
     ..indicatorSize = 45.0

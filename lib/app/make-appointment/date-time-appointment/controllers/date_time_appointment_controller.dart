@@ -88,7 +88,7 @@ class DateTimeAppointmentController extends BaseController {
 
   handleClickNext() {
     Get.to(
-      PatientInformationScreen(),
+      () => PatientInformationScreen(),
       transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

@@ -38,6 +38,7 @@ class EnabledInput extends StatelessWidget {
     required this.width,
     this.error,
     this.errorText,
+    this.isDarkMode = false,
   }) : super(key: key);
 
   final double height;
@@ -62,6 +63,7 @@ class EnabledInput extends StatelessWidget {
   final bool obscureText;
   final Color fillColor;
   final bool filled;
+  final bool isDarkMode;
   final int? maxLength;
   final bool? maxLengthEnforced = true;
   final Widget? suffixIcon;
@@ -82,7 +84,7 @@ class EnabledInput extends StatelessWidget {
           height: 21.h,
           width: 21.h,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.gray1),
+            border: Border.all(color: AppColors.gray1, width: 2),
             borderRadius: BorderRadius.circular(21.h),
           ),
         ),
@@ -92,6 +94,7 @@ class EnabledInput extends StatelessWidget {
             Image.asset(
               AppImages.enabledInput,
               height: 68.h,
+              color: isDarkMode ? AppColors.dark1 : AppColors.white,
             ),
             SizedBox(
               width: 250,
@@ -113,7 +116,7 @@ class EnabledInput extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.black1,
+                  color: isDarkMode ? AppColors.gray1 : AppColors.black1,
                 ),
                 cursorColor: AppColors.primary,
                 decoration: InputDecoration(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../config/colors/colors.dart';
+import '../../config/theme/theme_controller.dart';
 
 class ReservationButton extends StatelessWidget {
-  const ReservationButton({
+  ReservationButton({
     Key? key,
     this.textColor = AppColors.white,
     required this.text,
@@ -18,7 +20,7 @@ class ReservationButton extends StatelessWidget {
   final void Function() onClick;
   final bool? enabled;
   final bool isPrimary;
-
+  final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,7 +33,9 @@ class ReservationButton extends StatelessWidget {
               ? enabled!
                   ? AppColors.primary
                   : AppColors.primaryDisabled
-              : AppColors.white,
+              : _themeController.isDarkMode.value
+                  ? AppColors.dark1
+                  : AppColors.white,
           borderRadius: BorderRadius.circular(29),
           boxShadow: [
             BoxShadow(
@@ -44,7 +48,7 @@ class ReservationButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            text,
+            text.toUpperCase(),
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,

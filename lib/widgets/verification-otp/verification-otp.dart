@@ -9,9 +9,11 @@ class VerificationOTP extends StatefulWidget {
     Key? key,
     required this.onCompleted,
     required this.onEditing,
+    this.isDarkMode = false,
   }) : super(key: key);
   final ValueChanged<String> onCompleted;
   final ValueChanged<bool> onEditing;
+  final bool isDarkMode;
 
   @override
   _VerificationCodeState createState() => _VerificationCodeState();
@@ -67,7 +69,8 @@ class _VerificationCodeState extends State<VerificationOTP> {
                   borderRadius: BorderRadius.circular(11.0),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
-                fillColor: AppColors.white,
+                fillColor:
+                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
                 filled: true,
                 counterText: "",
                 errorMaxLines: 1,
@@ -131,7 +134,8 @@ class _VerificationCodeState extends State<VerificationOTP> {
                   borderRadius: BorderRadius.circular(11.0),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
-                fillColor: AppColors.white,
+                fillColor:
+                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
                 filled: true,
                 counterText: "",
                 errorMaxLines: 1,
@@ -198,7 +202,8 @@ class _VerificationCodeState extends State<VerificationOTP> {
                   borderRadius: BorderRadius.circular(11.0),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
-                fillColor: AppColors.white,
+                fillColor:
+                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
                 filled: true,
                 counterText: "",
                 errorMaxLines: 1,
@@ -265,7 +270,8 @@ class _VerificationCodeState extends State<VerificationOTP> {
                   borderRadius: BorderRadius.circular(11.0),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
-                fillColor: AppColors.white,
+                fillColor:
+                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
                 filled: true,
                 counterText: "",
                 errorMaxLines: 1,

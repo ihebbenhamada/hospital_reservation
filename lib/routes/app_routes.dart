@@ -5,7 +5,8 @@ class AppRoutes {
   static const String login = '/login';
   static const String signup = '/signup';
   static const String verification = '/verification';
-  static const String password = '/verification';
+  static const String password = '/password';
+  static const String forgetPassword = '/forgetPassword';
   static const String registrationSuccess = '/registrationSuccess';
   static const String dashboard = '/dashboard';
   static const String home = '/home';
@@ -17,4 +18,7 @@ class AppRoutes {
   static const String dateTimeAppointment = '/dateTimeAppointment';
   static const String patientInformation = '/patientInformation';
   static const String appointmentSuccess = '/appointmentSuccess';
+  static const String profile = '/profile';
+  static const String changePassword = '/changePassword';
+  static const String notifications = '/notifications';
 }

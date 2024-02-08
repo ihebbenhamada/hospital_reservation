@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:reservation/app/auth/forget-password/screens/forget_password_screen.dart';
 import 'package:reservation/app/auth/password/screens/password_screen.dart';
 import 'package:reservation/app/auth/registration-success/screens/registration_success_screen.dart';
 import 'package:reservation/app/auth/verification/screens/verification_screen.dart';
@@ -11,6 +12,9 @@ import 'package:reservation/app/make-appointment/clinic-doctor/screen/clinic_doc
 import 'package:reservation/app/make-appointment/date-time-appointment/screen/date_time_appointment_screen.dart';
 import 'package:reservation/app/make-appointment/patient-information/screen/patient_information_screen.dart';
 import 'package:reservation/app/make-appointment/screen/appointment-steps.dart';
+import 'package:reservation/app/notifications/screens/notifications_screen.dart';
+import 'package:reservation/app/profile/change-password/screens/change_password_screen.dart';
+import 'package:reservation/app/profile/screen/profile_screen.dart';
 
 import '../app/auth/login/screens/login_screen.dart';
 import '../app/auth/signup/screens/signup_screen.dart';
@@ -41,6 +45,11 @@ class AppPages {
       name: AppRoutes.password,
       page: () => PasswordScreen(),
       binding: PasswordPageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.forgetPassword,
+      page: () => ForgetPasswordScreen(),
+      binding: ForgetPasswordPageBindings(),
     ),
     GetPage(
       name: AppRoutes.registrationSuccess,
@@ -96,6 +105,21 @@ class AppPages {
       name: AppRoutes.appointmentSuccess,
       page: () => AppointmentSuccessScreen(),
       binding: AppointmentSuccessPageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => ProfileScreen(),
+      binding: ProfilePageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.changePassword,
+      page: () => ChangePasswordScreen(),
+      binding: ChangePasswordPageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.notifications,
+      page: () => NotificationsScreen(),
+      binding: NotificationsPageBindings(),
     ),
   ];
 }

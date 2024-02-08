@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:reservation/config/colors/colors.dart';
 import 'package:reservation/config/image_urls/image_urls.dart';
 
@@ -10,12 +11,16 @@ class HistoryItem extends StatelessWidget {
     required this.doctorName,
     required this.speciality,
     required this.date,
+    required this.isArabic,
+    required this.isDarkMode,
   }) : super(key: key);
 
   final String type;
   final String doctorName;
   final String speciality;
   final String date;
+  final bool isArabic;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class HistoryItem extends StatelessWidget {
             right: 24,
           ),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: isDarkMode ? AppColors.dark1 : AppColors.white,
             borderRadius: BorderRadius.circular(35),
             boxShadow: [
               BoxShadow(
@@ -47,8 +52,10 @@ class HistoryItem extends StatelessWidget {
             children: [
               Text(
                 type == 'done'
-                    ? 'Your Appointment Done Successfully'
-                    : 'Your Appointment Cancelled',
+                    ? 'appointment_done'.tr
+                    : type == 'cancelled'
+                        ? 'appointment_cancelled'.tr
+                        : 'new_doctor_added'.tr,
                 style: TextStyle(
                   color: AppColors.gray1,
                   fontWeight: FontWeight.w500,
@@ -59,7 +66,7 @@ class HistoryItem extends StatelessWidget {
               Text(
                 '$doctorName / $speciality',
                 style: TextStyle(
-                  color: AppColors.black1,
+                  color: isDarkMode ? AppColors.white : AppColors.black1,
                   fontWeight: FontWeight.w500,
                   fontSize: 12.sp,
                 ),
@@ -68,8 +75,9 @@ class HistoryItem extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
-                  color:
-                      type == 'done' ? AppColors.primary : AppColors.redLight,
+                  color: type == 'done' || type == 'news'
+                      ? AppColors.primary
+                      : AppColors.redLight,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
@@ -86,16 +94,21 @@ class HistoryItem extends StatelessWidget {
         ),
         Positioned(
           top: -17,
-          right: 33,
+          right: !isArabic ? 33 : null,
+          left: isArabic ? 33 : null,
           child: Container(
             height: 35.h,
             width: 35.h,
             decoration: BoxDecoration(
-              color: type == 'done' ? AppColors.primary : AppColors.redLight,
+              color: type == 'done'
+                  ? AppColors.primary
+                  : type == 'cancelled'
+                      ? AppColors.redLight
+                      : AppColors.blueLight,
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                color: AppColors.blueLight,
-                width: 3,
+                color: isDarkMode ? AppColors.dark2 : AppColors.blueLight,
+                width: type == 'news' ? 0 : 3,
               ),
             ),
             child: Center(
@@ -105,11 +118,17 @@ class HistoryItem extends StatelessWidget {
                       height: 12,
                       width: 16,
                     )
-                  : Image.asset(
-                      AppImages.cancelWhite,
-                      height: 12,
-                      width: 12,
-                    ),
+                  : type == 'cancelled'
+                      ? Image.asset(
+                          AppImages.cancelWhite,
+                          height: 12,
+                          width: 12,
+                        )
+                      : Image.asset(
+                          AppImages.newDoctor,
+                          height: 30,
+                          width: 30,
+                        ),
             ),
           ),
         ),

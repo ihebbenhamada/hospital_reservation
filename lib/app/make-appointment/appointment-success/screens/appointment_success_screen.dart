@@ -4,18 +4,21 @@ import 'package:get/get.dart';
 import 'package:reservation/config/colors/colors.dart';
 import 'package:reservation/config/image_urls/image_urls.dart';
 
+import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/appointment_success_controller.dart';
 
 class AppointmentSuccessScreen extends StatelessWidget {
   final _appointmentSuccessController = Get.put(AppointmentSuccessController());
-
+  final ThemeController themeController = Get.find();
   AppointmentSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -28,7 +31,9 @@ class AppointmentSuccessScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   Image.asset(
-                    AppImages.passwordCircle,
+                    themeController.isDarkMode.value
+                        ? AppImages.passwordCircleDark
+                        : AppImages.passwordCircle,
                     height: 188.h,
                     width: 188.h,
                   ),
@@ -45,15 +50,17 @@ class AppointmentSuccessScreen extends StatelessWidget {
             ),
             43.h.verticalSpace,
             Container(
-              width: 120,
+              width: 140,
               padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: themeController.isDarkMode.value
+                    ? AppColors.dark1
+                    : AppColors.white,
                 borderRadius: BorderRadius.circular(21),
               ),
               child: Center(
                 child: Text(
-                  'Congratultions !!',
+                  'congratulations'.tr.toUpperCase(),
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -64,7 +71,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
             ),
             25.h.verticalSpace,
             Text(
-              'Your Appiontment added Successfull !!',
+              'success_appointment_added'.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12.sp,
@@ -82,7 +89,9 @@ class AppointmentSuccessScreen extends StatelessWidget {
                     Container(
                       height: 190.h,
                       width: 8,
-                      color: AppColors.white,
+                      color: themeController.isDarkMode.value
+                          ? AppColors.dark1
+                          : AppColors.white,
                     ),
                     Positioned(
                       top: 0,
@@ -90,7 +99,9 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         width: 41.h,
                         height: 41.h,
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: themeController.isDarkMode.value
+                              ? AppColors.dark1
+                              : AppColors.white,
                           borderRadius: BorderRadius.circular(41.h),
                           boxShadow: [
                             BoxShadow(
@@ -115,7 +126,9 @@ class AppointmentSuccessScreen extends StatelessWidget {
                       width: 41.h,
                       height: 41.h,
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(41.h),
                         boxShadow: [
                           BoxShadow(
@@ -141,7 +154,9 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         width: 41.h,
                         height: 41.h,
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: themeController.isDarkMode.value
+                              ? AppColors.dark1
+                              : AppColors.white,
                           borderRadius: BorderRadius.circular(41.h),
                           boxShadow: [
                             BoxShadow(
@@ -176,7 +191,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MRN: 455',
+                        '${'mrn'.tr} 455',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -185,7 +200,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Name: Iheb Ben Hamada',
+                        '${'name'.tr} Iheb Ben Hamada',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -194,7 +209,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Mobile: 0597896489',
+                        '${'phone_number1'.tr} 0597896489',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -209,12 +224,12 @@ class AppointmentSuccessScreen extends StatelessWidget {
             ),
             40.h.verticalSpace,
             ReservationButton(
-              text: 'Continue',
+              text: 'continue'.tr,
               onClick: _appointmentSuccessController.handleClickContinue,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'Back',
+              text: 'back'.tr,
               isPrimary: false,
               onClick: _appointmentSuccessController.handleClickBack,
             ),

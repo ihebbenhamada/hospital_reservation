@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/date_time_appointment_controller.dart';
 
@@ -13,11 +14,13 @@ class DateTimeAppointmentScreen extends StatelessWidget {
 
   final _dateTimeAppointmentController =
       Get.put(DateTimeAppointmentController());
-
+  final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: _themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -35,7 +38,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImages.verificationCircle,
+                          _themeController.isDarkMode.value
+                              ? AppImages.appointmentCircleDark
+                              : AppImages.verificationCircle,
                           height: 142.h,
                           width: 142.h,
                         ),
@@ -56,10 +61,10 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'Choose Date & Time',
+                        'choose_date_time_step'.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                           color: AppColors.white,
                         ),
                       ),
@@ -76,7 +81,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                         horizontal: 23,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
@@ -99,14 +106,18 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.gray5,
+                                color: _themeController.isDarkMode.value
+                                    ? AppColors.gray1
+                                    : AppColors.gray5,
                               ),
                             ),
                           ),
                           Image.asset(
                             AppImages.appointment,
                             height: 18.h,
-                            color: AppColors.gray5,
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.gray1
+                                : AppColors.gray5,
                           ),
                         ],
                       ),
@@ -119,7 +130,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(vertical: 23.h, horizontal: 14),
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -155,7 +168,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                                             .selectedHourIndex ==
                                         index
                                     ? AppColors.primary
-                                    : AppColors.white,
+                                    : _themeController.isDarkMode.value
+                                        ? AppColors.dark4
+                                        : AppColors.white,
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(
                                   color: _dateTimeAppointmentController
@@ -175,7 +190,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                                                 .selectedHourIndex ==
                                             index
                                         ? AppColors.white
-                                        : AppColors.gray4,
+                                        : _themeController.isDarkMode.value
+                                            ? AppColors.gray1
+                                            : AppColors.gray4,
                                   ),
                                 ),
                               ),
@@ -189,12 +206,12 @@ class DateTimeAppointmentScreen extends StatelessWidget {
               ),
             ),
             ReservationButton(
-              text: 'Next',
+              text: 'next'.tr,
               onClick: _dateTimeAppointmentController.handleClickNext,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'Back',
+              text: 'back'.tr,
               isPrimary: false,
               onClick: _dateTimeAppointmentController.handleClickBack,
             ),

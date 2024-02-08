@@ -7,17 +7,20 @@ import 'package:reservation/config/colors/colors.dart';
 import 'package:reservation/config/image_urls/image_urls.dart';
 import 'package:reservation/widgets/verification-otp/verification-otp.dart';
 
+import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 
 class VerificationScreen extends StatelessWidget {
   final _verificationController = Get.put(VerificationController());
-
+  final ThemeController themeController = Get.find();
   VerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -31,7 +34,9 @@ class VerificationScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Image.asset(
-                    AppImages.verificationCircle,
+                    themeController.isDarkMode.value
+                        ? AppImages.appointmentCircleDark
+                        : AppImages.verificationCircle,
                     height: 163.h,
                     width: 163.h,
                   ),
@@ -47,12 +52,14 @@ class VerificationScreen extends StatelessWidget {
               width: 120,
               padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: themeController.isDarkMode.value
+                    ? AppColors.dark1
+                    : AppColors.white,
                 borderRadius: BorderRadius.circular(21),
               ),
               child: Center(
                 child: Text(
-                  'Verify Account',
+                  'verify_account'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -63,7 +70,7 @@ class VerificationScreen extends StatelessWidget {
             ),
             27.h.verticalSpace,
             Text(
-              'Please, enter the verification code we sent to your\nmobile **109',
+              'enter_verification_code'.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12.sp,
@@ -82,7 +89,7 @@ class VerificationScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'Wrong Code',
+                  'wrong_code'.tr,
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
@@ -95,6 +102,7 @@ class VerificationScreen extends StatelessWidget {
             VerificationOTP(
               onCompleted: (val) => _verificationController.enableBtn(val),
               onEditing: (value) => _verificationController.onEdit(value),
+              isDarkMode: themeController.isDarkMode.value,
             ),
             40.h.verticalSpace,
             CircularCountDownTimer(
@@ -114,7 +122,9 @@ class VerificationScreen extends StatelessWidget {
               height: 52.h,
 
               // Ring Color for Countdown Widget.
-              ringColor: AppColors.white,
+              ringColor: themeController.isDarkMode.value
+                  ? AppColors.dark3
+                  : AppColors.white,
 
               // Ring Gradient for Countdown Widget.
               ringGradient: null,
@@ -187,12 +197,14 @@ class VerificationScreen extends StatelessWidget {
               width: 120,
               padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: themeController.isDarkMode.value
+                    ? AppColors.dark1
+                    : AppColors.white,
                 borderRadius: BorderRadius.circular(21),
               ),
               child: Center(
                 child: Text(
-                  'Resend Code',
+                  'resend_code'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -203,12 +215,12 @@ class VerificationScreen extends StatelessWidget {
             ),
             40.h.verticalSpace,
             ReservationButton(
-              text: 'Confirm',
+              text: 'confirm'.tr,
               onClick: _verificationController.handleClickConfirm,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'I Have Account !!',
+              text: 'have_account'.tr,
               isPrimary: false,
               onClick: _verificationController.handleClickSignIn,
             ),

@@ -1,308 +1,83 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reservation/app/dashboard/settings/controllers/settings_controller.dart';
 import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:reservation/widgets/settings-item/settings-item.dart';
 
 import '../../../../config/colors/colors.dart';
+import '../../../../config/theme/theme_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   final _settingsController = Get.put(SettingsController());
+  final ThemeController themeController = Get.find();
   SettingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 56.h),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0),
-          child: Column(
-            children: [
-              220.h.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 160.h,
-                    width: 160.h,
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.language,
-                              height: 28,
-                              width: 28,
-                              color: AppColors.gray4,
-                            ),
-                            SizedBox(
-                              height: 16,
-                              width: 33,
-                              child: Transform.scale(
-                                scale: 0.7,
-                                child: CupertinoSwitch(
-                                  value: true,
-                                  activeColor: AppColors.primary,
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Arabic Language',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            6.h.verticalSpace,
-                            Text(
-                              'Change Laugauge',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+      backgroundColor: themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        child: Column(
+          children: [
+            220.h.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              textDirection: TextDirection.ltr,
+              children: [
+                Obx(
+                  () => SettingsItem(
+                    icon: AppImages.language,
+                    title: 'arabic_language',
+                    description: 'change_language',
+                    isEnabled: _settingsController.isArabic.value,
+                    isDarkMode: themeController.isDarkMode.value,
+                    onToggleSwitch: (value) =>
+                        _settingsController.toggleLanguage(value),
                   ),
-                  Container(
-                    height: 160.h,
-                    width: 160.h,
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.theme,
-                              height: 28,
-                              width: 28,
-                              color: AppColors.gray4,
-                            ),
-                            SizedBox(
-                              height: 16,
-                              width: 33,
-                              child: Transform.scale(
-                                scale: 0.7,
-                                child: CupertinoSwitch(
-                                  value: true,
-                                  activeColor: AppColors.primary,
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Dark Theme',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            6.h.verticalSpace,
-                            Text(
-                              'Change Theme',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                ),
+                Obx(
+                  () => SettingsItem(
+                    icon: AppImages.theme,
+                    title: 'dark_theme',
+                    description: 'change_theme',
+                    isDarkMode: themeController.isDarkMode.value,
+                    isEnabled: themeController.isDarkMode.value,
+                    onToggleSwitch: (value) =>
+                        themeController.toggleTheme(value),
                   ),
-                ],
-              ),
-              28.h.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 160.h,
-                    width: 160.h,
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.notif,
-                              height: 28,
-                              width: 28,
-                              color: AppColors.gray4,
-                            ),
-                            SizedBox(
-                              height: 16,
-                              width: 33,
-                              child: Transform.scale(
-                                scale: 0.7,
-                                child: CupertinoSwitch(
-                                  value: true,
-                                  activeColor: AppColors.primary,
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Send Notification',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            6.h.verticalSpace,
-                            Text(
-                              'Send Notification Alarm',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                ),
+              ],
+            ),
+            28.h.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              textDirection: TextDirection.ltr,
+              children: [
+                Obx(
+                  () => SettingsItem(
+                    icon: AppImages.notif,
+                    title: 'send_notification',
+                    description: 'send_notification_alarm',
+                    isEnabled: _settingsController.isNotificationEnabled.value,
+                    isDarkMode: themeController.isDarkMode.value,
+                    onToggleSwitch: (value) =>
+                        _settingsController.toggleNotification(value),
                   ),
-                  Container(
-                    height: 160.h,
-                    width: 160.h,
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              AppImages.signout,
-                              height: 28,
-                              width: 28,
-                              color: AppColors.gray4,
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Sign Out',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            6.h.verticalSpace,
-                            Text(
-                              'Sign Out From App',
-                              style: TextStyle(
-                                color: AppColors.gray3,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              30.h.verticalSpace,
-            ],
-          ),
+                ),
+                SettingsItem(
+                  icon: AppImages.signout,
+                  title: 'sign_out',
+                  description: 'sign_out_from_app',
+                  isDarkMode: themeController.isDarkMode.value,
+                  onClickItem: _settingsController.signOut,
+                ),
+              ],
+            ),
+            30.h.verticalSpace,
+          ],
         ),
       ),
     );

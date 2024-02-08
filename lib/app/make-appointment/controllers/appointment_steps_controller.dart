@@ -29,7 +29,7 @@ class AppointmentStepsController extends BaseController {
   /// FUNCTIONS
   handleClickMakeAppointment() {
     Get.to(
-      ClinicDoctorScreen(),
+      () => ClinicDoctorScreen(),
       transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

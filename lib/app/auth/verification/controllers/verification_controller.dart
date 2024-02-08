@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:reservation/app/auth/password/screens/password_screen.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';
@@ -52,7 +53,14 @@ class VerificationController extends BaseController {
     }
   }
 
-  handleClickConfirm() {}
+  handleClickConfirm() {
+    Get.off(
+      PasswordScreen(),
+      transition: Transition.leftToRight,
+      curve: Curves.ease,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
 
   void handleClickSignIn() async {
     Get.off(

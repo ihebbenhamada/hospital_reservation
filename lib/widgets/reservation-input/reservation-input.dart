@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:reservation/config/theme/theme_controller.dart';
 
 import '../../config/colors/colors.dart';
 
 class ReservationInput extends StatelessWidget {
-  const ReservationInput({
+  ReservationInput({
     Key? key,
     this.autofocus = false,
     this.obscureText = false,
@@ -38,6 +40,7 @@ class ReservationInput extends StatelessWidget {
     required this.width,
     this.error,
     this.errorText,
+    this.isDarkMode = false,
   }) : super(key: key);
 
   final double height;
@@ -72,6 +75,9 @@ class ReservationInput extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
+  final bool isDarkMode;
+
+  final ThemeController themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +86,14 @@ class ReservationInput extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
-        color: AppColors.gray2,
+        color: isDarkMode ? AppColors.dark1 : AppColors.gray2,
         boxShadow: [
           BoxShadow(
-            color: const Color.fromRGBO(152, 152, 152, 0.16),
-            offset: const Offset(0.0, 5),
-            blurRadius: 10.0.h,
+            color: isDarkMode
+                ? const Color.fromRGBO(0, 0, 0, 0.16)
+                : const Color.fromRGBO(152, 152, 152, 0.16),
+            offset: const Offset(0.0, 3),
+            blurRadius: 5.0.h,
             spreadRadius: 0.h,
           ),
         ],
@@ -109,7 +117,9 @@ class ReservationInput extends StatelessWidget {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w400,
-            color: AppColors.black1,
+            color: themeController.isDarkMode.value
+                ? AppColors.white
+                : AppColors.black1,
           ),
           cursorColor: AppColors.primary,
           decoration: InputDecoration(
@@ -118,7 +128,7 @@ class ReservationInput extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
               fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
               color: AppColors.gray1,
             ),
             contentPadding: const EdgeInsets.all(16),

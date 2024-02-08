@@ -48,7 +48,7 @@ class PatientInformationController extends BaseController {
   /// FUNCTIONS
   handleClickConfirm() {
     Get.to(
-      AppointmentSuccessScreen(),
+      () => AppointmentSuccessScreen(),
       transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

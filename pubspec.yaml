@@ -22,6 +22,7 @@ dependencies:
   syncfusion_flutter_charts: ^23.1.43
   syncfusion_flutter_datepicker: ^23.1.43
   intl: ^0.18.1
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
@@ -69,3 +70,14 @@ flutter:
         - asset: assets/fonts/graphik/GraphikSuperItalic.otf
         - asset: assets/fonts/graphik/GraphikThin.otf
         - asset: assets/fonts/graphik/GraphikThinItalic.otf
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
+        - asset: assets/fonts/cairo/Cairo-Medium.ttf
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+

@@ -7,13 +7,18 @@ import 'package:reservation/config/colors/colors.dart';
 import 'package:reservation/widgets/dashboard-grid-item/dashboard-grid-item.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../config/theme/theme_controller.dart';
+
 class HomeScreen extends StatelessWidget {
   final _homeController = Get.put(HomeController());
+  final ThemeController themeController = Get.find();
   HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 56.h),
         child: Column(
@@ -37,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                   title: item['title'],
                   description: item['description'],
                   isPrimary: item['isPrimary'],
+                  isDarkMode: themeController.isDarkMode.value,
                 );
               },
             ),
@@ -47,7 +53,9 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               margin: const EdgeInsets.symmetric(horizontal: 40.0),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: themeController.isDarkMode.value
+                    ? AppColors.dark1
+                    : AppColors.white,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
@@ -62,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Top 5 Doctors',
+                    'top_5_doctors'.tr,
                     style: TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
@@ -81,17 +89,19 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                         labelColor: AppColors.primary,
-                        unselectedLabelColor: AppColors.gray3,
+                        unselectedLabelColor: themeController.isDarkMode.value
+                            ? AppColors.white
+                            : AppColors.gray3,
                         labelPadding: EdgeInsets.zero,
-                        tabs: const [
+                        tabs: [
                           Tab(
-                            text: 'Today',
+                            text: 'today'.tr,
                           ),
                           Tab(
-                            text: 'Week',
+                            text: 'week'.tr,
                           ),
                           Tab(
-                            text: 'Month',
+                            text: 'month'.tr,
                           ),
                         ],
                       ),
@@ -110,7 +120,9 @@ class HomeScreen extends StatelessWidget {
                   labelStyle: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.gray3,
+                    color: themeController.isDarkMode.value
+                        ? AppColors.gray1
+                        : AppColors.gray3,
                   ),
                   labelAlignment: LabelAlignment.center,
                   majorTickLines: const MajorTickLines(width: 0),

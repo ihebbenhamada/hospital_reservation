@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../config/colors/colors.dart';
+import '../../config/theme/theme_controller.dart';
 
 class InformationInput extends StatelessWidget {
-  const InformationInput({
+  InformationInput({
     Key? key,
     this.autofocus = false,
     this.obscureText = false,
@@ -72,7 +74,7 @@ class InformationInput extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
-
+  final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,12 +82,16 @@ class InformationInput extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
-        color: AppColors.gray2,
+        color: _themeController.isDarkMode.value
+            ? AppColors.dark1
+            : AppColors.gray2,
         boxShadow: [
           BoxShadow(
-            color: const Color.fromRGBO(152, 152, 152, 0.16),
+            color: _themeController.isDarkMode.value
+                ? const Color.fromRGBO(0, 0, 0, 0.16)
+                : const Color.fromRGBO(152, 152, 152, 0.16),
             offset: const Offset(0.0, 5),
-            blurRadius: 10.0.h,
+            blurRadius: 8.0.h,
             spreadRadius: 0.h,
           ),
         ],
@@ -109,7 +115,9 @@ class InformationInput extends StatelessWidget {
           style: TextStyle(
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
-            color: AppColors.black1,
+            color: _themeController.isDarkMode.value
+                ? AppColors.white
+                : AppColors.black1,
           ),
           cursorColor: AppColors.primary,
           decoration: InputDecoration(

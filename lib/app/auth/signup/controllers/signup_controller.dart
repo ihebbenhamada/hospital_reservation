@@ -45,8 +45,21 @@ class SignUpController extends BaseController {
 
   /// SIGN UP METHODS
   handleClickContinue() {
+    _signupService
+        .signup(
+      fullName: fullNameTextEditingController.value.text,
+      hawia: idTextEditingController.value.text,
+      mobile: phoneNumberTextEditingController.value.text,
+    )
+        .then((value) {
+      if (value != null) {
+        print(value.fullName);
+      } else {
+        print('error');
+      }
+    });
     Get.to(
-      VerificationScreen(),
+      () => VerificationScreen(),
       transition: Transition.leftToRight,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

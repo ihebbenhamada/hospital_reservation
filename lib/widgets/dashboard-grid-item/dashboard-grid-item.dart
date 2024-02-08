@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:reservation/config/colors/colors.dart';
 
 class DashboardGridItem extends StatelessWidget {
@@ -10,6 +11,7 @@ class DashboardGridItem extends StatelessWidget {
     required this.title,
     required this.description,
     this.isPrimary = false,
+    this.isDarkMode = false,
   }) : super(key: key);
 
   final String icon;
@@ -17,13 +19,18 @@ class DashboardGridItem extends StatelessWidget {
   final String title;
   final String description;
   final bool isPrimary;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: isPrimary ? AppColors.primary : AppColors.white,
+        color: isPrimary
+            ? AppColors.primary
+            : isDarkMode
+                ? AppColors.dark1
+                : AppColors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -46,12 +53,17 @@ class DashboardGridItem extends StatelessWidget {
                 icon,
                 height: 28,
                 width: 28,
-                color: isPrimary ? AppColors.white : AppColors.gray3,
+                color:
+                    isPrimary || isDarkMode ? AppColors.white : AppColors.gray3,
               ),
               Text(
                 value.toString(),
                 style: TextStyle(
-                  color: isPrimary ? AppColors.white : AppColors.gray3,
+                  color: isPrimary
+                      ? AppColors.white
+                      : isDarkMode
+                          ? AppColors.gray1
+                          : AppColors.gray3,
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -63,18 +75,24 @@ class DashboardGridItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                title.toString(),
+                title.toString().tr,
                 style: TextStyle(
-                  color: isPrimary ? AppColors.white : AppColors.gray3,
+                  color: isPrimary || isDarkMode
+                      ? AppColors.white
+                      : AppColors.gray3,
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               6.h.verticalSpace,
               Text(
-                description.toString(),
+                description.toString().tr,
                 style: TextStyle(
-                  color: isPrimary ? AppColors.white : AppColors.gray3,
+                  color: isPrimary
+                      ? AppColors.white
+                      : isDarkMode
+                          ? AppColors.gray6
+                          : AppColors.gray3,
                   fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
                 ),

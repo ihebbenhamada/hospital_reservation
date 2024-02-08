@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reservation/app/make-appointment/controllers/appointment_steps_controller.dart';
+import 'package:reservation/config/theme/theme_controller.dart';
 
 import '../../../config/colors/colors.dart';
 import '../../../config/image_urls/image_urls.dart';
@@ -10,10 +11,13 @@ import '../../../widgets/reservation-button/reservation-button.dart';
 class AppointmentStepsScreen extends StatelessWidget {
   AppointmentStepsScreen({Key? key}) : super(key: key);
   final _appointmentStepsController = Get.put(AppointmentStepsController());
+  final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blueLight,
+      backgroundColor: _themeController.isDarkMode.value
+          ? AppColors.dark2
+          : AppColors.blueLight,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -31,7 +35,9 @@ class AppointmentStepsScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImages.verificationCircle,
+                          _themeController.isDarkMode.value
+                              ? AppImages.appointmentCircleDark
+                              : AppImages.verificationCircle,
                           height: 142.h,
                           width: 142.h,
                         ),
@@ -48,12 +54,14 @@ class AppointmentStepsScreen extends StatelessWidget {
                       width: 200,
                       padding: EdgeInsets.symmetric(vertical: 15.h),
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(21),
                       ),
                       child: Center(
                         child: Text(
-                          'Make Your Appointment',
+                          'Make_your_appointment'.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
@@ -66,7 +74,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                   22.h.verticalSpace,
                   Center(
                     child: Text(
-                      'With Easy Steps',
+                      'with_easy_steps'.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16.sp,
@@ -95,7 +103,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'Step 1',
+                                  'step1'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -117,7 +125,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'Step 2',
+                                  'step2'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -139,7 +147,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'Step 3',
+                                  'step3'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -164,41 +172,47 @@ class AppointmentStepsScreen extends StatelessWidget {
                   ),
                   55.h.verticalSpace,
                   Text(
-                    '1- CHOOSE CLINIC & DOCTOR',
+                    'choose_clinic_doctor'.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.gray3,
+                      color: _themeController.isDarkMode.value
+                          ? AppColors.white
+                          : AppColors.gray3,
                     ),
                   ),
                   30.h.verticalSpace,
                   Text(
-                    '2- Choose Date & Time',
+                    'choose_date_time'.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.gray3,
+                      color: _themeController.isDarkMode.value
+                          ? AppColors.white
+                          : AppColors.gray3,
                     ),
                   ),
                   30.h.verticalSpace,
                   Text(
-                    '3- Complete Information',
+                    'complete_information'.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.gray3,
+                      color: _themeController.isDarkMode.value
+                          ? AppColors.white
+                          : AppColors.gray3,
                     ),
                   ),
                 ],
               ),
             ),
             ReservationButton(
-              text: 'Start Your Appointment',
+              text: 'start_your_appointment'.tr,
               onClick: _appointmentStepsController.handleClickMakeAppointment,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'Back',
+              text: 'back'.tr,
               isPrimary: false,
               onClick: _appointmentStepsController.handleClickBack,
             ),
