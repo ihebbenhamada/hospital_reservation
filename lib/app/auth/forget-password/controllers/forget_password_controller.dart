@@ -11,9 +11,10 @@ class ForgetPasswordController extends BaseController {
   final ForgetPasswordService _forgetPasswordService = ForgetPasswordService();
 
   /// CONTROLLERS
-  late TextEditingController idNumberTextEditingController;
+  TextEditingController idNumberTextEditingController = TextEditingController();
 
   /// VARIABLES
+  RxString id = ''.obs;
 
   /// VALIDATION
 
@@ -31,9 +32,7 @@ class ForgetPasswordController extends BaseController {
   }
 
   /// INITIALISATION
-  void initValues() {
-    idNumberTextEditingController = TextEditingController();
-  }
+  void initValues() {}
 
   /// FUNCTIONS
 
@@ -53,5 +52,9 @@ class ForgetPasswordController extends BaseController {
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),
     );
+  }
+
+  onChange(String value) {
+    id.value = value;
   }
 }

@@ -1,17 +1,15 @@
 import 'package:dio/dio.dart';
 
-import '../../../../api/models/patient/patient.dart';
 import '../../../../config/api-urls/end_points.dart';
 import '../../../../config/interceptor/interceptor.dart';
+import '../model/patient_statistic/patient_statistic.dart';
 
 class HomeService {
-  Future<Patient?> getPatientByMobileNumber(
-      {required String mobileNumber}) async {
-    Response? response = await AppInterceptor.dio?.get(
-      EndPoints.GET_PATIENT_BY_MOBILE_NUMBER + mobileNumber,
-    );
+  Future<PatientStatistics?> getPatientStatisticsAndCharts() async {
+    Response? response =
+        await AppInterceptor.dio?.get(EndPoints.GET_PATIENT_STATISTICS_CHART);
     if (response != null && response.statusCode == 200) {
-      return Patient.fromJson(response.data);
+      return PatientStatistics.fromJson(response.data);
     } else {
       return null;
     }

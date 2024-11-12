@@ -1,24 +1,56 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:reservation/config/api-urls/end_points.dart';
+import 'package:reservation/config/colors/colors.dart';
+
 import '../../../../config/interceptor/interceptor.dart';
+import '../models/signup_response.dart';
 
 class PasswordService {
-  Future<bool> signup(String id, String fullName) async {
-    AppInterceptor.showLoader();
-    Map<String, String> data = {
-      "full_name": fullName,
-      "id": id,
+  Future<SignUpResponse?> signup({
+    required String hawiaNo,
+    required String fullName,
+    required String password,
+    required String phoneNumber,
+    required int fkDefCompanyId,
+    required int fkDefBranchId,
+    String? encryptedOTP,
+    String? otp,
+  }) async {
+    Map<String, dynamic> data = {
+      "HawiaNo": hawiaNo,
+      "FullName": fullName,
+      "Password": password,
+      "PhoneNumber": phoneNumber,
+      "Fk_DefCompanyId": fkDefCompanyId,
+      "Fk_DefBranchId": fkDefBranchId,
+      "EncryptedOTP": encryptedOTP,
+      "OTP": otp,
     };
-    await Future.delayed(const Duration(seconds: 3), () {
-      AppInterceptor.hideLoader();
-
-      return true;
-    });
-    return false;
-    /* AppInterceptor.dio?.post(EndPoints.LOGIN_URL, data: data).then(
-      (Response response) {
-        if (response.statusCode == 200) {
-          return true;
-        }
-      },
-    );*/
+    try {
+      Response? response =
+          await AppInterceptor.dio?.post(EndPoints.CREATE_PATENT, data: data);
+      if (response != null && response.statusCode == 200) {
+        return SignUpResponse.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } on DioException catch (e) {
+      log(e.response.toString());
+      Fluttertoast.showToast(
+        msg: e.response?.data['errors']['Password'][0].toString() ?? 'error'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: AppColors.redLight,
+        textColor: AppColors.white,
+        fontSize: 16.0.sp,
+      );
+      return null;
+    }
   }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/profile/controllers/profile_controller.dart';
 import 'package:reservation/config/theme/theme_controller.dart';
 
 import '../../../config/colors/colors.dart';
 import '../../../config/image_urls/image_urls.dart';
 import '../../../widgets/reservation-button/reservation-button.dart';
+import '../controllers/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({super.key});
   final _profileController = Get.put(ProfileController());
   final ThemeController _themeController = Get.find();
   @override
@@ -149,14 +149,15 @@ class ProfileScreen extends StatelessWidget {
                         padding: EdgeInsets.only(
                           top: 10.h,
                           bottom: 14.h,
-                          left: 10,
+                          left: Get.locale?.languageCode == 'en' ? 10 : 0,
+                          right: Get.locale?.languageCode == 'ar' ? 10 : 0,
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${'mrn'.tr} 455',
+                              '${'mrn'.tr} ${_profileController.patient.value.mrn} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -165,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'name'.tr} Iheb Ben Hamada',
+                              '${'name'.tr} ${_profileController.patient.value.name} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -174,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'phone_number1'.tr} 0597896489',
+                              '${'phone_number1'.tr} ${_profileController.phone.value} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,

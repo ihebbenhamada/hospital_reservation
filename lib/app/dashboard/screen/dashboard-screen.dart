@@ -5,7 +5,6 @@ import 'package:reservation/app/dashboard/appointment/screens/appointment_screen
 import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
 import 'package:reservation/app/dashboard/history/screens/history_screen.dart';
 import 'package:reservation/app/dashboard/settings/screens/settings_screen.dart';
-import 'package:reservation/app/make-appointment/screen/appointment-steps.dart';
 import 'package:reservation/config/theme/theme_controller.dart';
 import 'package:reservation/widgets/reservation-button/reservation-button.dart';
 
@@ -15,7 +14,7 @@ import '../../../routes/app_routes.dart';
 import '../home/screens/home_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
-  DashboardScreen({Key? key}) : super(key: key);
+  DashboardScreen({super.key});
   final _dashboardController = Get.put(DashboardController());
   final ThemeController themeController = Get.find();
   @override
@@ -57,13 +56,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     Navigator(
                       key: Get.nestedKey(4),
-                      onGenerateRoute: (route) => MaterialPageRoute(
-                        settings: route,
-                        builder: (context) => SettingsScreen(),
-                      ),
-                    ),
-                    Navigator(
-                      key: Get.nestedKey(5),
                       onGenerateRoute: (route) => MaterialPageRoute(
                         settings: route,
                         builder: (context) => SettingsScreen(),
@@ -126,12 +118,9 @@ class DashboardScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                   ),
-                                  3.h.verticalSpace,
-                                  GetBuilder<DashboardController>(
-                                    builder: (_) => Text(
-                                      _dashboardController.user != null
-                                          ? _dashboardController.user!.userName
-                                          : '',
+                                  Obx(
+                                    () => Text(
+                                      _dashboardController.patient.value.name,
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w500,
@@ -432,19 +421,14 @@ class DashboardScreen extends StatelessWidget {
                                 color: AppColors.primary,
                               ),
                             ),
-                            3.h.verticalSpace,
-                            GetBuilder<DashboardController>(
-                              builder: (_) => Text(
-                                _dashboardController.user != null
-                                    ? _dashboardController.user!.userName
-                                    : '',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: themeController.isDarkMode.value
-                                      ? AppColors.gray1
-                                      : AppColors.gray3,
-                                ),
+                            Text(
+                              _dashboardController.patient.value.name,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: themeController.isDarkMode.value
+                                    ? AppColors.gray1
+                                    : AppColors.gray3,
                               ),
                             ),
                           ],
@@ -459,118 +443,134 @@ class DashboardScreen extends StatelessWidget {
                         ? AppColors.gray1
                         : AppColors.gray3,
                   ),
-                  40.h.verticalSpace,
+                  20.h.verticalSpace,
                   GestureDetector(
                     onTap: () =>
                         _dashboardController.navigateToPage(0, context),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AppImages.chart,
-                          height: 16,
-                          color: themeController.isDarkMode.value
-                              ? AppColors.gray1
-                              : AppColors.gray3,
-                        ),
-                        20.horizontalSpace,
-                        Text(
-                          'home'.tr,
-                          style: TextStyle(
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            AppImages.chart,
+                            height: 16,
                             color: themeController.isDarkMode.value
                                 ? AppColors.gray1
                                 : AppColors.gray3,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
                           ),
-                        )
-                      ],
+                          20.horizontalSpace,
+                          Text(
+                            'home'.tr,
+                            style: TextStyle(
+                              color: themeController.isDarkMode.value
+                                  ? AppColors.gray1
+                                  : AppColors.gray3,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  40.h.verticalSpace,
+                  10.h.verticalSpace,
                   GestureDetector(
                     onTap: () =>
                         _dashboardController.navigateToPage(1, context),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AppImages.userMenu,
-                          height: 16,
-                          color: themeController.isDarkMode.value
-                              ? AppColors.gray1
-                              : AppColors.gray3,
-                        ),
-                        20.horizontalSpace,
-                        Text(
-                          'account'.tr,
-                          style: TextStyle(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      color: Colors.transparent,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            AppImages.userMenu,
+                            height: 16,
                             color: themeController.isDarkMode.value
                                 ? AppColors.gray1
                                 : AppColors.gray3,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
                           ),
-                        )
-                      ],
+                          20.horizontalSpace,
+                          Text(
+                            'account'.tr,
+                            style: TextStyle(
+                              color: themeController.isDarkMode.value
+                                  ? AppColors.gray1
+                                  : AppColors.gray3,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  40.h.verticalSpace,
+                  10.h.verticalSpace,
                   GestureDetector(
                     onTap: () =>
                         _dashboardController.navigateToPage(1, context),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AppImages.appointment,
-                          height: 16,
-                          color: themeController.isDarkMode.value
-                              ? AppColors.gray1
-                              : AppColors.gray3,
-                        ),
-                        20.horizontalSpace,
-                        Text(
-                          'my_appointment'.tr,
-                          style: TextStyle(
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            AppImages.appointment,
+                            height: 16,
                             color: themeController.isDarkMode.value
                                 ? AppColors.gray1
                                 : AppColors.gray3,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
                           ),
-                        )
-                      ],
+                          20.horizontalSpace,
+                          Text(
+                            'my_appointment'.tr,
+                            style: TextStyle(
+                              color: themeController.isDarkMode.value
+                                  ? AppColors.gray1
+                                  : AppColors.gray3,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  40.h.verticalSpace,
+                  10.h.verticalSpace,
                   GestureDetector(
                     onTap: () =>
                         _dashboardController.navigateToPage(3, context),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          AppImages.settings,
-                          height: 16,
-                          color: themeController.isDarkMode.value
-                              ? AppColors.gray1
-                              : AppColors.gray3,
-                        ),
-                        20.horizontalSpace,
-                        Text(
-                          'settings'.tr,
-                          style: TextStyle(
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            AppImages.settings,
+                            height: 16,
                             color: themeController.isDarkMode.value
                                 ? AppColors.gray1
                                 : AppColors.gray3,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
                           ),
-                        )
-                      ],
+                          20.horizontalSpace,
+                          Text(
+                            'settings'.tr,
+                            style: TextStyle(
+                              color: themeController.isDarkMode.value
+                                  ? AppColors.gray1
+                                  : AppColors.gray3,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   60.h.verticalSpace,
                   ReservationButton(
                     text: 'make_appointment'.tr,
-                    onClick: () {},
+                    onClick: _dashboardController.bookNow,
                   ),
                 ],
               ),
@@ -579,9 +579,7 @@ class DashboardScreen extends StatelessWidget {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: GestureDetector(
-            onTap: () {
-              Get.to(() => AppointmentStepsScreen());
-            },
+            onTap: _dashboardController.bookNow,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

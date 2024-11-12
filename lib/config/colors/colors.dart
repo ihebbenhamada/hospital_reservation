@@ -15,6 +15,7 @@ class AppColors {
   static const Color black1 = Color(0xff333333);
   static const Color white = Colors.white;
   static const Color redLight = Color(0xffF9686A);
+  static const Color green = Color(0xff00fd0d);
 
   /// DARK MODE COLORS
   static const Color dark1 = Color(0xff2A3042);

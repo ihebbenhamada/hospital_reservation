@@ -113,5 +113,8 @@ class En {
         'serial': 'Serial',
         'patient_name': 'Patient Name',
         'doctor_name': 'Doctor Name',
+        'notifications': 'NOTIFICATIONS',
+        'should_select_available_date': 'You should select an available date!',
+        'error': 'Error'
       };
 }

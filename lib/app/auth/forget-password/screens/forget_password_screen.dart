@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reservation/app/auth/forget-password/controllers/forget_password_controller.dart';
@@ -82,13 +83,23 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   46.h.verticalSpace,
-                  EnabledInput(
-                    controller:
-                        _forgetPasswordController.idNumberTextEditingController,
-                    height: 63.h,
-                    isDarkMode: _themeController.isDarkMode.value,
-                    width: double.infinity,
-                    hintText: 'id_number'.tr,
+                  Obx(
+                    () => EnabledInput(
+                      controller: _forgetPasswordController
+                          .idNumberTextEditingController,
+                      height: 63.h,
+                      onChanged: (value) =>
+                          _forgetPasswordController.onChange(value ?? ''),
+                      isDarkMode: _themeController.isDarkMode.value,
+                      isFilled: _forgetPasswordController.id.value.isNotEmpty,
+                      width: double.infinity,
+                      hintText: 'id_number'.tr,
+                      maxLength: 10,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    ),
                   ),
                 ],
               ),

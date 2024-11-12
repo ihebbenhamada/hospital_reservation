@@ -78,23 +78,33 @@ class PasswordScreen extends StatelessWidget {
               ),
             ),
             46.h.verticalSpace,
-            EnabledInput(
-              controller: _passwordController.passwordTextEditingController,
-              height: 63.h,
-              width: double.infinity,
-              isDarkMode: themeController.isDarkMode.value,
-              hintText: 'password'.tr,
-              obscureText: true,
+            Obx(
+              () => EnabledInput(
+                controller: _passwordController.passwordTextEditingController,
+                height: 63.h,
+                width: double.infinity,
+                onChanged: (value) =>
+                    _passwordController.onChangeInputs('password', value ?? ''),
+                isFilled: _passwordController.password.value.isNotEmpty,
+                isDarkMode: themeController.isDarkMode.value,
+                hintText: 'password'.tr,
+                obscureText: true,
+              ),
             ),
             26.h.verticalSpace,
-            EnabledInput(
-              controller:
-                  _passwordController.confirmPasswordTextEditingController,
-              height: 63.h,
-              width: double.infinity,
-              isDarkMode: themeController.isDarkMode.value,
-              hintText: 'repeat_password'.tr,
-              obscureText: true,
+            Obx(
+              () => EnabledInput(
+                controller:
+                    _passwordController.confirmPasswordTextEditingController,
+                height: 63.h,
+                width: double.infinity,
+                onChanged: (value) => _passwordController.onChangeInputs(
+                    'repeatPassword', value ?? ''),
+                isFilled: _passwordController.repeatPassword.value.isNotEmpty,
+                isDarkMode: themeController.isDarkMode.value,
+                hintText: 'repeat_password'.tr,
+                obscureText: true,
+              ),
             ),
             57.h.verticalSpace,
             Center(
@@ -132,16 +142,17 @@ class PasswordScreen extends StatelessWidget {
                         AnimatedBuilder(
                           animation: _passwordController.animationController,
                           builder: (context, child) {
-                            return LinearProgressIndicator(
-                              value:
-                                  _passwordController.animationController.value,
-                              color: _passwordController.getColor(
-                                _passwordController.animationController.value,
-                              ),
-                              backgroundColor: AppColors.white,
-                              borderRadius: BorderRadius.circular(4),
-                              minHeight: 7.0.h,
-                            );
+                            return Obx(() => LinearProgressIndicator(
+                                  value: _passwordController
+                                      .passwordStrengthValue.value,
+                                  color: _passwordController.getColor(
+                                    _passwordController
+                                        .passwordStrengthValue.value,
+                                  ),
+                                  backgroundColor: AppColors.white,
+                                  borderRadius: BorderRadius.circular(4),
+                                  minHeight: 7.0.h,
+                                ));
                           },
                         ),
                       ],

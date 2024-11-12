@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:reservation/app/make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
 import '../../../../config/theme/theme_controller.dart';
-import '../../../../widgets/reservation-button/reservation-button.dart';
-import '../controllers/date_time_appointment_controller.dart';
+import '../../../dashboard/controller/dashboard-controller.dart';
 
 class DateTimeAppointmentScreen extends StatelessWidget {
-  DateTimeAppointmentScreen({Key? key}) : super(key: key);
-
-  final _dateTimeAppointmentController =
-      Get.put(DateTimeAppointmentController());
+  DateTimeAppointmentScreen({super.key});
   final ThemeController _themeController = Get.find();
+  final DashboardController _dashboardController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,8 +70,7 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                   ),
                   28.h.verticalSpace,
                   GestureDetector(
-                    onTap: () =>
-                        _dateTimeAppointmentController.selectDate(context),
+                    onTap: () => _dashboardController.selectDate(context),
                     child: Container(
                       width: double.infinity,
                       height: 60.h,
@@ -100,8 +97,9 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                           Obx(
                             () => Text(
                               DateFormat('dd-MM-yyyy')
-                                  .format(_dateTimeAppointmentController
-                                      .selectedDate.value)
+                                  .format(
+                                    _dashboardController.selectedDate.value,
+                                  )
                                   .toString(),
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -124,7 +122,7 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                     ),
                   ),
                   28.h.verticalSpace,
-                  GetBuilder<DateTimeAppointmentController>(
+                  GetBuilder<DashboardController>(
                     builder: (_) => Container(
                       width: double.infinity,
                       padding:
@@ -143,79 +141,96 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5, // Number of elements in each row
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 14.0.h,
-                          childAspectRatio: 2,
-                        ),
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _dateTimeAppointmentController
-                            .hoursList.length, // Total number of elements
-                        itemBuilder: (context, index) {
-                          String item =
-                              _dateTimeAppointmentController.hoursList[index];
-                          return GestureDetector(
-                            onTap: () => _dateTimeAppointmentController
-                                .selectHour(index),
-                            child: Container(
-                              height: 27.h,
-                              decoration: BoxDecoration(
-                                color: _dateTimeAppointmentController
-                                            .selectedHourIndex ==
-                                        index
-                                    ? AppColors.primary
-                                    : _themeController.isDarkMode.value
-                                        ? AppColors.dark4
-                                        : AppColors.white,
-                                borderRadius: BorderRadius.circular(7),
-                                border: Border.all(
-                                  color: _dateTimeAppointmentController
-                                              .selectedHourIndex ==
-                                          index
-                                      ? AppColors.primary
-                                      : AppColors.gray4,
+                      child: Obx(
+                        () => _dashboardController.doctorScheduleList.isNotEmpty
+                            ? GridView.builder(
+                                padding: EdgeInsets.zero,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      5, // Number of elements in each row
+                                  crossAxisSpacing: 10.0,
+                                  mainAxisSpacing: 14.0.h,
+                                  childAspectRatio: 2,
                                 ),
-                              ),
-                              child: Center(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: _dashboardController
+                                    .doctorScheduleList
+                                    .length, // Total number of elements
+                                itemBuilder: (context, index) {
+                                  DoctorSchedule item = _dashboardController
+                                      .doctorScheduleList[index];
+                                  return GestureDetector(
+                                    onTap: item.appointmentAvailable
+                                        ? () => _dashboardController
+                                            .selectTime(item)
+                                        : null,
+                                    child: Container(
+                                      height: 27.h,
+                                      decoration: BoxDecoration(
+                                        color: item.appointmentAvailable
+                                            ? (_dashboardController
+                                                        .selectedDoctorSchedule
+                                                        .serial ==
+                                                    item.serial
+                                                ? AppColors.primary
+                                                : _themeController
+                                                        .isDarkMode.value
+                                                    ? AppColors.dark4
+                                                    : AppColors.white)
+                                            : AppColors.primaryDisabled,
+                                        borderRadius: BorderRadius.circular(7),
+                                        border: Border.all(
+                                          color: item.appointmentAvailable
+                                              ? (_dashboardController
+                                                          .selectedDoctorSchedule
+                                                          .serial ==
+                                                      item.serial
+                                                  ? AppColors.primary
+                                                  : AppColors.gray4)
+                                              : AppColors.gray1,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          item.startTime.substring(0, 5),
+                                          style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: item.appointmentAvailable
+                                                ? (_dashboardController
+                                                            .selectedDoctorSchedule
+                                                            .serial ==
+                                                        item.serial
+                                                    ? AppColors.white
+                                                    : _themeController
+                                                            .isDarkMode.value
+                                                        ? AppColors.gray1
+                                                        : AppColors.gray4)
+                                                : AppColors.gray1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            : Center(
                                 child: Text(
-                                  item,
+                                  'No available time found!',
                                   style: TextStyle(
                                     fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: _dateTimeAppointmentController
-                                                .selectedHourIndex ==
-                                            index
-                                        ? AppColors.white
-                                        : _themeController.isDarkMode.value
-                                            ? AppColors.gray1
-                                            : AppColors.gray4,
+                                    color: AppColors.gray1,
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            ReservationButton(
-              text: 'next'.tr,
-              onClick: _dateTimeAppointmentController.handleClickNext,
-            ),
-            20.h.verticalSpace,
-            ReservationButton(
-              text: 'back'.tr,
-              isPrimary: false,
-              onClick: _dateTimeAppointmentController.handleClickBack,
-            ),
-            80.h.verticalSpace
           ],
         ),
       ),

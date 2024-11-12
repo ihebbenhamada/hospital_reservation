@@ -200,7 +200,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${'mrn'.tr} 455',
+                              '${'mrn'.tr} ${_registrationSuccessController.mrn}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -209,7 +209,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'name'.tr}  Iheb Ben Hamada',
+                              '${'name'.tr}  ${_registrationSuccessController.fullName}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -218,7 +218,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'phone_number'.tr} 0597896489',
+                              '${'phone_number'.tr} ${_registrationSuccessController.phone}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,

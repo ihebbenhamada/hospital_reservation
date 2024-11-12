@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:reservation/app/auth/signup/widgets/signup_header.dart';
 import 'package:reservation/widgets/background-shape/background-shape.dart';
-import 'package:reservation/widgets/disabled-input/disabled-input.dart';
 import 'package:reservation/widgets/enabled-input/enabled-input.dart';
 
 import '../../../../config/colors/colors.dart';
-import '../../../../config/image_urls/image_urls.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/signup_controller.dart';
@@ -30,37 +30,7 @@ class SignUpScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               62.h.verticalSpace,
-              Row(
-                children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        AppImages.userPhoto,
-                        height: 55.h,
-                        width: 55.h,
-                      ),
-                      Image.asset(
-                        themeController.isDarkMode.value
-                            ? AppImages.signupUserShapeDark
-                            : AppImages.signupUserShape,
-                        height: 55.h,
-                        width: 55.h,
-                      ),
-                    ],
-                  ),
-                  12.horizontalSpace,
-                  Text(
-                    'registration'.tr.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: themeController.isDarkMode.value
-                          ? AppColors.white
-                          : AppColors.black1,
-                    ),
-                  ),
-                ],
-              ),
+              SignUpHeader(),
               90.h.verticalSpace,
               Text(
                 'easy_steps'.tr.toUpperCase(),
@@ -82,35 +52,77 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               46.h.verticalSpace,
-              DisabledInput(
-                controller: _signUpController.mrnTextEditingController,
-                height: 63.h,
-                width: double.infinity,
-                hintText: 'full_name'.tr,
+              Obx(
+                () => EnabledInput(
+                  controller: _signUpController.idTextEditingController,
+                  onChanged: (value) =>
+                      _signUpController.onChangeInputs('id', value),
+                  height: 63.h,
+                  isFilled: _signUpController.id.value.isNotEmpty,
+                  isDarkMode: themeController.isDarkMode.value,
+                  width: double.infinity,
+                  hintText: 'id_number'.tr,
+                  maxLength: 10,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  error: _signUpController.isIdValid.isTrue,
+                  errorText: _signUpController.isIdValid.value
+                      ? null
+                      : 'ID must be 10 digits',
+                  /*validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'ID is required';
+                    } else if (value.length != 10) {
+                      return 'ID must be 10 digits';
+                    }
+                    return null;
+                  },*/
+                ),
               ),
               26.h.verticalSpace,
-              EnabledInput(
-                controller: _signUpController.fullNameTextEditingController,
-                height: 63.h,
-                isDarkMode: themeController.isDarkMode.value,
-                width: double.infinity,
-                hintText: 'full_name'.tr,
+              Obx(
+                () => EnabledInput(
+                  controller: _signUpController.fullNameTextEditingController,
+                  height: 63.h,
+                  onChanged: (value) =>
+                      _signUpController.onChangeInputs('fullName', value),
+                  isFilled: _signUpController.fullName.value.isNotEmpty,
+                  isDarkMode: themeController.isDarkMode.value,
+                  width: double.infinity,
+                  hintText: 'full_name'.tr,
+                  /*validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  },*/
+                  error: _signUpController.isNameValid.isFalse,
+                  errorText: _signUpController.isNameValid.value
+                      ? null
+                      : 'Name cannot be empty',
+                ),
               ),
               26.h.verticalSpace,
-              EnabledInput(
-                controller: _signUpController.idTextEditingController,
-                height: 63.h,
-                isDarkMode: themeController.isDarkMode.value,
-                width: double.infinity,
-                hintText: 'id_number'.tr,
-              ),
-              26.h.verticalSpace,
-              EnabledInput(
-                controller: _signUpController.phoneNumberTextEditingController,
-                height: 63.h,
-                isDarkMode: themeController.isDarkMode.value,
-                width: double.infinity,
-                hintText: 'phone_number'.tr,
+              Obx(
+                () => EnabledInput(
+                  controller:
+                      _signUpController.phoneNumberTextEditingController,
+                  height: 63.h,
+                  onChanged: (value) =>
+                      _signUpController.onChangeInputs('phone', value),
+                  isFilled: _signUpController.phone.value.isNotEmpty,
+                  isDarkMode: themeController.isDarkMode.value,
+                  width: double.infinity,
+                  hintText: 'phone_number'.tr,
+                  maxLength: 10,
+                  keyboardType: TextInputType.phone,
+                  error: _signUpController.isPhoneNumberValid.isFalse,
+                  errorText: _signUpController.isPhoneNumberValid.value
+                      ? null
+                      : 'Invalid Saudi phone number',
+                ),
               ),
               40.h.verticalSpace,
               ReservationButton(

@@ -6,14 +6,12 @@ import 'package:reservation/widgets/information-input/information-input.dart';
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
 import '../../../../config/theme/theme_controller.dart';
-import '../../../../widgets/reservation-button/reservation-button.dart';
-import '../controllers/patient_information_controller.dart';
+import '../../../dashboard/controller/dashboard-controller.dart';
 
 class PatientInformationScreen extends StatelessWidget {
-  PatientInformationScreen({Key? key}) : super(key: key);
-
-  final _patientInformationController = Get.put(PatientInformationController());
+  PatientInformationScreen({super.key});
   final ThemeController _themeController = Get.find();
+  final DashboardController _dashboardController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,15 +72,16 @@ class PatientInformationScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InformationInput(
-                        controller: _patientInformationController
-                            .mrnTextEditingController,
+                        controller:
+                            _dashboardController.mrnTextEditingController,
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
                         hintText: 'Mrn',
+                        title: 'Mrn',
                       ),
                       InformationInput(
-                        controller: _patientInformationController
-                            .serialTextEditingController,
+                        controller:
+                            _dashboardController.serialTextEditingController,
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
                         hintText: 'serial'.tr,
@@ -91,16 +90,16 @@ class PatientInformationScreen extends StatelessWidget {
                   ),
                   35.h.verticalSpace,
                   InformationInput(
-                    controller: _patientInformationController
-                        .patientNameTextEditingController,
+                    controller:
+                        _dashboardController.patientNameTextEditingController,
                     height: 50.h,
                     width: double.infinity,
                     hintText: 'patient_name'.tr,
                   ),
                   35.h.verticalSpace,
                   InformationInput(
-                    controller: _patientInformationController
-                        .mobileTextEditingController,
+                    controller:
+                        _dashboardController.mobileTextEditingController,
                     height: 50.h,
                     width: double.infinity,
                     hintText: 'phone_number'.tr,
@@ -108,17 +107,6 @@ class PatientInformationScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ReservationButton(
-              text: 'confirm'.tr,
-              onClick: _patientInformationController.handleClickConfirm,
-            ),
-            20.h.verticalSpace,
-            ReservationButton(
-              text: 'back'.tr,
-              isPrimary: false,
-              onClick: _patientInformationController.handleClickBack,
-            ),
-            80.h.verticalSpace
           ],
         ),
       ),

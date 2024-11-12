@@ -17,10 +17,10 @@ class ThemeController extends BaseController {
     super.onInit();
   }
 
-  toggleTheme(bool value) {
-    isDarkMode.value = value;
+  toggleTheme() {
+    isDarkMode.value = !isDarkMode.value;
     Get.changeThemeMode(
-      isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+      isDarkMode.value == true ? ThemeMode.dark : ThemeMode.light,
     );
     _saveThemeStatus();
   }

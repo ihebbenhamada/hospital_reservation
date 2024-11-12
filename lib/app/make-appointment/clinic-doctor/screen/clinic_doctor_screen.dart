@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/controllers/clinic_doctor_controller.dart';
+import 'package:reservation/app/make-appointment/main/models/doctor/doctor.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
 import '../../../../config/theme/theme_controller.dart';
-import '../../../../widgets/reservation-button/reservation-button.dart';
+import '../../../dashboard/controller/dashboard-controller.dart';
+import '../../main/models/clinic/clinic.dart';
 
 class ClinicDoctorScreen extends StatelessWidget {
-  ClinicDoctorScreen({Key? key}) : super(key: key);
-  final _clinicDoctorController = Get.put(ClinicDoctorController());
+  ClinicDoctorScreen({super.key});
+  //final _clinicDoctorController = Get.put(ClinicDoctorController());
   final ThemeController _themeController = Get.find();
-
+  final DashboardController _dashboardController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,10 +90,10 @@ class ClinicDoctorScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: GetBuilder<ClinicDoctorController>(
-                      builder: (_) => DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _clinicDoctorController.selectedClinic,
+                    child: Obx(
+                      () => DropdownButtonHideUnderline(
+                        child: DropdownButton<Clinic>(
+                          value: _dashboardController.selectedClinic.value,
                           style: TextStyle(
                             color: AppColors.gray5,
                             fontSize: 12.sp,
@@ -104,13 +105,13 @@ class ClinicDoctorScreen extends StatelessWidget {
                             AppImages.arrowDrop,
                             height: 8.h,
                           ),
-                          onChanged: (String? newValue) =>
-                              _clinicDoctorController.onSelectClinic(newValue),
-                          items: _clinicDoctorController.clinics
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          onChanged: (Clinic? newValue) =>
+                              _dashboardController.onSelectClinic(newValue),
+                          items: _dashboardController.clinicsList
+                              .map<DropdownMenuItem<Clinic>>((Clinic value) {
+                            return DropdownMenuItem<Clinic>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.departmentNameEn),
                             );
                           }).toList(),
                         ),
@@ -136,10 +137,10 @@ class ClinicDoctorScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: GetBuilder<ClinicDoctorController>(
-                      builder: (_) => DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _clinicDoctorController.selectedDoctor,
+                    child: Obx(
+                      () => DropdownButtonHideUnderline(
+                        child: DropdownButton<Doctor>(
+                          value: _dashboardController.selectedDoctor.value,
                           style: TextStyle(
                             color: AppColors.gray5,
                             fontSize: 12.sp,
@@ -151,13 +152,13 @@ class ClinicDoctorScreen extends StatelessWidget {
                             AppImages.arrowDrop,
                             height: 8.h,
                           ),
-                          onChanged: (String? newValue) =>
-                              _clinicDoctorController.onSelectDoctor(newValue),
-                          items: _clinicDoctorController.doctors
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          onChanged: (Doctor? newValue) =>
+                              _dashboardController.onSelectDoctor(newValue),
+                          items: _dashboardController.doctorsList
+                              .map<DropdownMenuItem<Doctor>>((Doctor value) {
+                            return DropdownMenuItem<Doctor>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.fullName),
                             );
                           }).toList(),
                         ),
@@ -167,17 +168,6 @@ class ClinicDoctorScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ReservationButton(
-              text: 'next'.tr,
-              onClick: _clinicDoctorController.handleClickNext,
-            ),
-            20.h.verticalSpace,
-            ReservationButton(
-              text: 'back'.tr,
-              isPrimary: false,
-              onClick: _clinicDoctorController.handleClickBack,
-            ),
-            80.h.verticalSpace
           ],
         ),
       ),

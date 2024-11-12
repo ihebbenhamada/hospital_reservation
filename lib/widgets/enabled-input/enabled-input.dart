@@ -6,8 +6,9 @@ import 'package:reservation/config/image_urls/image_urls.dart';
 
 class EnabledInput extends StatelessWidget {
   const EnabledInput({
-    Key? key,
+    super.key,
     this.autofocus = false,
+    this.isFilled = false,
     this.obscureText = false,
     required this.controller,
     this.hintText = '',
@@ -29,7 +30,7 @@ class EnabledInput extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.inputFormatters,
     this.maxLength,
-    this.autovalidateMode,
+    this.autoValidateMode,
     this.initialValue,
     this.textCapitalization = TextCapitalization.none,
     this.enabled,
@@ -39,11 +40,12 @@ class EnabledInput extends StatelessWidget {
     this.error,
     this.errorText,
     this.isDarkMode = false,
-  }) : super(key: key);
+  });
 
   final double height;
   final double width;
   final bool autofocus;
+  final bool isFilled;
   final TextEditingController controller;
   final String hintText;
   final String? errorText;
@@ -71,7 +73,7 @@ class EnabledInput extends StatelessWidget {
   final String? title;
   final String? initialValue;
   final TextInputAction? textInputAction;
-  final AutovalidateMode? autovalidateMode;
+  final AutovalidateMode? autoValidateMode;
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
 
@@ -79,22 +81,33 @@ class EnabledInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: 21.h,
-          width: 21.h,
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.gray1, width: 2),
-            borderRadius: BorderRadius.circular(21.h),
-          ),
-        ),
+        isFilled
+            ? Image.asset(
+                AppImages.tick,
+                height: 15.h,
+                width: 21,
+              )
+            : Container(
+                height: 21.h,
+                width: 21.h,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.gray1, width: 2),
+                  borderRadius: BorderRadius.circular(21.h),
+                ),
+              ),
         Stack(
           alignment: Alignment.centerLeft,
           children: [
             Image.asset(
               AppImages.enabledInput,
               height: 68.h,
-              color: isDarkMode ? AppColors.dark1 : AppColors.white,
+              color: (isDarkMode && isFilled) || (!isDarkMode && isFilled)
+                  ? AppColors.primary
+                  : isDarkMode
+                      ? AppColors.dark1
+                      : AppColors.gray2,
             ),
             SizedBox(
               width: 250,
@@ -116,9 +129,9 @@ class EnabledInput extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: isDarkMode ? AppColors.gray1 : AppColors.black1,
+                  color: isFilled ? AppColors.white : AppColors.black1,
                 ),
-                cursorColor: AppColors.primary,
+                cursorColor: isFilled ? AppColors.white : AppColors.primary,
                 decoration: InputDecoration(
                   isDense: true,
                   counterText: '',
@@ -144,7 +157,7 @@ class EnabledInput extends StatelessWidget {
                 enableSuggestions: false,
                 enabled: enabled,
                 textInputAction: textInputAction,
-                autovalidateMode: autovalidateMode,
+                autovalidateMode: autoValidateMode,
                 validator: validator,
                 enableInteractiveSelection: true,
                 focusNode: focusNode,

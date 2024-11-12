@@ -11,7 +11,6 @@ import 'package:reservation/app/make-appointment/appointment-success/screens/app
 import 'package:reservation/app/make-appointment/clinic-doctor/screen/clinic_doctor_screen.dart';
 import 'package:reservation/app/make-appointment/date-time-appointment/screen/date_time_appointment_screen.dart';
 import 'package:reservation/app/make-appointment/patient-information/screen/patient_information_screen.dart';
-import 'package:reservation/app/make-appointment/screen/appointment-steps.dart';
 import 'package:reservation/app/notifications/screens/notifications_screen.dart';
 import 'package:reservation/app/profile/change-password/screens/change_password_screen.dart';
 import 'package:reservation/app/profile/screen/profile_screen.dart';
@@ -19,6 +18,7 @@ import 'package:reservation/app/profile/screen/profile_screen.dart';
 import '../app/auth/login/screens/login_screen.dart';
 import '../app/auth/signup/screens/signup_screen.dart';
 import '../app/dashboard/home/screens/home_screen.dart';
+import '../app/make-appointment/main/screen/appointment-steps.dart';
 import 'app_bindings.dart';
 import 'app_routes.dart';
 

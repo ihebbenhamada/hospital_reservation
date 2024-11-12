@@ -77,81 +77,102 @@ class InformationInput extends StatelessWidget {
   final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
-        color: _themeController.isDarkMode.value
-            ? AppColors.dark1
-            : AppColors.gray2,
-        boxShadow: [
-          BoxShadow(
-            color: _themeController.isDarkMode.value
-                ? const Color.fromRGBO(0, 0, 0, 0.16)
-                : const Color.fromRGBO(152, 152, 152, 0.16),
-            offset: const Offset(0.0, 5),
-            blurRadius: 8.0.h,
-            spreadRadius: 0.h,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: Get.locale?.languageCode == 'en' ? 12 : 0,
+            right: Get.locale?.languageCode == 'ar' ? 12 : 0,
           ),
-        ],
-      ),
-      child: Center(
-        child: TextFormField(
-          key: key,
-          autofocus: autofocus,
-          obscureText: obscureText,
-          controller: controller,
-          keyboardType: keyboardType,
-          maxLines: maxLines,
-          textAlignVertical: TextAlignVertical.center,
-          onChanged: onChanged,
-          onSaved: onSaved,
-          initialValue: initialValue,
-          maxLength: maxLength,
-          onEditingComplete: onEditingComplete,
-          onFieldSubmitted: onFieldSubmitted,
-          inputFormatters: inputFormatters,
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: _themeController.isDarkMode.value
-                ? AppColors.white
-                : AppColors.black1,
-          ),
-          cursorColor: AppColors.primary,
-          decoration: InputDecoration(
-            isDense: true,
-            counterText: '',
-            hintText: hintText,
-            hintStyle: TextStyle(
+          child: Text(
+            hintText,
+            style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.gray5,
+              color: _themeController.isDarkMode.value
+                  ? AppColors.gray2
+                  : AppColors.dark1,
             ),
-            contentPadding: const EdgeInsets.all(16),
-            suffixIcon: suffixIcon,
-            suffixIconConstraints: const BoxConstraints(),
-            prefixIcon: prefixIcon,
-            prefixIconConstraints: const BoxConstraints(),
-            focusedBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            border: InputBorder.none,
-            errorBorder: InputBorder.none,
-            focusedErrorBorder: InputBorder.none,
           ),
-          autocorrect: false,
-          enableSuggestions: false,
-          enabled: enabled,
-          textInputAction: textInputAction,
-          autovalidateMode: autovalidateMode,
-          validator: validator,
-          enableInteractiveSelection: true,
-          focusNode: focusNode,
-          textCapitalization: textCapitalization,
         ),
-      ),
+        5.h.verticalSpace,
+        Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            color: _themeController.isDarkMode.value
+                ? AppColors.dark1
+                : AppColors.gray2,
+            boxShadow: [
+              BoxShadow(
+                color: _themeController.isDarkMode.value
+                    ? const Color.fromRGBO(0, 0, 0, 0.16)
+                    : const Color.fromRGBO(152, 152, 152, 0.16),
+                offset: const Offset(0.0, 5),
+                blurRadius: 8.0.h,
+                spreadRadius: 0.h,
+              ),
+            ],
+          ),
+          child: Center(
+            child: TextFormField(
+              key: key,
+              autofocus: autofocus,
+              obscureText: obscureText,
+              controller: controller,
+              keyboardType: keyboardType,
+              maxLines: maxLines,
+              textAlignVertical: TextAlignVertical.center,
+              onChanged: onChanged,
+              onSaved: onSaved,
+              initialValue: initialValue,
+              maxLength: maxLength,
+              onEditingComplete: onEditingComplete,
+              onFieldSubmitted: onFieldSubmitted,
+              inputFormatters: inputFormatters,
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: _themeController.isDarkMode.value
+                    ? AppColors.white
+                    : AppColors.black1,
+              ),
+              cursorColor: AppColors.primary,
+              decoration: InputDecoration(
+                isDense: true,
+                counterText: '',
+                hintText: hintText,
+                hintStyle: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.gray5,
+                ),
+                contentPadding: const EdgeInsets.all(16),
+                suffixIcon: suffixIcon,
+                suffixIconConstraints: const BoxConstraints(),
+                prefixIcon: prefixIcon,
+                prefixIconConstraints: const BoxConstraints(),
+                focusedBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none,
+                errorBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+              ),
+              autocorrect: false,
+              enableSuggestions: false,
+              enabled: enabled,
+              textInputAction: textInputAction,
+              autovalidateMode: autovalidateMode,
+              validator: validator,
+              enableInteractiveSelection: true,
+              focusNode: focusNode,
+              textCapitalization: textCapitalization,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

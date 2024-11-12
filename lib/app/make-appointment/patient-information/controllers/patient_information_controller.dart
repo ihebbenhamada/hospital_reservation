@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
+import 'package:reservation/app/make-appointment/clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
+import 'package:reservation/app/make-appointment/patient-information/services/patient_info_service.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../auth/login/models/login_response.dart';
 
 class PatientInformationController extends BaseController {
+  /// SERVICES
+  final PatientInfoService _patientInfoService = PatientInfoService();
+
   /// CONTROLLERS
   late TextEditingController mrnTextEditingController;
   late TextEditingController serialTextEditingController;
@@ -12,6 +19,10 @@ class PatientInformationController extends BaseController {
   late TextEditingController doctorNameTextEditingController;
   late TextEditingController mobileTextEditingController;
   late TextEditingController dateTextEditingController;
+
+  final Rx<DataCreateAppointment> dataCreateAppointment =
+      DataCreateAppointment().obs;
+  final Rx<LoginResponse> loginResponse = LoginResponse().obs;
 
   /// VARIABLES
 
@@ -37,25 +48,27 @@ class PatientInformationController extends BaseController {
 
   /// INITIALISATION
   void initValues() {
+    loginResponse.value = LoginResponse.fromJson(
+        GetStorage().read('user') as Map<String, dynamic>);
     mrnTextEditingController = TextEditingController();
     serialTextEditingController = TextEditingController();
     patientNameTextEditingController = TextEditingController();
     doctorNameTextEditingController = TextEditingController();
     mobileTextEditingController = TextEditingController();
     dateTextEditingController = TextEditingController();
-  }
 
-  /// FUNCTIONS
-  handleClickConfirm() {
-    Get.to(
-      () => AppointmentSuccessScreen(),
-      transition: Transition.rightToLeft,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 500),
-    );
-  }
-
-  void handleClickBack() async {
-    Get.back();
+    if (Get.arguments != null) {
+      dataCreateAppointment.value = Get.arguments[0];
+      mrnTextEditingController.text =
+          dataCreateAppointment.value.medicalRegisterNo ?? '';
+      serialTextEditingController.text =
+          dataCreateAppointment.value.appointmentNo.toString();
+      patientNameTextEditingController.text =
+          GetStorage().read('patientName') ?? "";
+      Logger().e(GetStorage().read('user'));
+      mobileTextEditingController.text = (LoginResponse.fromJson(
+              GetStorage().read('user') as Map<String, dynamic>))
+          .phoneNumber;
+    }
   }
 }

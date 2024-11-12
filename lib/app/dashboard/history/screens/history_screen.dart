@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:reservation/app/dashboard/history/controllers/history_controller.dart';
+import 'package:reservation/app/dashboard/history/models/patient_appointment/patient_appointment.dart';
 import 'package:reservation/config/theme/theme_controller.dart';
 import 'package:reservation/widgets/history-item/history-item.dart';
 
@@ -28,15 +30,22 @@ class HistoryScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: _historyController.historyList.length,
+              itemCount: _historyController
+                  .historicList.value.patientAppointments.length,
               itemBuilder: (context, index) {
-                var item = _historyController.historyList[index];
+                PatientAppointment item = _historyController
+                    .historicList.value.patientAppointments[index];
                 return HistoryItem(
-                  type: item['type'],
-                  doctorName: item['doctor']['name'],
-                  speciality: item['doctor']['speciality'],
-                  date: item['date'],
-                  isArabic: _settingsController.isArabic.value,
+                  isCanceled: item.isCanceled,
+                  doctorName: Get.locale?.languageCode == 'en'
+                      ? item.docotorNameEn
+                      : item.docotorNameAr,
+                  speciality: Get.locale?.languageCode == 'en'
+                      ? item.docotorJobNameEn
+                      : item.doctorJobNameAr,
+                  date: DateFormat('MM/dd/yyyy hh:mm a',
+                          Get.locale?.languageCode ?? 'en')
+                      .format(DateTime.parse(item.appointmentDateStartTime)),
                   isDarkMode: _themeController.isDarkMode.value,
                 );
               },

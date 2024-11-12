@@ -43,14 +43,14 @@ class Ar {
         'success_account_added': 'تمت إضافة حسابك بنجاح !!',
         'success_password_changed': 'تم تغيير كلمة المرور الخاصة بك بنجاح !!',
         'success_appointment_added': 'تمت إضافة موعدك بنجاح !!',
-        'mrn': ': MRN',
+        'mrn': 'رقم السجل الطبي :',
         'name': 'الاسم :',
 
         /// HOME SCREEN
         'welcome': 'مرحباً',
         'book_now': 'احجز الآن !',
         'book_now2': 'احجز الآن !!',
-        'my_mrn': ': MRN الخاصة بي',
+        'my_mrn': 'رقم السجل الطبي الخاص بي :',
         'file_number': 'رقم الملف',
         'my_appointment': 'موعدي',
         'appointment_number': 'رقم الموعد',
@@ -58,7 +58,7 @@ class Ar {
         'pending_appointment': 'في انتظار الموعد',
         'cancel': 'إلغاء',
         'cancel_appointment': 'إلغاء الموعد',
-        'top_5_doctors': 'أفضل 5 أطباء',
+        'top_5_doctors': 'أفضل ٥ أطباء',
         'today': 'اليوم',
         'week': 'أسبوع',
         'month': 'شهر',
@@ -113,5 +113,8 @@ class Ar {
         'serial': 'تسلسل',
         'patient_name': 'اسم المريض',
         'doctor_name': 'اسم الطبيب',
+        'notifications': 'الإشعارات',
+        'should_select_available_date': 'عليك اختيار الوقت!',
+        'error': 'خطأ'
       };
 }

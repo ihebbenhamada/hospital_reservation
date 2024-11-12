@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
 import 'package:reservation/config/colors/colors.dart';
 import 'package:reservation/config/image_urls/image_urls.dart';
 
 import '../../../../config/theme/theme_controller.dart';
-import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/appointment_success_controller.dart';
 
 class AppointmentSuccessScreen extends StatelessWidget {
   final _appointmentSuccessController = Get.put(AppointmentSuccessController());
   final ThemeController themeController = Get.find();
+  final DashboardController _dashboardController = Get.find();
   AppointmentSuccessScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,14 +184,15 @@ class AppointmentSuccessScreen extends StatelessWidget {
                   padding: EdgeInsets.only(
                     top: 10.h,
                     bottom: 14.h,
-                    left: 10,
+                    left: Get.locale?.languageCode == 'en' ? 10 : 0,
+                    right: Get.locale?.languageCode == 'ar' ? 10 : 0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${'mrn'.tr} 455',
+                        '${'mrn'.tr} ${_dashboardController.mrnTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -200,7 +201,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${'name'.tr} Iheb Ben Hamada',
+                        '${'name'.tr} ${_dashboardController.patientNameTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -209,7 +210,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${'phone_number1'.tr} 0597896489',
+                        '${'phone_number1'.tr} ${_dashboardController.mobileTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -221,17 +222,6 @@ class AppointmentSuccessScreen extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-            40.h.verticalSpace,
-            ReservationButton(
-              text: 'continue'.tr,
-              onClick: _appointmentSuccessController.handleClickContinue,
-            ),
-            20.h.verticalSpace,
-            ReservationButton(
-              text: 'back'.tr,
-              isPrimary: false,
-              onClick: _appointmentSuccessController.handleClickBack,
             ),
           ],
         ),

@@ -34,8 +34,8 @@ class SettingsScreen extends StatelessWidget {
                     description: 'change_language',
                     isEnabled: _settingsController.isArabic.value,
                     isDarkMode: themeController.isDarkMode.value,
-                    onToggleSwitch: (value) =>
-                        _settingsController.toggleLanguage(value),
+                    onToggleSwitch: _settingsController.toggleLanguage,
+                    isSwitchVisible: true,
                   ),
                 ),
                 Obx(
@@ -45,8 +45,8 @@ class SettingsScreen extends StatelessWidget {
                     description: 'change_theme',
                     isDarkMode: themeController.isDarkMode.value,
                     isEnabled: themeController.isDarkMode.value,
-                    onToggleSwitch: (value) =>
-                        themeController.toggleTheme(value),
+                    onToggleSwitch: themeController.toggleTheme,
+                    isSwitchVisible: true,
                   ),
                 ),
               ],
@@ -63,8 +63,8 @@ class SettingsScreen extends StatelessWidget {
                     description: 'send_notification_alarm',
                     isEnabled: _settingsController.isNotificationEnabled.value,
                     isDarkMode: themeController.isDarkMode.value,
-                    onToggleSwitch: (value) =>
-                        _settingsController.toggleNotification(value),
+                    onToggleSwitch: _settingsController.toggleNotification,
+                    isSwitchVisible: true,
                   ),
                 ),
                 SettingsItem(
@@ -72,7 +72,8 @@ class SettingsScreen extends StatelessWidget {
                   title: 'sign_out',
                   description: 'sign_out_from_app',
                   isDarkMode: themeController.isDarkMode.value,
-                  onClickItem: _settingsController.signOut,
+                  onToggleSwitch: _settingsController.signOut,
+                  isSwitchVisible: false,
                 ),
               ],
             ),

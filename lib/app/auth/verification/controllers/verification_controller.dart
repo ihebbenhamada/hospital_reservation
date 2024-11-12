@@ -18,6 +18,9 @@ class VerificationController extends BaseController {
   /// VARIABLES
   late bool enabled;
   late final int duration;
+  String id = '';
+  String fullName = '';
+  String phone = '';
 
   /// VALIDATION
 
@@ -35,6 +38,11 @@ class VerificationController extends BaseController {
 
   /// INITIALISATION
   void initValues() {
+    if (Get.arguments != null) {
+      id = Get.arguments[0];
+      fullName = Get.arguments[1];
+      phone = Get.arguments[2];
+    }
     enabled = false;
     controller = CountDownController();
     duration = 60;
@@ -56,6 +64,7 @@ class VerificationController extends BaseController {
   handleClickConfirm() {
     Get.off(
       PasswordScreen(),
+      arguments: [id, fullName, phone],
       transition: Transition.leftToRight,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),

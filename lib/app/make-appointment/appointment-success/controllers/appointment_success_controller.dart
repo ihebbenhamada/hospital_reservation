@@ -1,6 +1,5 @@
-import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/screen/dashboard-screen.dart';
+import 'package:reservation/routes/app_routes.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 
@@ -30,12 +29,9 @@ class AppointmentSuccessController extends BaseController {
 
   /// FUNCTIONS
   handleClickContinue() {
-    Get.offAll(
-      () => DashboardScreen(),
-      transition: Transition.rightToLeft,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 500),
-    );
+    Get.offNamedUntil(AppRoutes.dashboard, (route) {
+      return true;
+    });
   }
 
   void handleClickBack() async {

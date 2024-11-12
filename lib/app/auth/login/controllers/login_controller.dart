@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/auth/forget-password/screens/forget_password_screen.dart';
+import 'package:reservation/config/interceptor/interceptor.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../dashboard/screen/dashboard-screen.dart';
+import '../../forget-password/screens/forget_password_screen.dart';
 import '../../signup/screens/signup_screen.dart';
 import '../services/login_service.dart';
 
@@ -96,33 +96,46 @@ class LoginController extends BaseController {
   handleClickSignIn() {
     if (idTextEditingController.value.text.isNotEmpty &&
         passwordTextEditingController.value.text.isNotEmpty) {
-      _loginService
-          .login(
-              id: idTextEditingController.value.text,
-              password: passwordTextEditingController.value.text)
-          .then((value) {
-        if (value != null) {
-          storage.write('token', value.token);
-          storage.write('user', value.toJson());
-          Get.offAll(
-            () => DashboardScreen(),
-            transition: Transition.leftToRight,
-            curve: Curves.ease,
-            duration: const Duration(milliseconds: 500),
-          );
-        } else {
-          print('error');
-        }
-      });
+      if (idTextEditingController.value.text.length >= 10) {
+        AppInterceptor.showLoader();
+        _loginService
+            .login(
+                hawiaNo: idTextEditingController.value.text,
+                password: passwordTextEditingController.value.text)
+            .then((value) {
+          AppInterceptor.hideLoader();
+          if (value != null) {
+            idTextEditingController.clear();
+            passwordTextEditingController.clear();
+            storage.write('token', value.token);
+            storage.write('user', value);
+            storage.write('phone', value.phoneNumber);
+            Get.offAll(
+              () => DashboardScreen(),
+              transition: Transition.leftToRight,
+              curve: Curves.ease,
+              duration: const Duration(milliseconds: 500),
+            );
+          } else {
+            print('error');
+          }
+        });
+      } else {
+        Get.snackbar(
+          'Error',
+          'Make sure you entered right id',
+          colorText: AppColors.white,
+          backgroundColor: AppColors.redLight,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } else {
-      Fluttertoast.showToast(
-        msg: "Fill in the credentials",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
+      Get.snackbar(
+        'Error',
+        'Fill in the credentials',
+        colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
-        textColor: AppColors.white,
-        fontSize: 16.0,
+        snackPosition: SnackPosition.BOTTOM,
       );
     }
   }

@@ -1,29 +1,44 @@
-import 'package:dio/dio.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/models/clinic_response.dart';
-import 'package:reservation/config/api-urls/end_points.dart';
+import 'dart:developer';
 
+import 'package:dio/dio.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:get/route_manager.dart';
+
+import '../../../../config/api-urls/end_points.dart';
+import '../../../../config/colors/colors.dart';
 import '../../../../config/interceptor/interceptor.dart';
-import '../models/doctors_by_clinic_response.dart';
+import '../models/doctor_schedule/doctor_schedule.dart';
 
 class ClinicDoctorService {
-  Future<ClinicResponse?> getAllClinics() async {
-    Response? response =
-        await AppInterceptor.dio?.get(EndPoints.GET_ALL_CLINICS);
-    if (response != null && response.statusCode == 200) {
-      return ClinicResponse.fromJson(response.data);
-    } else {
-      return null;
-    }
-  }
-
-  Future<DoctorsByClinicResponse?> getDoctorsByClinic({
-    required int clinicId,
-  }) async {
-    Response? response = await AppInterceptor.dio
-        ?.get(EndPoints.GET_ALL_DOCTORS_BY_CLINIC_ID + clinicId.toString());
-    if (response != null && response.statusCode == 200) {
-      return DoctorsByClinicResponse.fromJson(response.data);
-    } else {
+  Future<List<DoctorSchedule>?> getDoctorSchedule(
+      {required int doctorId, required String date}) async {
+    try {
+      Response? response = await AppInterceptor.dio?.get(
+        EndPoints.GET_DOCTOR_SCHEDULE_BY_DOCTOR_ID_DATE,
+        data: {"doctorId": doctorId.toString(), "bookDate": date},
+      );
+      if (response != null && response.statusCode == 200) {
+        List<DoctorSchedule> doctorScheduleList =
+            (response.data as List<dynamic>)
+                .map(
+                  (doctorScheduleJson) => DoctorSchedule.fromJson(
+                    doctorScheduleJson,
+                  ),
+                )
+                .toList();
+        return doctorScheduleList;
+      } else {
+        return null;
+      }
+    } on DioException catch (e) {
+      Get.snackbar(
+        'Error',
+        e.response?.data.toString() ?? 'error'.tr,
+        colorText: AppColors.white,
+        backgroundColor: AppColors.redLight,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      log(e.response.toString());
       return null;
     }
   }

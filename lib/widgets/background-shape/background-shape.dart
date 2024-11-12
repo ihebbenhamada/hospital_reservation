@@ -8,10 +8,10 @@ import '../../config/theme/theme_controller.dart';
 
 class BackgroundShape extends StatelessWidget {
   BackgroundShape({
-    Key? key,
+    super.key,
     required this.child,
     this.backgroundColor = AppColors.white,
-  }) : super(key: key);
+  });
   final Widget child;
   final Color? backgroundColor;
   final ThemeController themeController = Get.find();

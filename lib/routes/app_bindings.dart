@@ -18,7 +18,7 @@ import 'package:reservation/app/profile/change-password/controllers/change-passw
 import 'package:reservation/app/profile/controllers/profile_controller.dart';
 
 import '../app/dashboard/home/controllers/home_controller.dart';
-import '../app/make-appointment/controllers/appointment_steps_controller.dart';
+import '../app/make-appointment/main/controllers/appointment_steps_controller.dart';
 
 class LoginPageBindings extends Bindings {
   @override

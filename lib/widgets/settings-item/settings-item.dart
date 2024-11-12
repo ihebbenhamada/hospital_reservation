@@ -6,28 +6,28 @@ import '../../config/colors/colors.dart';
 
 class SettingsItem extends StatelessWidget {
   const SettingsItem({
-    Key? key,
+    super.key,
     required this.icon,
     this.isEnabled,
     required this.title,
     required this.description,
     this.onToggleSwitch,
-    this.onClickItem,
     this.isDarkMode = false,
-  }) : super(key: key);
+    this.isSwitchVisible = false,
+  });
 
   final String icon;
+  final bool isSwitchVisible;
   final bool? isEnabled;
   final bool isDarkMode;
   final String title;
   final String description;
-  final void Function(bool value)? onToggleSwitch;
-  final void Function()? onClickItem;
+  final void Function()? onToggleSwitch;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClickItem,
+      onTap: onToggleSwitch,
       child: Container(
         height: 160.h,
         width: 160.h,
@@ -67,7 +67,7 @@ class SettingsItem extends StatelessWidget {
                           child: CupertinoSwitch(
                             value: isEnabled!,
                             activeColor: AppColors.primary,
-                            onChanged: (value) => onToggleSwitch!(value),
+                            onChanged: (value) => onToggleSwitch,
                           ),
                         ),
                       )

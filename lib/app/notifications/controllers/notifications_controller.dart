@@ -1,12 +1,19 @@
+import 'package:get/get.dart';
+import 'package:reservation/app/make-appointment/main/models/doctor/doctor.dart';
+import 'package:reservation/app/notifications/services/notifications_service.dart';
+import 'package:reservation/config/interceptor/interceptor.dart';
+
 import '../../../../config/controllerConfig/base_controller.dart';
 
 class NotificationsController extends BaseController {
   /// SERVICES
+  NotificationsService _notificationsService = NotificationsService();
 
   /// CONTROLLERS
 
   /// VARIABLES
-  final List<Map<String, dynamic>> notificationsList = [
+  final RxList<Doctor> notificationsList = <Doctor>[].obs;
+  /*[
     {
       'type': 'news',
       'doctor': {
@@ -63,7 +70,7 @@ class NotificationsController extends BaseController {
       },
       'date': '13Dec - 6:30'
     },
-  ];
+  ]*/
 
   /// VALIDATION
 
@@ -80,7 +87,19 @@ class NotificationsController extends BaseController {
   }
 
   /// INITIALISATION
-  void initValues() {}
+  void initValues() {
+    getNotifications();
+  }
+
+  getNotifications() {
+    AppInterceptor.showLoader();
+    _notificationsService.getNotifications().then((value) {
+      if (value != null) {
+        notificationsList.value = value;
+      }
+      AppInterceptor.hideLoader();
+    });
+  }
 
   /// FUNCTIONS
 }

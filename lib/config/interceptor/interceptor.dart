@@ -1,10 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/config/colors/colors.dart';
 
 import '../api-urls/end_points.dart';
 
@@ -18,7 +18,7 @@ class AppInterceptor {
       _dio = Dio(
         BaseOptions(
           baseUrl: EndPoints.BASE_URL,
-          connectTimeout: const Duration(seconds: 15),
+          connectTimeout: const Duration(seconds: 30),
           sendTimeout: const Duration(seconds: 50),
           receiveTimeout: const Duration(seconds: 50),
         ),
@@ -30,7 +30,6 @@ class AppInterceptor {
             RequestOptions requestOptions,
             RequestInterceptorHandler handler,
           ) {
-            showLoader();
             if (requestOptions.method == 'GET') {
               requestOptions.queryParameters.removeWhere(
                 (key, value) => value == null,
@@ -47,12 +46,13 @@ class AppInterceptor {
               HttpHeaders.contentTypeHeader: "application/json",
             });
             handler.next(requestOptions);
+            onRequestSent(requestOptions);
           },
           onResponse: (
             response,
             ResponseInterceptorHandler handler,
           ) {
-            hideLoader();
+            onResponseReceived(response);
             _reestablishDefaultConfig();
             handler.next(response);
           },
@@ -60,6 +60,7 @@ class AppInterceptor {
             DioException error,
             ErrorInterceptorHandler handler,
           ) {
+            onResponseFailed(error);
             EasyLoading.dismiss();
             _reestablishDefaultConfig();
             _handleError(error);
@@ -94,19 +95,67 @@ class AppInterceptor {
 
   /// ERROR HANDLER
 
-  static void _handleError(DioException error) {
-    Fluttertoast.showToast(
-      msg: "${error.response?.data}",
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: AppColors.redLight,
-      textColor: AppColors.white,
-      fontSize: 16.0,
-    );
+  static void _handleError(DioException dioException) {
+    if (kDebugMode) {
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      log('RequestOptions uri path error : ${dioException.requestOptions.uri.path}');
+      log('RequestOptions method error : ${dioException.requestOptions.method}');
+      log('RequestOptions path error : ${dioException.requestOptions.path}');
+      log('RequestOptions data error : ${dioException.requestOptions.data}');
+      log('Exception status code : ${dioException.response?.statusCode}');
+      log('Exception status message : ${dioException.response?.statusMessage}');
+      log('Exception type name : ${dioException.type.name}');
+      log('Exception message : ${dioException.message}');
+      log('Exception error : ${dioException.error.toString()}');
+
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+    }
   }
 
   static void _reestablishDefaultConfig() {
     responseType = ResponseType.json;
+  }
+
+  static void onRequestSent(RequestOptions requestOptions) {
+    if (kDebugMode) {
+      log('✅✅✅✅✅✅✅✅✅✅✅✅ Request ✅✅✅✅✅✅✅✅✅✅✅✅✅');
+      log('Method : ${requestOptions.method}');
+      log('Path : ${requestOptions.baseUrl}${requestOptions.path}');
+      if (requestOptions.method != 'GET') {
+        log('Data : ${requestOptions.data}');
+      }
+      log('✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅');
+    }
+  }
+
+  static void onResponseReceived(Response response) {
+    if (kDebugMode) {
+      if (response.statusCode == 200) {
+        log('✅✅✅✅✅✅✅✅✅✅✅✅ Response success ✅✅✅✅✅✅✅✅✅✅✅✅✅');
+        log('Status Code : ${response.statusCode}');
+        log('Status Message : ${response.statusMessage}');
+        log('Data : ${response.data}');
+        log('✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅');
+      } else {
+        log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ Response failed ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+        log('Status Code : ${response.statusCode}');
+        log('Status Message : ${response.statusMessage}');
+        log('Data : ${response.data.toString()}');
+        log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      }
+    }
+  }
+
+  static void onResponseFailed(DioException dioException) {
+    if (kDebugMode) {
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ Response error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      log('Exception status code : ${dioException.response?.statusCode}');
+      log('Exception status message : ${dioException.response?.statusMessage}');
+      log('Exception type name : ${dioException.type.name}');
+      log('Exception message : ${dioException.message}');
+      log('Exception error : ${dioException.error.toString()}');
+
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+    }
   }
 }

@@ -15,7 +15,7 @@ class DashboardGridItem extends StatelessWidget {
   }) : super(key: key);
 
   final String icon;
-  final int value;
+  final String value;
   final String title;
   final String description;
   final bool isPrimary;

@@ -1,23 +1,41 @@
-import 'package:dio/dio.dart';
-import 'package:reservation/app/auth/login/models/login_response.dart';
-import 'package:reservation/config/api-urls/end_points.dart';
+import 'dart:developer';
 
+import 'package:dio/dio.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
+
+import '../../../../config/api-urls/end_points.dart';
+import '../../../../config/colors/colors.dart';
 import '../../../../config/interceptor/interceptor.dart';
+import '../models/login_response.dart';
 
 class LoginService {
   Future<LoginResponse?> login({
-    required String id,
+    required String hawiaNo,
     required String password,
   }) async {
     Map<String, String> data = {
-      "email": id,
+      "hawiaNo": hawiaNo,
       "password": password,
     };
-    Response? response =
-        await AppInterceptor.dio?.post(EndPoints.LOGIN_URL, data: data);
-    if (response != null && response.statusCode == 200) {
-      return LoginResponse.fromJson(response.data);
-    } else {
+
+    try {
+      Response? response =
+          await AppInterceptor.dio?.post(EndPoints.LOGIN_URL, data: data);
+      if (response != null && response.statusCode == 200) {
+        return LoginResponse.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } on DioException catch (e) {
+      Get.snackbar(
+        'Error',
+        e.response?.data.toString() ?? 'error'.tr,
+        colorText: AppColors.white,
+        backgroundColor: AppColors.redLight,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      log(e.response.toString());
       return null;
     }
   }
