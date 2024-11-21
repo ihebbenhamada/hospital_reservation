@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +12,8 @@ class ProfileController extends BaseController {
   /// VARIABLES
   Rx<PatientStatistics> patient = PatientStatistics().obs;
   RxString phone = ''.obs;
+  RxString mrn = ''.obs;
+  RxString name = ''.obs;
 
   /// VALIDATION
 
@@ -34,14 +34,12 @@ class ProfileController extends BaseController {
     if (GetStorage().read('phone') != null) {
       phone.value = GetStorage().read('phone');
     }
-    log(PatientStatistics.fromJson(
-      GetStorage().read('patient') as Map<String, dynamic>,
-    ).toString());
-    /*if (GetStorage().read('patient') != null) {
-      patient.value = PatientStatistics.fromJson(
-        GetStorage().read('patient') as Map<String, dynamic>,
-      );
-    }*/
+    if (GetStorage().read('mrn') != null) {
+      mrn.value = GetStorage().read('mrn');
+    }
+    if (GetStorage().read('patientName') != null) {
+      name.value = GetStorage().read('patientName');
+    }
   }
 
   /// FUNCTIONS

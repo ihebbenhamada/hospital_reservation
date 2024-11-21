@@ -82,57 +82,62 @@ class DashboardScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          height: 50.h,
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: _dashboardController.handleClickProfile,
-                                child: Stack(
-                                  children: [
-                                    Image.asset(
-                                      AppImages.userPhoto,
-                                      height: 50.h,
-                                      width: 50.h,
-                                    ),
-                                    Image.asset(
-                                      themeController.isDarkMode.value
-                                          ? AppImages.signupUserShapeDark
-                                          : AppImages.signupUserShape,
-                                      height: 50.h,
-                                      width: 50.h,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              12.horizontalSpace,
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'welcome'.tr,
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.primary,
-                                    ),
+                        GestureDetector(
+                          onTap: _dashboardController.handleClickProfile,
+                          child: SizedBox(
+                            height: 50.h,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap:
+                                      _dashboardController.handleClickProfile,
+                                  child: Stack(
+                                    children: [
+                                      Image.asset(
+                                        AppImages.userPhoto,
+                                        height: 50.h,
+                                        width: 50.h,
+                                      ),
+                                      Image.asset(
+                                        themeController.isDarkMode.value
+                                            ? AppImages.signupUserShapeDark
+                                            : AppImages.signupUserShape,
+                                        height: 50.h,
+                                        width: 50.h,
+                                      ),
+                                    ],
                                   ),
-                                  Obx(
-                                    () => Text(
-                                      _dashboardController.patient.value.name,
+                                ),
+                                12.horizontalSpace,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'welcome'.tr,
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w500,
-                                        color: themeController.isDarkMode.value
-                                            ? AppColors.gray1
-                                            : AppColors.gray3,
+                                        color: AppColors.primary,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Obx(
+                                      () => Text(
+                                        _dashboardController.patient.value.name,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              themeController.isDarkMode.value
+                                                  ? AppColors.gray1
+                                                  : AppColors.gray3,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Row(

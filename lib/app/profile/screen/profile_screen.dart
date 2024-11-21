@@ -157,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${'mrn'.tr} ${_profileController.patient.value.mrn} ',
+                              '${'mrn'.tr} ${_profileController.mrn} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'name'.tr} ${_profileController.patient.value.name} ',
+                              '${'name'.tr} ${_profileController.name} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,

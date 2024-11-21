@@ -28,6 +28,7 @@ import '../../make-appointment/main/models/doctor/doctor.dart';
 import '../../make-appointment/main/screen/appointment-steps.dart';
 import '../../make-appointment/main/services/appointment_steps_service.dart';
 import '../../make-appointment/patient-information/services/patient_info_service.dart';
+import '../../profile/screen/profile_screen.dart';
 
 class DashboardController extends BaseController
     with GetSingleTickerProviderStateMixin {
@@ -196,7 +197,6 @@ class DashboardController extends BaseController
   }
 
   onClickNext() {
-    log(pageIndex.value.toString());
     switch (pageIndex.value) {
       case 0:
         handleClickMakeAppointment();
@@ -217,6 +217,7 @@ class DashboardController extends BaseController
         firstButtonText.value = 'start_your_appointment';
         HomeController homeController = Get.find();
         homeController.getHomeInformation();
+        selectedDate.value = DateTime.now();
         break;
     }
   }
@@ -240,12 +241,12 @@ class DashboardController extends BaseController
   }
 
   void handleClickProfile() {
-    /*Get.to(
+    Get.to(
       () => ProfileScreen(),
       transition: Transition.rightToLeft,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),
-    );*/
+    );
   }
 
   void initViews() {

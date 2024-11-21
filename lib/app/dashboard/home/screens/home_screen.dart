@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: _homeController.handleRefresh,
         color: AppColors.white,
+        displacement: 100,
         backgroundColor: AppColors.primary,
         child: SingleChildScrollView(
           padding: EdgeInsets.only(bottom: 56.h),
