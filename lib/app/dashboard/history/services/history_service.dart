@@ -13,7 +13,7 @@ class HistoryService {
   Future<PatientAppointments?> getPatientsAppointments() async {
     try {
       Response? response =
-          await AppInterceptor.dio?.get(EndPoints.GET_PATIENT_APPOINTMENTS);
+          await AppInterceptor.dio?.get(EndPoints.GET_PATIENT_APPOINTMENTS(3));
       if (response != null && response.statusCode == 200) {
         return PatientAppointments.fromJson(response.data);
       } else {

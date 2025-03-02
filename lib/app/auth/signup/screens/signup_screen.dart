@@ -58,7 +58,6 @@ class SignUpScreen extends StatelessWidget {
                   onChanged: (value) =>
                       _signUpController.onChangeInputs('id', value),
                   height: 63.h,
-                  isFilled: _signUpController.id.value.isNotEmpty,
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
                   hintText: 'id_number'.tr,
@@ -71,6 +70,7 @@ class SignUpScreen extends StatelessWidget {
                   errorText: _signUpController.isIdValid.value
                       ? null
                       : 'ID must be 10 digits',
+                  isValid: _signUpController.isIdValid.value,
                   /*validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'ID is required';
@@ -88,10 +88,10 @@ class SignUpScreen extends StatelessWidget {
                   height: 63.h,
                   onChanged: (value) =>
                       _signUpController.onChangeInputs('fullName', value),
-                  isFilled: _signUpController.fullName.value.isNotEmpty,
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
                   hintText: 'full_name'.tr,
+                  isValid: _signUpController.isNameValid.value,
                   /*validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Name is required';
@@ -112,7 +112,6 @@ class SignUpScreen extends StatelessWidget {
                   height: 63.h,
                   onChanged: (value) =>
                       _signUpController.onChangeInputs('phone', value),
-                  isFilled: _signUpController.phone.value.isNotEmpty,
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
                   hintText: 'phone_number'.tr,
@@ -122,6 +121,7 @@ class SignUpScreen extends StatelessWidget {
                   errorText: _signUpController.isPhoneNumberValid.value
                       ? null
                       : 'Invalid Saudi phone number',
+                  isValid: _signUpController.isPhoneNumberValid.value,
                 ),
               ),
               40.h.verticalSpace,

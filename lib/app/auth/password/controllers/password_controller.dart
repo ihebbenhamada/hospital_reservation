@@ -25,6 +25,8 @@ class PasswordController extends BaseController
   String id = '';
   String fullName = '';
   String phone = '';
+  RxBool isValidPassword = false.obs;
+  RxBool isValidConfirmPassword = false.obs;
 
   /// VALIDATION
 
@@ -58,19 +60,23 @@ class PasswordController extends BaseController
     if (hasLowercase(password)) strength++;
     if (hasSpecialCharacter(password)) strength++;
     if (hasMinLength(password, 6)) strength++;
-    passwordStrengthValue.value =
-        strength / 4; // Progress will be a value between 0 and 1
+    passwordStrengthValue.value = strength / 4;
     if (strength == 0) {
       passwordStrength.value = 'weak_password'.tr;
+      isValidPassword.value = false;
     } else if (strength == 1) {
+      isValidPassword.value = false;
       passwordStrength.value = 'weak_password'.tr;
     } else if (strength == 2) {
       passwordStrength.value = 'weak_password'.tr;
+      isValidPassword.value = false;
     } else if (strength == 3) {
       passwordStrength.value = 'weak_password'.tr;
+      isValidPassword.value = false;
     } else if (strength == 4) {
       passwordStrength.value = 'strong_password'.tr;
-    } // Assuming a maximum strength of 4
+      isValidPassword.value = true;
+    }
   }
 
   Color getColor(double value) {
@@ -94,10 +100,7 @@ class PasswordController extends BaseController
 
   /// SIGN UP METHODS
   handleClickContinue() {
-    if (id.isNotEmpty &&
-        fullName.isNotEmpty &&
-        phone.isNotEmpty &&
-        passwordTextEditingController.text.isNotEmpty) {
+    if (isValidPassword.isTrue && isValidConfirmPassword.isTrue) {
       AppInterceptor.showLoader();
       _passwordService
           .signup(
@@ -105,8 +108,8 @@ class PasswordController extends BaseController
         fullName: fullName,
         phoneNumber: phone,
         password: passwordTextEditingController.text,
-        fkDefBranchId: 2,
-        fkDefCompanyId: 2,
+        fkDefBranchId: 3,
+        fkDefCompanyId: 3,
         encryptedOTP: null,
         otp: null,
       )
@@ -186,6 +189,7 @@ class PasswordController extends BaseController
       password.value = value;
     } else {
       repeatPassword.value = value;
+      isValidConfirmPassword.value = repeatPassword.value == password.value;
     }
   }
 }

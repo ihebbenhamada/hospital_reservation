@@ -13,8 +13,8 @@ class EndPoints {
       '/PatientProfile/GetPatientStatisticsAndCharts';
 
   /// GET PATIENT APPOINTMENTS
-  static const String GET_PATIENT_APPOINTMENTS =
-      '/PatientProfile/GetAppointementsForPatient';
+  static String GET_PATIENT_APPOINTMENTS(int branchId) =>
+      '/PatientProfile/GetAppointementsForPatient?branchId=$branchId';
 
   /// GET CLINICS
   static const String GET_ALL_CLINICS = '/Mobile/GetAllClinics';

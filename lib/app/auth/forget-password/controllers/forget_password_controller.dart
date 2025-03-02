@@ -15,6 +15,7 @@ class ForgetPasswordController extends BaseController {
 
   /// VARIABLES
   RxString id = ''.obs;
+  RxBool isValidForgetPassword = false.obs;
 
   /// VALIDATION
 

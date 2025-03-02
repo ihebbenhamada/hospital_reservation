@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/auth/login/screens/login_screen.dart';
 import 'package:reservation/app/dashboard/home/controllers/home_controller.dart';
 import 'package:reservation/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
 import 'package:reservation/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
@@ -17,6 +14,7 @@ import '../../../config/interceptor/interceptor.dart';
 import '../../../config/theme/theme_controller.dart';
 import '../../../widgets/reservation-button/reservation-button.dart';
 import '../../auth/login/models/login_response.dart';
+import '../../auth/login/screens/login_screen.dart';
 import '../../make-appointment/clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
 import '../../make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
 import '../../make-appointment/clinic-doctor/screen/clinic_doctor_screen.dart';
@@ -93,7 +91,17 @@ class DashboardController extends BaseController
 
   onItemSelected(int index) {
     if (index == 4) {
-      storage.remove('user');
+      storage.erase();
+      selectedIndex = 0;
+      //update();
+      Get.offAll(
+        () => LoginScreen(),
+        transition: Transition.rightToLeft,
+        curve: Curves.ease,
+        duration: const Duration(milliseconds: 500),
+      );
+
+      /*storage.remove('user');
       storage.remove('token');
       storage.remove('patient');
       storage.remove('mrn');
@@ -103,7 +111,7 @@ class DashboardController extends BaseController
         transition: Transition.rightToLeft,
         curve: Curves.ease,
         duration: const Duration(milliseconds: 500),
-      );
+      );*/
     } else if (index == 2) {
       Get.to(
         () => AppointmentStepsScreen(),
@@ -259,7 +267,6 @@ class DashboardController extends BaseController
 
   ///PAGE START MAKE APPOINTMENT
   handleClickMakeAppointment() {
-    log('90909090090909090');
     AppInterceptor.showLoader();
     _appointmentStepsService.getAllClinics().then((clinics) {
       if (clinics != null && clinics.isNotEmpty) {

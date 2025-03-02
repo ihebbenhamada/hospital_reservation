@@ -7,7 +7,7 @@ class LatestDoctor {
   final int id;
   final String fullName;
   final String code;
-  @JsonKey(name: 'fk_HrDepartmentId')
+  @JsonKey(name: 'fK_HrDepartmentId')
   final int fkHrDepartmentId;
   final String departmentName;
   final String jobNameAr;

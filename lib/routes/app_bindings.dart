@@ -10,9 +10,6 @@ import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
 import 'package:reservation/app/dashboard/history/controllers/history_controller.dart';
 import 'package:reservation/app/dashboard/settings/controllers/settings_controller.dart';
 import 'package:reservation/app/make-appointment/appointment-success/controllers/appointment_success_controller.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/controllers/clinic_doctor_controller.dart';
-import 'package:reservation/app/make-appointment/date-time-appointment/controllers/date_time_appointment_controller.dart';
-import 'package:reservation/app/make-appointment/patient-information/controllers/patient_information_controller.dart';
 import 'package:reservation/app/notifications/controllers/notifications_controller.dart';
 import 'package:reservation/app/profile/change-password/controllers/change-password_controller.dart';
 import 'package:reservation/app/profile/controllers/profile_controller.dart';
@@ -101,27 +98,6 @@ class AppointmentStepsPageBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => AppointmentStepsController());
-  }
-}
-
-class ClinicDoctorPageBindings extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => ClinicDoctorController());
-  }
-}
-
-class DateTimeAppointmentPageBindings extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => DateTimeAppointmentController());
-  }
-}
-
-class PatientInformationPageBindings extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => PatientInformationController());
   }
 }
 

@@ -18,9 +18,9 @@ class SignUpController extends BaseController {
   RxString fullName = ''.obs;
   RxString phone = ''.obs;
 
-  RxBool isIdValid = true.obs;
-  RxBool isNameValid = true.obs;
-  RxBool isPhoneNumberValid = true.obs;
+  RxBool isIdValid = false.obs;
+  RxBool isNameValid = false.obs;
+  RxBool isPhoneNumberValid = false.obs;
 
   /// VALIDATION
 
@@ -80,12 +80,16 @@ class SignUpController extends BaseController {
     switch (key) {
       case 'id':
         id.value = value ?? '';
+        isIdValid.value = id.value.length == 10;
         break;
       case 'fullName':
         fullName.value = value ?? '';
+        isNameValid.value = id.value.isNotEmpty;
         break;
       case 'phone':
         phone.value = value ?? '';
+        isPhoneNumberValid.value =
+            RegExp(r'^(05)[0-9]{8}$').hasMatch(phone.value);
         break;
       default:
         break;

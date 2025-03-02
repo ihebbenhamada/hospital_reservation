@@ -8,7 +8,6 @@ class EnabledInput extends StatelessWidget {
   const EnabledInput({
     super.key,
     this.autofocus = false,
-    this.isFilled = false,
     this.obscureText = false,
     required this.controller,
     this.hintText = '',
@@ -23,7 +22,6 @@ class EnabledInput extends StatelessWidget {
     this.keyboardType = TextInputType.multiline,
     this.validator,
     this.fillColor = Colors.white,
-    this.filled = true,
     this.suffixIcon,
     this.prefixIcon,
     this.title,
@@ -40,17 +38,18 @@ class EnabledInput extends StatelessWidget {
     this.error,
     this.errorText,
     this.isDarkMode = false,
+    this.isValid = true,
   });
 
   final double height;
   final double width;
   final bool autofocus;
-  final bool isFilled;
   final TextEditingController controller;
   final String hintText;
   final String? errorText;
   final bool? enabled;
   final bool? error;
+  final bool isValid;
   final void Function()? onTap;
   final void Function(String?)? onChanged;
   final void Function(String?)? onSaved;
@@ -64,7 +63,6 @@ class EnabledInput extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final Color fillColor;
-  final bool filled;
   final bool isDarkMode;
   final int? maxLength;
   final bool? maxLengthEnforced = true;
@@ -83,7 +81,7 @@ class EnabledInput extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        isFilled
+        isValid
             ? Image.asset(
                 AppImages.tick,
                 height: 15.h,
@@ -103,7 +101,7 @@ class EnabledInput extends StatelessWidget {
             Image.asset(
               AppImages.enabledInput,
               height: 68.h,
-              color: (isDarkMode && isFilled) || (!isDarkMode && isFilled)
+              color: (isDarkMode && isValid) || (!isDarkMode && isValid)
                   ? AppColors.primary
                   : isDarkMode
                       ? AppColors.dark1
@@ -129,9 +127,9 @@ class EnabledInput extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: isFilled ? AppColors.white : AppColors.black1,
+                  color: isValid ? AppColors.white : AppColors.black1,
                 ),
-                cursorColor: isFilled ? AppColors.white : AppColors.primary,
+                cursorColor: isValid ? AppColors.white : AppColors.primary,
                 decoration: InputDecoration(
                   isDense: true,
                   counterText: '',

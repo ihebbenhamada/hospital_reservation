@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/auth/login/screens/login_screen.dart';
+import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../auth/login/screens/login_screen.dart';
 import '../services/settings_service.dart';
 
 class SettingsController extends BaseController {
@@ -11,6 +12,7 @@ class SettingsController extends BaseController {
   final SettingsService _settingsService = SettingsService();
 
   /// CONTROLLERS
+  final DashboardController _dashboardController = Get.find();
 
   /// VARIABLES
   final Rx<bool> isArabic = false.obs;
@@ -63,13 +65,20 @@ class SettingsController extends BaseController {
   }
 
   signOut() {
-    storage.remove('token');
-    storage.remove('user');
+    storage.erase();
+    _dashboardController.selectedIndex = 0;
+    //update();
     Get.offAll(
+      () => LoginScreen(),
+      transition: Transition.rightToLeft,
+      curve: Curves.ease,
+      duration: const Duration(milliseconds: 500),
+    );
+    /*Get.offAll(
       () => LoginScreen(),
       transition: Transition.leftToRight,
       curve: Curves.ease,
       duration: const Duration(milliseconds: 500),
-    );
+    );*/
   }
 }

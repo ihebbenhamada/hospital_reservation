@@ -91,7 +91,8 @@ class ForgetPasswordScreen extends StatelessWidget {
                       onChanged: (value) =>
                           _forgetPasswordController.onChange(value ?? ''),
                       isDarkMode: _themeController.isDarkMode.value,
-                      isFilled: _forgetPasswordController.id.value.isNotEmpty,
+                      isValid:
+                          _forgetPasswordController.isValidForgetPassword.value,
                       width: double.infinity,
                       hintText: 'id_number'.tr,
                       maxLength: 10,

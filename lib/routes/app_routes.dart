@@ -14,9 +14,6 @@ class AppRoutes {
   static const String appointment = '/appointment';
   static const String history = '/history';
   static const String appointmentSteps = '/appointmentSteps';
-  static const String clinicDoctor = '/clinicDoctor';
-  static const String dateTimeAppointment = '/dateTimeAppointment';
-  static const String patientInformation = '/patientInformation';
   static const String appointmentSuccess = '/appointmentSuccess';
   static const String profile = '/profile';
   static const String changePassword = '/changePassword';

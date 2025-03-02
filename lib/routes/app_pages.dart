@@ -8,9 +8,6 @@ import 'package:reservation/app/dashboard/history/screens/history_screen.dart';
 import 'package:reservation/app/dashboard/screen/dashboard-screen.dart';
 import 'package:reservation/app/dashboard/settings/screens/settings_screen.dart';
 import 'package:reservation/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/screen/clinic_doctor_screen.dart';
-import 'package:reservation/app/make-appointment/date-time-appointment/screen/date_time_appointment_screen.dart';
-import 'package:reservation/app/make-appointment/patient-information/screen/patient_information_screen.dart';
 import 'package:reservation/app/notifications/screens/notifications_screen.dart';
 import 'package:reservation/app/profile/change-password/screens/change_password_screen.dart';
 import 'package:reservation/app/profile/screen/profile_screen.dart';
@@ -85,21 +82,6 @@ class AppPages {
       name: AppRoutes.appointmentSteps,
       page: () => AppointmentStepsScreen(),
       binding: AppointmentStepsPageBindings(),
-    ),
-    GetPage(
-      name: AppRoutes.clinicDoctor,
-      page: () => ClinicDoctorScreen(),
-      binding: ClinicDoctorPageBindings(),
-    ),
-    GetPage(
-      name: AppRoutes.dateTimeAppointment,
-      page: () => DateTimeAppointmentScreen(),
-      binding: DateTimeAppointmentPageBindings(),
-    ),
-    GetPage(
-      name: AppRoutes.patientInformation,
-      page: () => PatientInformationScreen(),
-      binding: PatientInformationPageBindings(),
     ),
     GetPage(
       name: AppRoutes.appointmentSuccess,
