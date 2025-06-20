@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/settings/controllers/settings_controller.dart';
-import 'package:reservation/app/make-appointment/main/models/doctor/doctor.dart';
-import 'package:reservation/app/notifications/controllers/notifications_controller.dart';
-import 'package:reservation/widgets/notification-item/notification-item.dart';
+import 'package:inn_tech_appointment/app/dashboard/settings/controllers/settings_controller.dart';
+import 'package:inn_tech_appointment/app/make-appointment/main/models/doctor/doctor.dart';
+import 'package:inn_tech_appointment/app/notifications/controllers/notifications_controller.dart';
+import 'package:inn_tech_appointment/widgets/notification-item/notification-item.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../config/image_urls/image_urls.dart';
+import '../../../config/strings/strings.dart';
 import '../../../config/theme/theme_controller.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -45,7 +46,7 @@ class NotificationsScreen extends StatelessWidget {
                   },
                 ),
                 Text(
-                  'notifications'.tr,
+                  AppStrings.notifications.tr,
                   style: TextStyle(
                     color: _themeController.isDarkMode.value
                         ? AppColors.white

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
 
 class EnabledInput extends StatelessWidget {
   const EnabledInput({
@@ -98,14 +98,19 @@ class EnabledInput extends StatelessWidget {
         Stack(
           alignment: Alignment.centerLeft,
           children: [
-            Image.asset(
-              AppImages.enabledInput,
-              height: 68.h,
-              color: (isDarkMode && isValid) || (!isDarkMode && isValid)
-                  ? AppColors.primary
-                  : isDarkMode
-                      ? AppColors.dark1
-                      : AppColors.gray2,
+            ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                (isDarkMode && isValid) || (!isDarkMode && isValid)
+                    ? AppColors.primary
+                    : isDarkMode
+                        ? AppColors.dark1
+                        : AppColors.gray2, // Change this to your desired color
+                BlendMode.srcATop,
+              ),
+              child: Image.asset(
+                AppImages.enabledInput,
+                height: 68.h,
+              ),
             ),
             SizedBox(
               width: 250,

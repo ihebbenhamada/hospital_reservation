@@ -7,6 +7,7 @@ import 'package:get/route_manager.dart';
 import '../../../../config/api-urls/end_points.dart';
 import '../../../../config/colors/colors.dart';
 import '../../../../config/interceptor/interceptor.dart';
+import '../../../../config/strings/strings.dart';
 import '../models/doctor_schedule/doctor_schedule.dart';
 
 class ClinicDoctorService {
@@ -32,8 +33,8 @@ class ClinicDoctorService {
       }
     } on DioException catch (e) {
       Get.snackbar(
-        'Error',
-        e.response?.data.toString() ?? 'error'.tr,
+        AppStrings.error.tr,
+        e.response?.data.toString() ?? AppStrings.error.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,

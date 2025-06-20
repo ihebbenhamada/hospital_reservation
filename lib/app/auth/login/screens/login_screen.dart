@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
-import 'package:reservation/widgets/background-shape/background-shape.dart';
-import 'package:reservation/widgets/reservation-button/reservation-button.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/widgets/background-shape/background-shape.dart';
+import 'package:inn_tech_appointment/widgets/reservation-button/reservation-button.dart';
 
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-input/reservation-input.dart';
 import '../controllers/login_controller.dart';
@@ -20,12 +21,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusManager.instance.primaryFocus!.unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       child: BackgroundShape(
         backgroundColor: themeController.isDarkMode.value
             ? AppColors.dark2
             : AppColors.white,
+        withLogo: true,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 40.0,
@@ -33,32 +35,9 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              105.h.verticalSpace,
-              Center(
-                child: Image.asset(
-                  themeController.isDarkMode.value
-                      ? AppImages.logoCompanyDark
-                      : AppImages.logo,
-                  height: 99.h,
-                  width: 99.h,
-                ),
-              ),
-              23.h.verticalSpace,
-              Center(
-                child: Text(
-                  'reservation'.tr.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    color: themeController.isDarkMode.value
-                        ? AppColors.white
-                        : AppColors.gray,
-                  ),
-                ),
-              ),
-              55.h.verticalSpace,
+              280.h.verticalSpace,
               Text(
-                'sign_in'.tr.toUpperCase(),
+                AppStrings.signIn.tr.toUpperCase(),
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
@@ -69,7 +48,7 @@ class LoginScreen extends StatelessWidget {
               ),
               10.h.verticalSpace,
               Text(
-                'fill_credentials'.tr,
+                AppStrings.fillCredentials.tr,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
@@ -82,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                 height: 63.h,
                 width: double.infinity,
                 isDarkMode: themeController.isDarkMode.value,
-                hintText: 'id_number'.tr,
+                hintText: AppStrings.idNumber.tr,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
@@ -106,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                 height: 63.h,
                 obscureText: true,
                 width: double.infinity,
-                hintText: 'password'.tr,
+                hintText: AppStrings.password.tr,
                 isDarkMode: themeController.isDarkMode.value,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.only(
@@ -126,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    'forget_password'.tr.toUpperCase(),
+                    AppStrings.forgetPassword.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
@@ -137,13 +116,13 @@ class LoginScreen extends StatelessWidget {
               ),
               50.h.verticalSpace,
               ReservationButton(
-                text: 'sign_in'.tr.toUpperCase(),
+                text: AppStrings.signIn.tr.toUpperCase(),
                 onClick: _authController.handleClickSignIn,
               ),
               47.h.verticalSpace,
               Center(
                 child: Text(
-                  'dont_have_account'.tr,
+                  AppStrings.dontHaveAccount.tr,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
@@ -156,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                 onTap: _authController.handleClickSignup,
                 child: Center(
                   child: Text(
-                    'sign_up_now'.tr,
+                    AppStrings.signUpNow.tr,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,

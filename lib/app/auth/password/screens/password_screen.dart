@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/widgets/background-shape/background-shape.dart';
-import 'package:reservation/widgets/enabled-input/enabled-input.dart';
+import 'package:inn_tech_appointment/widgets/background-shape/background-shape.dart';
+import 'package:inn_tech_appointment/widgets/enabled-input/enabled-input.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/password_controller.dart';
@@ -46,7 +47,7 @@ class PasswordScreen extends StatelessWidget {
                 ),
                 12.horizontalSpace,
                 Text(
-                  'registration'.tr.toUpperCase(),
+                  AppStrings.registration.tr.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
@@ -59,7 +60,7 @@ class PasswordScreen extends StatelessWidget {
             ),
             90.h.verticalSpace,
             Text(
-              'enter_password'.tr.toUpperCase(),
+              AppStrings.enterPassword.tr.toUpperCase(),
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w500,
@@ -70,7 +71,7 @@ class PasswordScreen extends StatelessWidget {
             ),
             10.h.verticalSpace,
             Text(
-              'fill_fields'.tr,
+              AppStrings.fillFields.tr,
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
@@ -87,7 +88,7 @@ class PasswordScreen extends StatelessWidget {
                     _passwordController.onChangeInputs('password', value ?? ''),
                 isValid: _passwordController.isValidPassword.value,
                 isDarkMode: themeController.isDarkMode.value,
-                hintText: 'password'.tr,
+                hintText: AppStrings.password.tr,
                 obscureText: true,
               ),
             ),
@@ -102,7 +103,7 @@ class PasswordScreen extends StatelessWidget {
                     'repeatPassword', value ?? ''),
                 isValid: _passwordController.isValidConfirmPassword.value,
                 isDarkMode: themeController.isDarkMode.value,
-                hintText: 'repeat_password'.tr,
+                hintText: AppStrings.repeatPassword.tr,
                 obscureText: true,
               ),
             ),
@@ -114,7 +115,7 @@ class PasswordScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'password_strength'.tr,
+                      AppStrings.passwordStrength.tr,
                       style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w500,
@@ -177,12 +178,12 @@ class PasswordScreen extends StatelessWidget {
             ),
             40.h.verticalSpace,
             ReservationButton(
-              text: 'continue'.tr,
+              text: AppStrings.continueText.tr,
               onClick: _passwordController.handleClickContinue,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'have_account'.tr,
+              text: AppStrings.haveAccount.tr,
               isPrimary: false,
               onClick: _passwordController.handleClickSignIn,
             ),

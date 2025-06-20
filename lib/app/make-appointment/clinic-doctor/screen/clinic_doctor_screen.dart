@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/make-appointment/main/models/doctor/doctor.dart';
+import 'package:inn_tech_appointment/app/make-appointment/main/models/doctor/doctor.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../dashboard/controller/dashboard-controller.dart';
 import '../../main/models/clinic/clinic.dart';
@@ -27,7 +28,7 @@ class ClinicDoctorScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            130.h.verticalSpace,
+            100.h.verticalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +61,7 @@ class ClinicDoctorScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'choose_clinic_doctor_step'.tr,
+                        AppStrings.chooseClinicDoctorStep.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w400,

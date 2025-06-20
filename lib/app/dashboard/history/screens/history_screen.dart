@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:inn_tech_appointment/app/dashboard/history/controllers/history_controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/history/models/patient_appointment/patient_appointment.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/widgets/history-item/history-item.dart';
 import 'package:intl/intl.dart';
-import 'package:reservation/app/dashboard/history/controllers/history_controller.dart';
-import 'package:reservation/app/dashboard/history/models/patient_appointment/patient_appointment.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
-import 'package:reservation/widgets/history-item/history-item.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../settings/controllers/settings_controller.dart';

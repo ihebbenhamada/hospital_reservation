@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
+import 'package:inn_tech_appointment/app/make-appointment/patient-information/services/patient_info_service.dart';
 import 'package:logger/logger.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
-import 'package:reservation/app/make-appointment/patient-information/services/patient_info_service.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../auth/login/models/login_response.dart';

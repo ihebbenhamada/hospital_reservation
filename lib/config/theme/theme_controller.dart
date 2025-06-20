@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/config/controllerConfig/base_controller.dart';
+import 'package:inn_tech_appointment/config/controllerConfig/base_controller.dart';
 
 class ThemeController extends BaseController {
   late RxBool isDarkMode;

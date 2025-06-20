@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/controller/dashboard-controller.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../auth/login/screens/login_screen.dart';

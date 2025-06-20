@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
 import 'package:intl/intl.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../dashboard/controller/dashboard-controller.dart';
 
@@ -26,7 +27,7 @@ class DateTimeAppointmentScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            130.h.verticalSpace,
+            100.h.verticalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +60,7 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'choose_date_time_step'.tr,
+                        AppStrings.chooseDateTimeStep.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w400,
@@ -218,7 +219,7 @@ class DateTimeAppointmentScreen extends StatelessWidget {
                               )
                             : Center(
                                 child: Text(
-                                  'No available time found!',
+                                  AppStrings.noAvailableTime.tr,
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     color: AppColors.gray1,

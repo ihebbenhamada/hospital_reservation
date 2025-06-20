@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/registration-success/controllers/registration_success_controller.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/app/auth/registration-success/controllers/registration_success_controller.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
 
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 
@@ -67,7 +68,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'congratulations'.tr.toUpperCase(),
+                        AppStrings.congratulations.tr.toUpperCase(),
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
@@ -79,8 +80,8 @@ class RegistrationSuccessScreen extends StatelessWidget {
                   25.h.verticalSpace,
                   Text(
                     from == 'register'
-                        ? 'success_account_added'.tr
-                        : 'success_password_changed'.tr,
+                        ? AppStrings.successAccountAdded.tr
+                        : AppStrings.successPasswordChanged.tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -200,7 +201,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${'mrn'.tr} ${_registrationSuccessController.mrn}',
+                              '${AppStrings.mrn.tr} ${_registrationSuccessController.mrn}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -209,7 +210,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'name'.tr}  ${_registrationSuccessController.fullName}',
+                              '${AppStrings.name.tr}  ${_registrationSuccessController.fullName}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -218,7 +219,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'phone_number'.tr} ${_registrationSuccessController.phone}',
+                              '${AppStrings.phoneNumber.tr} : ${_registrationSuccessController.phone}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -235,18 +236,18 @@ class RegistrationSuccessScreen extends StatelessWidget {
               ),
             ),
             ReservationButton(
-              text: 'continue'.tr,
+              text: AppStrings.continueText.tr,
               onClick: _registrationSuccessController.handleClickContinue,
             ),
             20.h.verticalSpace,
             from == 'register'
                 ? ReservationButton(
-                    text: 'have_account'.tr,
+                    text: AppStrings.haveAccount.tr,
                     isPrimary: false,
                     onClick: _registrationSuccessController.handleClickSignIn,
                   )
                 : const SizedBox(),
-            130.h.verticalSpace,
+            100.h.verticalSpace,
           ],
         ),
       ),

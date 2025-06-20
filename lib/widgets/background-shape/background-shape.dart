@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 import '../../config/image_urls/image_urls.dart';
+import '../../config/strings/strings.dart';
 import '../../config/theme/theme_controller.dart';
 
 class BackgroundShape extends StatelessWidget {
@@ -11,9 +12,11 @@ class BackgroundShape extends StatelessWidget {
     super.key,
     required this.child,
     this.backgroundColor = AppColors.white,
+    this.withLogo = false,
   });
   final Widget child;
   final Color? backgroundColor;
+  final bool? withLogo;
   final ThemeController themeController = Get.find();
 
   @override
@@ -28,12 +31,49 @@ class BackgroundShape extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            child: Image.asset(
-              AppImages.bgShapeTop,
-              fit: BoxFit.fitWidth,
-              color: themeController.isDarkMode.value
-                  ? AppColors.dark1
-                  : AppColors.blueLight,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Image.asset(
+                  AppImages.bgShapeTop,
+                  fit: BoxFit.fitHeight,
+                  color: themeController.isDarkMode.value
+                      ? AppColors.dark1
+                      : AppColors.blueLight,
+                ),
+                withLogo!
+                    ? Positioned(
+                        bottom: -50.h,
+                        child: Center(
+                          child: Image.asset(
+                            themeController.isDarkMode.value
+                                ? AppImages.logoCompanyDark
+                                : AppImages.logo,
+                            height: 99.h,
+                            width: 99.h,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                withLogo!
+                    ? Positioned(
+                        bottom: -90.h,
+                        child: Center(
+                          child: Text(
+                            AppStrings.reservation.tr.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              color: themeController.isDarkMode.value
+                                  ? AppColors.white
+                                  : AppColors.gray,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ],
             ),
           ),
           Positioned(
@@ -76,7 +116,9 @@ class BackgroundShape extends StatelessWidget {
           GestureDetector(
             onTap: () => {FocusScope.of(context).unfocus()},
             behavior: HitTestBehavior.opaque,
-            child: child,
+            child: SingleChildScrollView(
+              child: child,
+            ),
           ),
         ],
       ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
 
 import '../../../config/colors/colors.dart';
 import '../../../config/image_urls/image_urls.dart';
+import '../../../config/strings/strings.dart';
 import '../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/profile_controller.dart';
 
@@ -157,7 +158,7 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${'mrn'.tr} ${_profileController.mrn} ',
+                              '${AppStrings.mrn.tr} ${_profileController.mrn} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -166,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'name'.tr} ${_profileController.name} ',
+                              '${AppStrings.name.tr} ${_profileController.name} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -175,7 +176,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${'phone_number1'.tr} ${_profileController.phone.value} ',
+                              '${AppStrings.phoneNumber1.tr} ${_profileController.phone.value} ',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -192,18 +193,18 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             ReservationButton(
-              text: 'change_your_password'.tr,
+              text: AppStrings.changeYourPassword.tr,
               onClick: _profileController.handleClickChangePassword,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'change_phone_number'.tr,
+              text: AppStrings.changePhoneNumber.tr,
               isPrimary: true,
               onClick: _profileController.handleClickChangePhone,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'back'.tr,
+              text: AppStrings.back.tr,
               isPrimary: false,
               onClick: _profileController.handleClickBack,
             ),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/signup/widgets/signup_header.dart';
-import 'package:reservation/widgets/background-shape/background-shape.dart';
-import 'package:reservation/widgets/enabled-input/enabled-input.dart';
+import 'package:inn_tech_appointment/app/auth/signup/widgets/signup_header.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
+import 'package:inn_tech_appointment/widgets/background-shape/background-shape.dart';
+import 'package:inn_tech_appointment/widgets/enabled-input/enabled-input.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/theme/theme_controller.dart';
@@ -33,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
               SignUpHeader(),
               90.h.verticalSpace,
               Text(
-                'easy_steps'.tr.toUpperCase(),
+                AppStrings.easySteps.tr.toUpperCase(),
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
@@ -44,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               10.h.verticalSpace,
               Text(
-                'fill_fields'.tr,
+                AppStrings.fillFields.tr,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
@@ -60,7 +61,7 @@ class SignUpScreen extends StatelessWidget {
                   height: 63.h,
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
-                  hintText: 'id_number'.tr,
+                  hintText: AppStrings.idNumber.tr,
                   maxLength: 10,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -69,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                   error: _signUpController.isIdValid.isTrue,
                   errorText: _signUpController.isIdValid.value
                       ? null
-                      : 'ID must be 10 digits',
+                      : AppStrings.id10Digits.tr,
                   isValid: _signUpController.isIdValid.value,
                   /*validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -90,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                       _signUpController.onChangeInputs('fullName', value),
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
-                  hintText: 'full_name'.tr,
+                  hintText: AppStrings.fullName.tr,
                   isValid: _signUpController.isNameValid.value,
                   /*validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -101,7 +102,7 @@ class SignUpScreen extends StatelessWidget {
                   error: _signUpController.isNameValid.isFalse,
                   errorText: _signUpController.isNameValid.value
                       ? null
-                      : 'Name cannot be empty',
+                      : AppStrings.nameNotEmpty.tr,
                 ),
               ),
               26.h.verticalSpace,
@@ -114,24 +115,27 @@ class SignUpScreen extends StatelessWidget {
                       _signUpController.onChangeInputs('phone', value),
                   isDarkMode: themeController.isDarkMode.value,
                   width: double.infinity,
-                  hintText: 'phone_number'.tr,
+                  hintText: AppStrings.phoneNumber.tr,
                   maxLength: 10,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   keyboardType: TextInputType.phone,
                   error: _signUpController.isPhoneNumberValid.isFalse,
                   errorText: _signUpController.isPhoneNumberValid.value
                       ? null
-                      : 'Invalid Saudi phone number',
+                      : AppStrings.invalidNumber.tr,
                   isValid: _signUpController.isPhoneNumberValid.value,
                 ),
               ),
               40.h.verticalSpace,
               ReservationButton(
-                text: 'continue'.tr,
+                text: AppStrings.continueText.tr,
                 onClick: _signUpController.handleClickContinue,
               ),
               20.h.verticalSpace,
               ReservationButton(
-                text: 'have_account'.tr,
+                text: AppStrings.haveAccount.tr,
                 isPrimary: false,
                 onClick: _signUpController.handleClickSignIn,
               ),

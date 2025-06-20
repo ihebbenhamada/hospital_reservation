@@ -1,8 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/screen/clinic_doctor_screen.dart';
-import 'package:reservation/app/make-appointment/main/services/appointment_steps_service.dart';
-import 'package:reservation/config/interceptor/interceptor.dart';
+import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/screen/clinic_doctor_screen.dart';
+import 'package:inn_tech_appointment/app/make-appointment/main/services/appointment_steps_service.dart';
+import 'package:inn_tech_appointment/config/interceptor/interceptor.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 

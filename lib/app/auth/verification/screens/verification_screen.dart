@@ -2,10 +2,11 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/verification/controllers/verification_controller.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
-import 'package:reservation/widgets/verification-otp/verification-otp.dart';
+import 'package:inn_tech_appointment/app/auth/verification/controllers/verification_controller.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
+import 'package:inn_tech_appointment/widgets/verification-otp/verification-otp.dart';
 
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
@@ -59,7 +60,7 @@ class VerificationScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'verify_account'.tr,
+                  AppStrings.verifyAccount.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -70,7 +71,7 @@ class VerificationScreen extends StatelessWidget {
             ),
             27.h.verticalSpace,
             Text(
-              'enter_verification_code'.tr,
+              AppStrings.enterVerificationCode.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12.sp,
@@ -89,7 +90,7 @@ class VerificationScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'wrong_code'.tr,
+                  AppStrings.wrongCode.tr,
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w500,
@@ -204,7 +205,7 @@ class VerificationScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'resend_code'.tr,
+                  AppStrings.resendCode.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -215,12 +216,12 @@ class VerificationScreen extends StatelessWidget {
             ),
             40.h.verticalSpace,
             ReservationButton(
-              text: 'confirm'.tr,
+              text: AppStrings.confirm.tr,
               onClick: _verificationController.handleClickConfirm,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'have_account'.tr,
+              text: AppStrings.haveAccount.tr,
               isPrimary: false,
               onClick: _verificationController.handleClickSignIn,
             ),

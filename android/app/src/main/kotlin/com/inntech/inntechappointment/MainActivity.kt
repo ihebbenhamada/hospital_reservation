@@ -1,4 +1,4 @@
-package com.example.reservation
+package com.inntech.inntechappointment
 
 import io.flutter.embedding.android.FlutterActivity
 

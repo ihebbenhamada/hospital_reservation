@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/utils.dart';
-import 'package:reservation/app/make-appointment/date-time-appointment/models/patient/patient.dart';
+import 'package:inn_tech_appointment/app/make-appointment/date-time-appointment/models/patient/patient.dart';
 
 import '../../../../config/api-urls/end_points.dart';
 import '../../../../config/colors/colors.dart';

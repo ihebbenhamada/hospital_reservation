@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/registration-success/services/registration_success_service.dart';
+import 'package:inn_tech_appointment/app/auth/registration-success/services/registration_success_service.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';
@@ -33,6 +35,7 @@ class RegistrationSuccessController extends BaseController {
 
   /// INITIALISATION
   void initValues() {
+    log(Get.arguments[0]['phone']);
     if (Get.arguments != null) {
       mrn.value = Get.arguments[0]['mrn'];
       fullName.value = Get.arguments[0]['fullName'];

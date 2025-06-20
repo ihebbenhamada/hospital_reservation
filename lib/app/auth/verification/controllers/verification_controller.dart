@@ -1,7 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/password/screens/password_screen.dart';
+import 'package:inn_tech_appointment/app/auth/password/screens/password_screen.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';

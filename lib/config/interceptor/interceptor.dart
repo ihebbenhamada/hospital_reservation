@@ -1,10 +1,10 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../api-urls/end_points.dart';
 
@@ -23,7 +23,7 @@ class AppInterceptor {
           receiveTimeout: const Duration(seconds: 50),
         ),
       );
-
+      _dio!.interceptors.add(PrettyDioLogger());
       _dio!.interceptors.add(
         InterceptorsWrapper(
           onRequest: (
@@ -97,7 +97,7 @@ class AppInterceptor {
 
   static void _handleError(DioException dioException) {
     if (kDebugMode) {
-      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      /*log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
       log('RequestOptions uri path error : ${dioException.requestOptions.uri.path}');
       log('RequestOptions method error : ${dioException.requestOptions.method}');
       log('RequestOptions path error : ${dioException.requestOptions.path}');
@@ -108,7 +108,7 @@ class AppInterceptor {
       log('Exception message : ${dioException.message}');
       log('Exception error : ${dioException.error.toString()}');
 
-      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');*/
     }
   }
 
@@ -118,19 +118,19 @@ class AppInterceptor {
 
   static void onRequestSent(RequestOptions requestOptions) {
     if (kDebugMode) {
-      log('✅✅✅✅✅✅✅✅✅✅✅✅ Request ✅✅✅✅✅✅✅✅✅✅✅✅✅');
+      /*log('✅✅✅✅✅✅✅✅✅✅✅✅ Request ✅✅✅✅✅✅✅✅✅✅✅✅✅');
       log('Method : ${requestOptions.method}');
       log('Path : ${requestOptions.baseUrl}${requestOptions.path}');
       if (requestOptions.method != 'GET') {
         log('Data : ${requestOptions.data}');
       }
-      log('✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅');
+      log('✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅');*/
     }
   }
 
   static void onResponseReceived(Response response) {
     if (kDebugMode) {
-      if (response.statusCode == 200) {
+      /*if (response.statusCode == 200) {
         log('✅✅✅✅✅✅✅✅✅✅✅✅ Response success ✅✅✅✅✅✅✅✅✅✅✅✅✅');
         log('Status Code : ${response.statusCode}');
         log('Status Message : ${response.statusMessage}');
@@ -142,20 +142,20 @@ class AppInterceptor {
         log('Status Message : ${response.statusMessage}');
         log('Data : ${response.data.toString()}');
         log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
-      }
+      }*/
     }
   }
 
   static void onResponseFailed(DioException dioException) {
     if (kDebugMode) {
-      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ Response error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      /*log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️ Response error ⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
       log('Exception status code : ${dioException.response?.statusCode}');
       log('Exception status message : ${dioException.response?.statusMessage}');
       log('Exception type name : ${dioException.type.name}');
       log('Exception message : ${dioException.message}');
       log('Exception error : ${dioException.error.toString()}');
 
-      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');
+      log('⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️');*/
     }
   }
 }

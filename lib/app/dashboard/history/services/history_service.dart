@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:get/route_manager.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
 
 import '../../../../config/api-urls/end_points.dart';
 import '../../../../config/colors/colors.dart';
@@ -21,8 +22,8 @@ class HistoryService {
       }
     } on DioException catch (e) {
       Get.snackbar(
-        'Error',
-        e.response?.data.toString() ?? 'error'.tr,
+        AppStrings.error.tr,
+        e.response?.data.toString() ?? AppStrings.error.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,

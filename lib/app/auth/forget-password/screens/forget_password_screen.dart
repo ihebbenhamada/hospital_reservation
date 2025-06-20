@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/forget-password/controllers/forget_password_controller.dart';
-import 'package:reservation/config/colors/colors.dart';
 
+import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/background-shape/background-shape.dart';
 import '../../../../widgets/enabled-input/enabled-input.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
+import '../controllers/forget_password_controller.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   final _forgetPasswordController = Get.put(ForgetPasswordController());
@@ -51,7 +52,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       ),
                       12.horizontalSpace,
                       Text(
-                        'forget_password_1'.tr.toUpperCase(),
+                        AppStrings.forgetPassword1.tr.toUpperCase(),
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -64,7 +65,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   90.h.verticalSpace,
                   Text(
-                    'easy_steps'.tr.toUpperCase(),
+                    AppStrings.easySteps.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
@@ -75,7 +76,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   10.h.verticalSpace,
                   Text(
-                    'fill_fields'.tr,
+                    AppStrings.fillFields.tr,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
@@ -94,7 +95,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       isValid:
                           _forgetPasswordController.isValidForgetPassword.value,
                       width: double.infinity,
-                      hintText: 'id_number'.tr,
+                      hintText: AppStrings.idNumber.tr,
                       maxLength: 10,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -106,12 +107,12 @@ class ForgetPasswordScreen extends StatelessWidget {
               ),
             ),
             ReservationButton(
-              text: 'continue'.tr,
+              text: AppStrings.continueText.tr,
               onClick: _forgetPasswordController.handleClickContinue,
             ),
             20.h.verticalSpace,
             ReservationButton(
-              text: 'have_account'.tr,
+              text: AppStrings.haveAccount.tr,
               isPrimary: false,
               onClick: _forgetPasswordController.handleClickSignIn,
             ),

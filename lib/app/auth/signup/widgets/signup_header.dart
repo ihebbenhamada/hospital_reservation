@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
 
 class SignUpHeader extends StatelessWidget {
   SignUpHeader({super.key});

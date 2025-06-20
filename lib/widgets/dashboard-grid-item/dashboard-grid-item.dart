@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 class DashboardGridItem extends StatelessWidget {
   const DashboardGridItem({

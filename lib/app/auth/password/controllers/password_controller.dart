@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/registration-success/screens/registration_success_screen.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/interceptor/interceptor.dart';
+import 'package:inn_tech_appointment/app/auth/registration-success/screens/registration_success_screen.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/interceptor/interceptor.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';
@@ -18,7 +19,7 @@ class PasswordController extends BaseController
 
   /// VARIABLES
   late AnimationController animationController;
-  RxString passwordStrength = 'weak_password'.tr.obs;
+  RxString passwordStrength = AppStrings.weakPassword.tr.obs;
   RxDouble passwordStrengthValue = 0.0.obs;
   RxString password = ''.tr.obs;
   RxString repeatPassword = ''.tr.obs;
@@ -62,19 +63,19 @@ class PasswordController extends BaseController
     if (hasMinLength(password, 6)) strength++;
     passwordStrengthValue.value = strength / 4;
     if (strength == 0) {
-      passwordStrength.value = 'weak_password'.tr;
+      passwordStrength.value = AppStrings.weakPassword.tr;
       isValidPassword.value = false;
     } else if (strength == 1) {
       isValidPassword.value = false;
-      passwordStrength.value = 'weak_password'.tr;
+      passwordStrength.value = AppStrings.weakPassword.tr;
     } else if (strength == 2) {
-      passwordStrength.value = 'weak_password'.tr;
+      passwordStrength.value = AppStrings.weakPassword.tr;
       isValidPassword.value = false;
     } else if (strength == 3) {
-      passwordStrength.value = 'weak_password'.tr;
+      passwordStrength.value = AppStrings.weakPassword.tr;
       isValidPassword.value = false;
     } else if (strength == 4) {
-      passwordStrength.value = 'strong_password'.tr;
+      passwordStrength.value = AppStrings.strongPassword.tr;
       isValidPassword.value = true;
     }
   }
@@ -146,8 +147,8 @@ class PasswordController extends BaseController
     } else {
       // Show an error message or handle invalid form
       Get.snackbar(
-        'Error',
-        'Please correct the errors in the form.',
+        AppStrings.error.tr,
+        AppStrings.pleaseCorrectError.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,
@@ -187,6 +188,7 @@ class PasswordController extends BaseController
   onChangeInputs(String name, String value) {
     if (name == 'password') {
       password.value = value;
+      isValidConfirmPassword.value = repeatPassword.value == password.value;
     } else {
       repeatPassword.value = value;
       isValidConfirmPassword.value = repeatPassword.value == password.value;

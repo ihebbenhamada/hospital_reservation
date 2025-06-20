@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/verification/screens/verification_screen.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../login/screens/login_screen.dart';
+import '../../verification/screens/verification_screen.dart';
 import '../services/forget_password_service.dart';
 
 class ForgetPasswordController extends BaseController {

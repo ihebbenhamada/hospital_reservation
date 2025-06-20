@@ -1,4 +1,4 @@
-import 'package:reservation/app/make-appointment/clinic-doctor/services/clinic_doctor_service.dart';
+import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/services/clinic_doctor_service.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../main/services/appointment_steps_service.dart';

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
 
 class HistoryItem extends StatelessWidget {
   const HistoryItem({
@@ -50,8 +51,8 @@ class HistoryItem extends StatelessWidget {
             children: [
               Text(
                 !isCanceled
-                    ? 'appointment_done'.tr
-                    : 'appointment_cancelled'.tr,
+                    ? AppStrings.appointmentDone.tr
+                    : AppStrings.appointmentCancelled.tr,
                 style: TextStyle(
                   color: AppColors.gray1,
                   fontWeight: FontWeight.w500,

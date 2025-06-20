@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/verification/screens/verification_screen.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/app/auth/verification/screens/verification_screen.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../../config/strings/strings.dart';
 import '../../login/screens/login_screen.dart';
 
 class SignUpController extends BaseController {
@@ -58,8 +59,8 @@ class SignUpController extends BaseController {
       );
     } else {
       Get.snackbar(
-        'Error',
-        'Please correct the errors in the form.',
+        AppStrings.error.tr,
+        AppStrings.pleaseCorrectError.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,
@@ -84,7 +85,7 @@ class SignUpController extends BaseController {
         break;
       case 'fullName':
         fullName.value = value ?? '';
-        isNameValid.value = id.value.isNotEmpty;
+        isNameValid.value = fullName.value.isNotEmpty;
         break;
       case 'phone':
         phone.value = value ?? '';

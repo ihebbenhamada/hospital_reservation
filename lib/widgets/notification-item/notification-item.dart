@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+
+import '../../config/strings/strings.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
@@ -52,10 +54,10 @@ class NotificationItem extends StatelessWidget {
             children: [
               Text(
                 type == 'done'
-                    ? 'appointment_done'.tr
+                    ? AppStrings.appointmentDone.tr
                     : type == 'cancelled'
-                        ? 'appointment_cancelled'.tr
-                        : 'new_doctor_added'.tr,
+                        ? AppStrings.appointmentCancelled.tr
+                        : AppStrings.newDoctorAdded.tr,
                 style: TextStyle(
                   color: AppColors.gray1,
                   fontWeight: FontWeight.w500,

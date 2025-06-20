@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/controller/dashboard-controller.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
@@ -26,7 +27,7 @@ class AppointmentStepsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            130.h.verticalSpace,
+            100.h.verticalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  97.h.verticalSpace,
+                  80.h.verticalSpace,
                   Center(
                     child: Container(
                       width: 200,
@@ -62,7 +63,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Make_your_appointment'.tr,
+                          AppStrings.makeYourAppointment.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
@@ -75,7 +76,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                   22.h.verticalSpace,
                   Center(
                     child: Text(
-                      'with_easy_steps'.tr,
+                      AppStrings.withEasySteps.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16.sp,
@@ -104,7 +105,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'step1'.tr,
+                                  AppStrings.step1.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -126,7 +127,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'step2'.tr,
+                                  AppStrings.step2.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -148,7 +149,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                                 ),
                                 10.h.verticalSpace,
                                 Text(
-                                  'step3'.tr,
+                                  AppStrings.step3.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
@@ -173,7 +174,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                   ),
                   55.h.verticalSpace,
                   Text(
-                    'choose_clinic_doctor'.tr.toUpperCase(),
+                    AppStrings.chooseClinicDoctor.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
@@ -184,7 +185,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                   ),
                   30.h.verticalSpace,
                   Text(
-                    'choose_date_time'.tr.toUpperCase(),
+                    AppStrings.chooseDateTime.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
@@ -195,7 +196,7 @@ class AppointmentStepsScreen extends StatelessWidget {
                   ),
                   30.h.verticalSpace,
                   Text(
-                    'complete_information'.tr.toUpperCase(),
+                    AppStrings.completeInformation.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,

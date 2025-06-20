@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:reservation/config/api-urls/end_points.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/api-urls/end_points.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 import '../../../../config/interceptor/interceptor.dart';
 import '../models/signup_response.dart';

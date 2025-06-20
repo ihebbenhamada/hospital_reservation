@@ -2,14 +2,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
-import 'package:reservation/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
-import 'package:reservation/app/dashboard/home/model/top_doctor/top_doctor.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
-import 'package:reservation/config/interceptor/interceptor.dart';
+import 'package:inn_tech_appointment/app/dashboard/controller/dashboard-controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
+import 'package:inn_tech_appointment/app/dashboard/home/model/top_doctor/top_doctor.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/config/interceptor/interceptor.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../../config/strings/strings.dart';
 import '../services/home_service.dart';
 
 class HomeController extends BaseController {
@@ -49,29 +50,29 @@ class HomeController extends BaseController {
       {
         'icon': AppImages.hashtagWhite,
         'value': 0,
-        'title': 'my_mrn',
-        'description': 'file_number',
+        'title': AppStrings.myMrn,
+        'description': AppStrings.fileNumber,
         'isPrimary': true,
       },
       {
         'icon': AppImages.appointment,
         'value': 0,
-        'title': 'my_appointment',
-        'description': 'appointment_number',
+        'title': AppStrings.myAppointment,
+        'description': AppStrings.appointmentNumber,
         'isPrimary': false,
       },
       {
         'icon': AppImages.pending,
         'value': 0,
-        'title': 'pending',
-        'description': 'pending_appointment',
+        'title': AppStrings.pending,
+        'description': AppStrings.pendingAppointment,
         'isPrimary': false,
       },
       {
         'icon': AppImages.cancel,
         'value': 0,
-        'title': 'cancel',
-        'description': 'cancel_appointment',
+        'title': AppStrings.cancel,
+        'description': AppStrings.cancelAppointment,
         'isPrimary': false,
       },
     ];
@@ -89,29 +90,29 @@ class HomeController extends BaseController {
           {
             'icon': AppImages.hashtagWhite,
             'value': value.mrn,
-            'title': 'my_mrn',
-            'description': 'file_number',
+            'title': AppStrings.myMrn,
+            'description': AppStrings.fileNumber,
             'isPrimary': true,
           },
           {
             'icon': AppImages.appointment,
             'value': value.allAppointments.length,
-            'title': 'my_appointment',
-            'description': 'appointment_number',
+            'title': AppStrings.myAppointment,
+            'description': AppStrings.appointmentNumber,
             'isPrimary': false,
           },
           {
             'icon': AppImages.pending,
             'value': value.pendingAppointments.length,
-            'title': 'pending',
-            'description': 'pending_appointment',
+            'title': AppStrings.pending,
+            'description': AppStrings.pendingAppointment,
             'isPrimary': false,
           },
           {
             'icon': AppImages.cancel,
             'value': value.canceledAppointments.length,
-            'title': 'cancel',
-            'description': 'cancel_appointment',
+            'title': AppStrings.cancel,
+            'description': AppStrings.cancelAppointment,
             'isPrimary': false,
           },
         ];

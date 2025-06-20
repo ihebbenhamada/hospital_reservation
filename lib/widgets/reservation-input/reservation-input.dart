@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
 
 import '../../config/colors/colors.dart';
 
 class ReservationInput extends StatelessWidget {
   ReservationInput({
-    Key? key,
+    super.key,
     this.autofocus = false,
     this.obscureText = false,
     required this.controller,
@@ -41,7 +41,7 @@ class ReservationInput extends StatelessWidget {
     this.error,
     this.errorText,
     this.isDarkMode = false,
-  }) : super(key: key);
+  });
 
   final double height;
   final double width;

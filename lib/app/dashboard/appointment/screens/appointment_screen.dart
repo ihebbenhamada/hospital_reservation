@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/appointment/controllers/appointment_controller.dart';
+
+import '../controllers/appointment_controller.dart';
 
 class AppointmentScreen extends StatelessWidget {
   final _appointmentController = Get.put(AppointmentController());

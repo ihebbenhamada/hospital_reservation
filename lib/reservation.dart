@@ -4,10 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/auth/login/screens/login_screen.dart';
-import 'package:reservation/app/dashboard/screen/dashboard-screen.dart';
-import 'package:reservation/config/theme/reservation-theme.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/app/auth/login/screens/login_screen.dart';
+import 'package:inn_tech_appointment/app/dashboard/screen/dashboard-screen.dart';
+import 'package:inn_tech_appointment/config/theme/reservation-theme.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
 
 import '../config/binding/binding.dart';
 import '../config/translation/translation.dart';

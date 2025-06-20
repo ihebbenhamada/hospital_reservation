@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/app/dashboard/controller/dashboard-controller.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
 
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../controllers/appointment_success_controller.dart';
 
@@ -26,7 +27,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            130.h.verticalSpace,
+            100.h.verticalSpace,
             Center(
               child: Stack(
                 children: [
@@ -60,7 +61,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'congratulations'.tr.toUpperCase(),
+                  AppStrings.congratulations.tr.toUpperCase(),
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -71,7 +72,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
             ),
             25.h.verticalSpace,
             Text(
-              'success_appointment_added'.tr,
+              AppStrings.successAppointmentAdded.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12.sp,
@@ -192,7 +193,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${'mrn'.tr} ${_dashboardController.mrnTextEditingController.text}',
+                        '${AppStrings.mrn.tr} ${_dashboardController.mrnTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -201,7 +202,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${'name'.tr} ${_dashboardController.patientNameTextEditingController.text}',
+                        '${AppStrings.name.tr} ${_dashboardController.patientNameTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -210,7 +211,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${'phone_number1'.tr} ${_dashboardController.mobileTextEditingController.text}',
+                        '${AppStrings.phoneNumber1.tr} ${_dashboardController.mobileTextEditingController.text}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14.sp,

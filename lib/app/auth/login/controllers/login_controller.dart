@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/config/interceptor/interceptor.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../../config/interceptor/interceptor.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../dashboard/screen/dashboard-screen.dart';
 import '../../forget-password/screens/forget_password_screen.dart';
 import '../../signup/screens/signup_screen.dart';
@@ -24,7 +25,6 @@ class LoginController extends BaseController {
 
   /// VALIDATION
   late bool isIdError;
-  late String idErrorText;
   late GetStorage storage;
 
   /// SCREEN LIFE CYCLE
@@ -45,7 +45,6 @@ class LoginController extends BaseController {
   void initValues() {
     idTextEditingController = TextEditingController();
     passwordTextEditingController = TextEditingController();
-    idErrorText = "invalid_email";
     isIdError = false;
     isPasswordVisible = false;
     enabled = false;
@@ -107,9 +106,9 @@ class LoginController extends BaseController {
           if (value != null) {
             idTextEditingController.clear();
             passwordTextEditingController.clear();
-            storage.write('token', value.token);
-            storage.write('user', value);
-            storage.write('phone', value.phoneNumber);
+            storage.write(AppStrings.token, value.token);
+            storage.write(AppStrings.user, value);
+            storage.write(AppStrings.phone, value.phoneNumber);
             Get.offAll(
               () => DashboardScreen(),
               transition: Transition.leftToRight,
@@ -117,13 +116,13 @@ class LoginController extends BaseController {
               duration: const Duration(milliseconds: 500),
             );
           } else {
-            print('error');
+            print(AppStrings.error.tr);
           }
         });
       } else {
         Get.snackbar(
-          'Error',
-          'Make sure you entered right id',
+          AppStrings.error.tr,
+          AppStrings.makeSureRightId.tr,
           colorText: AppColors.white,
           backgroundColor: AppColors.redLight,
           snackPosition: SnackPosition.BOTTOM,
@@ -131,8 +130,8 @@ class LoginController extends BaseController {
       }
     } else {
       Get.snackbar(
-        'Error',
-        'Fill in the credentials',
+        AppStrings.error.tr,
+        AppStrings.fillCredentials.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,

@@ -51,7 +51,7 @@ class BaseController extends GetxController {
   }
 
   void showLoading() {
-    EasyLoading.show(status: 'Chargement en cours...');
+    EasyLoading.show(status: 'Loading in progress...');
     loadingState();
   }
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/auth/registration-success/screens/registration_success_screen.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/app/auth/registration-success/screens/registration_success_screen.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
+import '../../../../config/strings/strings.dart';
 
 class ChangePasswordController extends BaseController
     with GetSingleTickerProviderStateMixin {
@@ -14,7 +15,7 @@ class ChangePasswordController extends BaseController
 
   /// VARIABLES
   late AnimationController animationController;
-  RxString passwordStrength = 'Week Password'.tr.obs;
+  RxString passwordStrength = AppStrings.weakPassword.tr.obs;
 
   /// VALIDATION
 
@@ -47,11 +48,11 @@ class ChangePasswordController extends BaseController
 
   int calculatePasswordStrength(String password) {
     if (animationController.value < 0.50) {
-      passwordStrength.value = 'weak_password'.tr;
+      passwordStrength.value = AppStrings.weakPassword.tr;
     } else if (animationController.value < 0.83) {
-      passwordStrength.value = 'medium_password'.tr;
+      passwordStrength.value = AppStrings.mediumPassword.tr;
     } else {
-      passwordStrength.value = 'strong_password'.tr;
+      passwordStrength.value = AppStrings.strongPassword.tr;
     }
     return password.length;
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/settings/controllers/settings_controller.dart';
-import 'package:reservation/config/image_urls/image_urls.dart';
-import 'package:reservation/widgets/settings-item/settings-item.dart';
+import 'package:inn_tech_appointment/app/dashboard/settings/controllers/settings_controller.dart';
+import 'package:inn_tech_appointment/config/image_urls/image_urls.dart';
+import 'package:inn_tech_appointment/widgets/settings-item/settings-item.dart';
 
 import '../../../../config/colors/colors.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -30,8 +31,8 @@ class SettingsScreen extends StatelessWidget {
                 Obx(
                   () => SettingsItem(
                     icon: AppImages.language,
-                    title: 'arabic_language',
-                    description: 'change_language',
+                    title: AppStrings.arabicLanguage,
+                    description: AppStrings.changeLanguage,
                     isEnabled: _settingsController.isArabic.value,
                     isDarkMode: themeController.isDarkMode.value,
                     onToggleSwitch: _settingsController.toggleLanguage,
@@ -41,8 +42,8 @@ class SettingsScreen extends StatelessWidget {
                 Obx(
                   () => SettingsItem(
                     icon: AppImages.theme,
-                    title: 'dark_theme',
-                    description: 'change_theme',
+                    title: AppStrings.darkTheme,
+                    description: AppStrings.changeTheme,
                     isDarkMode: themeController.isDarkMode.value,
                     isEnabled: themeController.isDarkMode.value,
                     onToggleSwitch: themeController.toggleTheme,
@@ -59,8 +60,8 @@ class SettingsScreen extends StatelessWidget {
                 Obx(
                   () => SettingsItem(
                     icon: AppImages.notif,
-                    title: 'send_notification',
-                    description: 'send_notification_alarm',
+                    title: AppStrings.sendNotification,
+                    description: AppStrings.sendNotificationAlarm,
                     isEnabled: _settingsController.isNotificationEnabled.value,
                     isDarkMode: themeController.isDarkMode.value,
                     onToggleSwitch: _settingsController.toggleNotification,
@@ -69,8 +70,8 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 SettingsItem(
                   icon: AppImages.signout,
-                  title: 'sign_out',
-                  description: 'sign_out_from_app',
+                  title: AppStrings.signOut,
+                  description: AppStrings.signOutFromApp,
                   isDarkMode: themeController.isDarkMode.value,
                   onToggleSwitch: _settingsController.signOut,
                   isSwitchVisible: false,

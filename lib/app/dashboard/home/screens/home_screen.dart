@@ -2,9 +2,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/config/colors/colors.dart';
-import 'package:reservation/widgets/dashboard-grid-item/dashboard-grid-item.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/widgets/dashboard-grid-item/dashboard-grid-item.dart';
 
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../controllers/home_controller.dart';
 
@@ -76,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'top_5_doctors'.tr,
+                      AppStrings.top5Doctors.tr,
                       style: TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w500,
@@ -104,13 +105,13 @@ class HomeScreen extends StatelessWidget {
                               _homeController.onSelectFilter(index),
                           tabs: [
                             Tab(
-                              text: 'today'.tr,
+                              text: AppStrings.today.tr,
                             ),
                             Tab(
-                              text: 'week'.tr,
+                              text: AppStrings.week.tr,
                             ),
                             Tab(
-                              text: 'month'.tr,
+                              text: AppStrings.month.tr,
                             ),
                           ],
                         ),

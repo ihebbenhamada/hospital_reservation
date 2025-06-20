@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/dashboard/home/controllers/home_controller.dart';
-import 'package:reservation/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
-import 'package:reservation/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
-import 'package:reservation/app/make-appointment/patient-information/screen/patient_information_screen.dart';
-import 'package:reservation/app/notifications/screens/notifications_screen.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/app/dashboard/home/controllers/home_controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
+import 'package:inn_tech_appointment/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
+import 'package:inn_tech_appointment/app/make-appointment/patient-information/screen/patient_information_screen.dart';
+import 'package:inn_tech_appointment/app/notifications/screens/notifications_screen.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
+import 'package:inn_tech_appointment/config/strings/strings.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../config/interceptor/interceptor.dart';
@@ -44,7 +45,7 @@ class DashboardController extends BaseController
   final Rx<PatientStatistics> patient = PatientStatistics().obs;
   final PageController pageController = PageController();
   final RxInt pageIndex = 0.obs;
-  final RxString firstButtonText = 'start_your_appointment'.obs;
+  final RxString firstButtonText = AppStrings.startYourAppointment.obs;
 
   /// VARIABLES CLINIC DOCTOR
   final RxList<Clinic> clinicsList = <Clinic>[].obs;
@@ -135,12 +136,12 @@ class DashboardController extends BaseController
     pageIndex.value = input;
     isBackVisible.value = pageIndex.value == 4 ? false : true;
     firstButtonText.value = pageIndex.value == 0
-        ? 'start_your_appointment'
+        ? AppStrings.startYourAppointment
         : pageIndex.value == 3
-            ? 'confirm'
+            ? AppStrings.confirm
             : pageIndex.value == 4
-                ? 'continue'
-                : 'next';
+                ? AppStrings.continueText
+                : AppStrings.next;
 
     pageController.animateToPage(input,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
@@ -185,7 +186,7 @@ class DashboardController extends BaseController
                     20.h.verticalSpace,
                     isBackVisible.isTrue
                         ? ReservationButton(
-                            text: 'back'.tr,
+                            text: AppStrings.back.tr,
                             isPrimary: false,
                             onClick: onClickBack,
                           )
@@ -222,7 +223,7 @@ class DashboardController extends BaseController
         Get.back();
         pageIndex.value = 0;
         isBackVisible.value = true;
-        firstButtonText.value = 'start_your_appointment';
+        firstButtonText.value = AppStrings.startYourAppointment;
         HomeController homeController = Get.find();
         homeController.getHomeInformation();
         selectedDate.value = DateTime.now();
@@ -444,8 +445,8 @@ class DashboardController extends BaseController
       });
     } else {
       Get.snackbar(
-        'error'.tr,
-        'should_select_available_date'.tr,
+        AppStrings.error.tr,
+        AppStrings.shouldSelectAvailableDate.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:inn_tech_appointment/reservation.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:reservation/reservation.dart';
 
 import 'config/colors/colors.dart';
 import 'config/custom_loading_animation.dart';

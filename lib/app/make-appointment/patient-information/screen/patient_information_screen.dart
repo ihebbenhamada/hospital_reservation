@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/widgets/information-input/information-input.dart';
+import 'package:inn_tech_appointment/widgets/information-input/information-input.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../dashboard/controller/dashboard-controller.dart';
 
@@ -25,7 +26,7 @@ class PatientInformationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            130.h.verticalSpace,
+            100.h.verticalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +59,7 @@ class PatientInformationScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'complete_information_step'.tr,
+                        AppStrings.completeInformationStep.tr,
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w400,
@@ -76,15 +77,15 @@ class PatientInformationScreen extends StatelessWidget {
                             _dashboardController.mrnTextEditingController,
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
-                        hintText: 'Mrn',
-                        title: 'Mrn',
+                        hintText: AppStrings.mrn.tr,
+                        title: AppStrings.mrn.tr,
                       ),
                       InformationInput(
                         controller:
                             _dashboardController.serialTextEditingController,
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
-                        hintText: 'serial'.tr,
+                        hintText: AppStrings.serial.tr,
                       ),
                     ],
                   ),
@@ -94,7 +95,7 @@ class PatientInformationScreen extends StatelessWidget {
                         _dashboardController.patientNameTextEditingController,
                     height: 50.h,
                     width: double.infinity,
-                    hintText: 'patient_name'.tr,
+                    hintText: AppStrings.patientName.tr,
                   ),
                   35.h.verticalSpace,
                   InformationInput(
@@ -102,7 +103,7 @@ class PatientInformationScreen extends StatelessWidget {
                         _dashboardController.mobileTextEditingController,
                     height: 50.h,
                     width: double.infinity,
-                    hintText: 'phone_number'.tr,
+                    hintText: AppStrings.phoneNumber.tr,
                   ),
                 ],
               ),

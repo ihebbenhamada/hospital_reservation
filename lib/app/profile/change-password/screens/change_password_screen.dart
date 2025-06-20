@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/widgets/background-shape/background-shape.dart';
-import 'package:reservation/widgets/enabled-input/enabled-input.dart';
+import 'package:inn_tech_appointment/widgets/background-shape/background-shape.dart';
+import 'package:inn_tech_appointment/widgets/enabled-input/enabled-input.dart';
 
 import '../../../../config/colors/colors.dart';
 import '../../../../config/image_urls/image_urls.dart';
+import '../../../../config/strings/strings.dart';
 import '../../../../config/theme/theme_controller.dart';
 import '../../../../widgets/reservation-button/reservation-button.dart';
 import '../controllers/change-password_controller.dart';
@@ -49,7 +50,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                   12.horizontalSpace,
                   Text(
-                    'change_password'.tr.toUpperCase(),
+                    AppStrings.changePassword.tr.toUpperCase(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
@@ -62,7 +63,7 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
               90.h.verticalSpace,
               Text(
-                'change_your_password'.tr.toUpperCase(),
+                AppStrings.changeYourPassword.tr.toUpperCase(),
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w500,
@@ -73,7 +74,7 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
               10.h.verticalSpace,
               Text(
-                'fill_fields'.tr,
+                AppStrings.fillFields.tr,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
@@ -87,7 +88,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 63.h,
                 width: double.infinity,
                 isDarkMode: _themeController.isDarkMode.value,
-                hintText: 'enter_old_password'.tr,
+                hintText: AppStrings.enterOldPassword.tr,
                 obscureText: true,
               ),
               26.h.verticalSpace,
@@ -97,7 +98,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 63.h,
                 width: double.infinity,
                 isDarkMode: _themeController.isDarkMode.value,
-                hintText: 'new_password'.tr,
+                hintText: AppStrings.newPassword.tr,
                 obscureText: true,
               ),
               26.h.verticalSpace,
@@ -107,7 +108,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 63.h,
                 width: double.infinity,
                 isDarkMode: _themeController.isDarkMode.value,
-                hintText: 'repeat_password'.tr,
+                hintText: AppStrings.repeatPassword.tr,
                 obscureText: true,
               ),
               40.h.verticalSpace,
@@ -118,7 +119,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'password_strength'.tr,
+                        AppStrings.passwordStrength.tr,
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w500,
@@ -182,12 +183,12 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
               40.h.verticalSpace,
               ReservationButton(
-                text: 'continue'.tr,
+                text: AppStrings.continueText.tr,
                 onClick: _changePasswordController.handleClickContinue,
               ),
               20.h.verticalSpace,
               ReservationButton(
-                text: 'back'.tr,
+                text: AppStrings.back.tr,
                 isPrimary: false,
                 onClick: _changePasswordController.handleClickBack,
               ),

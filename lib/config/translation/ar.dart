@@ -115,6 +115,12 @@ class Ar {
         'doctor_name': 'اسم الطبيب',
         'notifications': 'الإشعارات',
         'should_select_available_date': 'عليك اختيار الوقت!',
-        'error': 'خطأ'
+        'error': 'خطأ',
+        'make_sure_right_id': 'تأكد من إدخال الهوية الصحيحة',
+        'please_correct_error': 'يرجى تصحيح الأخطاء في النموذج',
+        'id_10_digits': 'يجب أن يتكون المعرف من 10 أرقام بالضبط',
+        'name_not_empty': 'الاسم لا يمكن أن يكون فارغاً',
+        'invalid_number': 'رقم هاتف غير صالح',
+        'no_available_time': 'لا يوجد وقت متاح!'
       };
 }

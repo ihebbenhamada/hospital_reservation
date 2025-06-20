@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
-import 'package:reservation/app/make-appointment/date-time-appointment/services/date_appointment_service.dart';
-import 'package:reservation/config/colors/colors.dart';
+import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/models/doctor_schedule/doctor_schedule.dart';
+import 'package:inn_tech_appointment/app/make-appointment/date-time-appointment/services/date_appointment_service.dart';
+import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../../config/interceptor/interceptor.dart';
+import '../../../../config/strings/strings.dart';
 import '../../clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
 import '../../clinic-doctor/services/clinic_doctor_service.dart';
 import '../../patient-information/screen/patient_information_screen.dart';
@@ -138,8 +139,8 @@ class DateTimeAppointmentController extends BaseController {
       });
     } else {
       Get.snackbar(
-        'Error',
-        'You should select an available date!',
+        AppStrings.error.tr,
+        AppStrings.shouldSelectAvailableDate.tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.redLight,
         snackPosition: SnackPosition.BOTTOM,

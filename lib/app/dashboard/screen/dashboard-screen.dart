@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reservation/app/dashboard/appointment/screens/appointment_screen.dart';
-import 'package:reservation/app/dashboard/controller/dashboard-controller.dart';
-import 'package:reservation/app/dashboard/history/screens/history_screen.dart';
-import 'package:reservation/app/dashboard/settings/screens/settings_screen.dart';
-import 'package:reservation/config/theme/theme_controller.dart';
-import 'package:reservation/widgets/reservation-button/reservation-button.dart';
+import 'package:inn_tech_appointment/app/dashboard/appointment/screens/appointment_screen.dart';
+import 'package:inn_tech_appointment/app/dashboard/controller/dashboard-controller.dart';
+import 'package:inn_tech_appointment/app/dashboard/history/screens/history_screen.dart';
+import 'package:inn_tech_appointment/app/dashboard/settings/screens/settings_screen.dart';
+import 'package:inn_tech_appointment/config/theme/theme_controller.dart';
+import 'package:inn_tech_appointment/widgets/reservation-button/reservation-button.dart';
 
 import '../../../config/colors/colors.dart';
 import '../../../config/image_urls/image_urls.dart';
+import '../../../config/strings/strings.dart';
 import '../../../routes/app_routes.dart';
 import '../home/screens/home_screen.dart';
 
@@ -85,7 +86,6 @@ class DashboardScreen extends StatelessWidget {
                         GestureDetector(
                           onTap: _dashboardController.handleClickProfile,
                           child: SizedBox(
-                            height: 50.h,
                             child: Row(
                               children: [
                                 GestureDetector(
@@ -114,7 +114,7 @@ class DashboardScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'welcome'.tr,
+                                      AppStrings.welcome.tr,
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w500,
@@ -240,7 +240,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'book_now'.tr,
+                          AppStrings.bookNow.tr,
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -334,7 +334,7 @@ class DashboardScreen extends StatelessWidget {
                         width: 23,
                         color: AppColors.white.withOpacity(0),
                       ),
-                      label: 'book_now2'.tr,
+                      label: AppStrings.bookNow2.tr,
                     ),
                     BottomNavigationBarItem(
                       activeIcon: Image.asset(
@@ -419,7 +419,7 @@ class DashboardScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'welcome'.tr,
+                              AppStrings.welcome.tr,
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
@@ -466,7 +466,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           20.horizontalSpace,
                           Text(
-                            'home'.tr,
+                            AppStrings.home.tr,
                             style: TextStyle(
                               color: themeController.isDarkMode.value
                                   ? AppColors.gray1
@@ -497,7 +497,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           20.horizontalSpace,
                           Text(
-                            'account'.tr,
+                            AppStrings.account.tr,
                             style: TextStyle(
                               color: themeController.isDarkMode.value
                                   ? AppColors.gray1
@@ -528,7 +528,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           20.horizontalSpace,
                           Text(
-                            'my_appointment'.tr,
+                            AppStrings.myAppointment.tr,
                             style: TextStyle(
                               color: themeController.isDarkMode.value
                                   ? AppColors.gray1
@@ -559,7 +559,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           20.horizontalSpace,
                           Text(
-                            'settings'.tr,
+                            AppStrings.settings.tr,
                             style: TextStyle(
                               color: themeController.isDarkMode.value
                                   ? AppColors.gray1
@@ -574,7 +574,7 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   60.h.verticalSpace,
                   ReservationButton(
-                    text: 'make_appointment'.tr,
+                    text: AppStrings.makeAppointment.tr,
                     onClick: _dashboardController.bookNow,
                   ),
                 ],
@@ -616,7 +616,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 7.h.verticalSpace,
                 Text(
-                  'book_now2'.tr,
+                  AppStrings.bookNow2.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: themeController.isDarkMode.value

@@ -1,7 +1,7 @@
-name: reservation
-description: A new Flutter project.
+name: inn_tech_appointment
+description: Find doctors, book appointments & get smart reminders—all in one app!
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -19,21 +19,21 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   circular_countdown_timer: ^0.2.4
   flutter_floating_bottom_bar: ^1.2.1+1
-  syncfusion_flutter_charts: ^26.2.14
-  syncfusion_flutter_datepicker: ^26.2.11
-  intl: ^0.19.0
+  intl: ^0.20.0
   fluttertoast: ^8.2.8
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
   build_runner: ^2.4.12
   drop_shadow_image: ^0.9.1
   fl_chart: ^0.69.0
+  pretty_dio_logger: ^1.4.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  change_app_package_name: ^1.5.0
 
   flutter_localizations:
     sdk: flutter

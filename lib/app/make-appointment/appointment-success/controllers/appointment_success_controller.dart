@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:reservation/routes/app_routes.dart';
+import 'package:inn_tech_appointment/routes/app_routes.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 

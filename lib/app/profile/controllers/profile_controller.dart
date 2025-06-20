@@ -1,7 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reservation/app/profile/change-password/screens/change_password_screen.dart';
+import 'package:inn_tech_appointment/app/profile/change-password/screens/change_password_screen.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../dashboard/home/model/patient_statistic/patient_statistic.dart';

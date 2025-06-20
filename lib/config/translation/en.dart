@@ -115,6 +115,12 @@ class En {
         'doctor_name': 'Doctor Name',
         'notifications': 'NOTIFICATIONS',
         'should_select_available_date': 'You should select an available date!',
-        'error': 'Error'
+        'error': 'Error',
+        'make_sure_right_id': 'Make sure you entered right id',
+        'please_correct_error': 'Please correct the errors in the form',
+        'id_10_digits': 'ID must consist of exactly 10 digits',
+        'name_not_empty': 'Name cannot be empty',
+        'invalid_number': 'Invalid phone number',
+        'no_available_time': 'No available time found!'
       };
 }

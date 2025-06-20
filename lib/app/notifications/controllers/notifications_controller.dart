@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:reservation/app/make-appointment/main/models/doctor/doctor.dart';
-import 'package:reservation/app/notifications/services/notifications_service.dart';
-import 'package:reservation/config/interceptor/interceptor.dart';
+import 'package:inn_tech_appointment/app/make-appointment/main/models/doctor/doctor.dart';
+import 'package:inn_tech_appointment/app/notifications/services/notifications_service.dart';
+import 'package:inn_tech_appointment/config/interceptor/interceptor.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 
