@@ -1,7 +1,7 @@
 name: inn_tech_appointment
 description: Find doctors, book appointments & get smart reminders—all in one app!
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: '>=3.1.0 <4.0.0'

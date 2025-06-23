@@ -31,6 +31,7 @@ class PasswordService {
       "EncryptedOTP": encryptedOTP,
       "OTP": otp,
     };
+    log(data.toString());
     try {
       Response? response =
           await AppInterceptor.dio?.post(EndPoints.CREATE_PATENT, data: data);

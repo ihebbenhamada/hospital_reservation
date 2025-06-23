@@ -43,6 +43,7 @@ class PasswordController extends BaseController
   /// INITIALISATION
   void initValues() {
     if (Get.arguments != null) {
+      log(Get.arguments.toString());
       id = Get.arguments[0];
       fullName = Get.arguments[1];
       phone = Get.arguments[2];

@@ -132,7 +132,9 @@ class EnabledInput extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: isValid ? AppColors.white : AppColors.black1,
+                  color: isValid || isDarkMode
+                      ? AppColors.white
+                      : AppColors.black1,
                 ),
                 cursorColor: isValid ? AppColors.white : AppColors.primary,
                 decoration: InputDecoration(

@@ -63,7 +63,6 @@ class SignUpController extends BaseController {
           print('error');
         }
       });
-      clearInputs();
       Get.to(
         () => VerificationScreen(),
         transition: Transition.leftToRight,
@@ -71,6 +70,7 @@ class SignUpController extends BaseController {
         curve: Curves.ease,
         duration: const Duration(milliseconds: 500),
       );
+      clearInputs();
     } else {
       Get.snackbar(
         AppStrings.error.tr,

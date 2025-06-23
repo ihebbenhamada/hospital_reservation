@@ -68,7 +68,7 @@ class _VerificationCodeState extends State<VerificationOTP> {
         style: TextStyle(
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: AppColors.black1,
+          color: widget.isDarkMode ? AppColors.white : AppColors.black1,
         ),
         cursorColor: AppColors.primary,
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -94,21 +94,24 @@ class _VerificationCodeState extends State<VerificationOTP> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(4 * 2 - 1, (i) {
-          if (i.isEven) {
-            return _buildOtpField(i ~/ 2);
-          } else {
-            return Row(
-              children: [
-                11.horizontalSpace,
-                Container(width: 3.5, height: 1.5.h, color: AppColors.gray1),
-                11.horizontalSpace,
-              ],
-            );
-          }
-        }),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(4 * 2 - 1, (i) {
+            if (i.isEven) {
+              return _buildOtpField(i ~/ 2);
+            } else {
+              return Row(
+                children: [
+                  11.horizontalSpace,
+                  Container(width: 3.5, height: 1.5.h, color: AppColors.gray1),
+                  11.horizontalSpace,
+                ],
+              );
+            }
+          }),
+        ),
       ),
     );
   }
