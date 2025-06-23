@@ -102,4 +102,6 @@ class AppStrings {
   static const String user = 'user';
   static const String phone = 'phone';
   static const String searchClinic = 'search_clinic';
+  static const String selectDoctor = 'select_doctor';
+  static const String shouldSelectDoctor = 'should_select_doctor';
 }

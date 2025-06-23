@@ -113,6 +113,7 @@ class En {
         'serial': 'Serial',
         'patient_name': 'Patient Name',
         'doctor_name': 'Doctor Name',
+        'select_doctor': 'Select Doctor',
         'notifications': 'NOTIFICATIONS',
         'should_select_available_date': 'You should select an available date!',
         'error': 'Error',
@@ -123,5 +124,6 @@ class En {
         'invalid_number': 'Invalid phone number',
         'no_available_time': 'No available time found!',
         'search_clinic': 'Search Clinic',
+        'should_select_doctor': 'You should select a doctor',
       };
 }

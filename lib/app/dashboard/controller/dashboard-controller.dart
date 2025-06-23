@@ -322,6 +322,16 @@ class DashboardController extends BaseController
 
   ///PAGE CLINIC DOCTORS
   handleClickNextInPageClinicDoctor() {
+    if (doctorsList.isEmpty) {
+      Get.snackbar(
+        AppStrings.error.tr,
+        AppStrings.shouldSelectDoctor.tr,
+        colorText: AppColors.white,
+        backgroundColor: AppColors.redLight,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
     AppInterceptor.showLoader();
     _clinicDoctorService
         .getDoctorSchedule(
@@ -353,8 +363,8 @@ class DashboardController extends BaseController
         selectedDoctor.value?.fKDefBranchId;
   }
 
-  onSelectClinic(Clinic? value) {
-    selectedClinic.value = value!;
+  onSelectClinic(Clinic value) {
+    selectedClinic.value = value;
     AppInterceptor.showLoader();
     _appointmentStepsService
         .getDoctorsByClinic(clinicId: value.id)
@@ -506,17 +516,14 @@ class DashboardController extends BaseController
   }
 
   Future<List<Clinic>> searchClinic(String value) async {
-    return clinicsList
-        .where(
-          (clinic) => Get.locale?.countryCode == 'en'
-              ? clinic.departmentNameEn
-                  .toLowerCase()
-                  .contains(value.toLowerCase())
-              : clinic.departmentNameAr.toLowerCase().contains(
-                    value.toLowerCase(),
-                  ),
-        )
-        .toList();
+    final query = value.toLowerCase();
+    final isEnglish = Get.locale?.languageCode == 'en';
+    return clinicsList.where((clinic) {
+      final name = isEnglish
+          ? clinic.departmentNameEn.toLowerCase()
+          : clinic.departmentNameAr.toLowerCase();
+      return name.contains(query);
+    }).toList();
   }
 
   Future<List<Doctor>> searchDoctor(String value) async {

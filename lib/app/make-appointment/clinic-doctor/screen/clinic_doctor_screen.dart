@@ -189,14 +189,14 @@ class ClinicDoctorScreen extends StatelessWidget {
                       futureRequest: (value) =>
                           _dashboardController.searchClinic(value),
                       onChanged: (Clinic? newValue) =>
-                          _dashboardController.onSelectClinic(newValue),
+                          _dashboardController.onSelectClinic(newValue!),
                     ),
                   ),
                   28.h.verticalSpace,
                   Obx(
                     () => CustomDropdown<Doctor>(
                       items: _dashboardController.doctorsList,
-                      hintText: "select_employee".tr,
+                      hintText: AppStrings.selectDoctor.tr,
                       listItemBuilder:
                           (context, doctor, isSelected, onItemSelect) {
                         return Text(
@@ -227,10 +227,17 @@ class ClinicDoctorScreen extends StatelessWidget {
                         horizontal: 23,
                         vertical: 18.h,
                       ),
-                      initialItem: _dashboardController.selectedDoctor.value,
+                      initialItem: _dashboardController.doctorsList.contains(
+                              _dashboardController.selectedDoctor.value)
+                          ? _dashboardController.selectedDoctor.value
+                          : null,
                       decoration: CustomDropdownDecoration(
                         hintStyle: TextStyle(
+                          color: _themeController.isDarkMode.value
+                              ? AppColors.white
+                              : AppColors.gray5,
                           fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
                         ),
                         closedSuffixIcon: Image.asset(
                           AppImages.arrowDrop,

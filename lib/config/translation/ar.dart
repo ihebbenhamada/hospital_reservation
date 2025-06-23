@@ -113,6 +113,7 @@ class Ar {
         'serial': 'تسلسل',
         'patient_name': 'اسم المريض',
         'doctor_name': 'اسم الطبيب',
+        'select_doctor': 'اختر الطبيب',
         'notifications': 'الإشعارات',
         'should_select_available_date': 'عليك اختيار الوقت!',
         'error': 'خطأ',
@@ -122,6 +123,7 @@ class Ar {
         'name_not_empty': 'الاسم لا يمكن أن يكون فارغاً',
         'invalid_number': 'رقم هاتف غير صالح',
         'no_available_time': 'لا يوجد وقت متاح!',
-        'search_clinic': 'ابحث عن العيادة'
+        'search_clinic': 'ابحث عن العيادة',
+        'should_select_doctor': 'يجب عليك اختيار الطبيب'
       };
 }
