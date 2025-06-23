@@ -24,7 +24,7 @@ class En {
         /// VERIFICATION PAGE
         'verify_account': 'Verify Account',
         'enter_verification_code':
-            'Please, enter the verification code we sent to your mobile **',
+            'Please, enter the verification code we sent to your mobile ',
         'seconds': 's',
         'resend_code': 'Resend Code',
         'wrong_code': 'Wrong Code',
@@ -121,6 +121,7 @@ class En {
         'id_10_digits': 'ID must consist of exactly 10 digits',
         'name_not_empty': 'Name cannot be empty',
         'invalid_number': 'Invalid phone number',
-        'no_available_time': 'No available time found!'
+        'no_available_time': 'No available time found!',
+        'search_clinic': 'Search Clinic',
       };
 }

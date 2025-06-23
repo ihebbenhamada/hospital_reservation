@@ -84,8 +84,6 @@ class PasswordScreen extends StatelessWidget {
                 controller: _passwordController.passwordTextEditingController,
                 height: 63.h,
                 width: double.infinity,
-                onChanged: (value) =>
-                    _passwordController.onChangeInputs('password', value ?? ''),
                 isValid: _passwordController.isValidPassword.value,
                 isDarkMode: themeController.isDarkMode.value,
                 hintText: AppStrings.password.tr,
@@ -99,8 +97,6 @@ class PasswordScreen extends StatelessWidget {
                     _passwordController.confirmPasswordTextEditingController,
                 height: 63.h,
                 width: double.infinity,
-                onChanged: (value) => _passwordController.onChangeInputs(
-                    'repeatPassword', value ?? ''),
                 isValid: _passwordController.isValidConfirmPassword.value,
                 isDarkMode: themeController.isDarkMode.value,
                 hintText: AppStrings.repeatPassword.tr,

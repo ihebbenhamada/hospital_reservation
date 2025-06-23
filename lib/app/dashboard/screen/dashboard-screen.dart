@@ -26,7 +26,8 @@ class DashboardScreen extends StatelessWidget {
           backgroundColor: themeController.isDarkMode.value
               ? AppColors.dark2
               : AppColors.blueLight,
-          body: SizedBox.expand(
+          resizeToAvoidBottomInset: true,
+          body: SizedBox(
             child: Stack(
               alignment: Alignment.topCenter,
               children: [

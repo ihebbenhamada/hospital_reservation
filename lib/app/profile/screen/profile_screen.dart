@@ -192,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ReservationButton(
+            /*ReservationButton(
               text: AppStrings.changeYourPassword.tr,
               onClick: _profileController.handleClickChangePassword,
             ),
@@ -202,7 +202,7 @@ class ProfileScreen extends StatelessWidget {
               isPrimary: true,
               onClick: _profileController.handleClickChangePhone,
             ),
-            20.h.verticalSpace,
+            20.h.verticalSpace,*/
             ReservationButton(
               text: AppStrings.back.tr,
               isPrimary: false,

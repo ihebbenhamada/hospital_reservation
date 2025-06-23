@@ -51,7 +51,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
             ),
             43.h.verticalSpace,
             Container(
-              width: 140,
+              width: 170,
               padding: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
                 color: themeController.isDarkMode.value

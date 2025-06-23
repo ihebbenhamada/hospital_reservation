@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inn_tech_appointment/app/auth/registration-success/screens/registration_success_screen.dart';
@@ -52,40 +54,36 @@ class PasswordController extends BaseController
       duration: const Duration(seconds: 1),
     );
     passwordTextEditingController.addListener(_updateStrength);
+    confirmPasswordTextEditingController.addListener(_updateStrength);
   }
 
   void _updateStrength() {
     int strength = 0;
     String password = passwordTextEditingController.text;
+    String repeatPassword = confirmPasswordTextEditingController.text;
     if (hasUppercase(password)) strength++;
     if (hasLowercase(password)) strength++;
     if (hasSpecialCharacter(password)) strength++;
+    if (hasNumber(password)) strength++;
     if (hasMinLength(password, 6)) strength++;
-    passwordStrengthValue.value = strength / 4;
-    if (strength == 0) {
-      passwordStrength.value = AppStrings.weakPassword.tr;
-      isValidPassword.value = false;
-    } else if (strength == 1) {
-      isValidPassword.value = false;
-      passwordStrength.value = AppStrings.weakPassword.tr;
-    } else if (strength == 2) {
-      passwordStrength.value = AppStrings.weakPassword.tr;
-      isValidPassword.value = false;
-    } else if (strength == 3) {
-      passwordStrength.value = AppStrings.weakPassword.tr;
-      isValidPassword.value = false;
-    } else if (strength == 4) {
-      passwordStrength.value = AppStrings.strongPassword.tr;
-      isValidPassword.value = true;
-    }
+    passwordStrengthValue.value = strength / 5;
+    isValidPassword.value = (strength == 5);
+    isValidConfirmPassword.value =
+        (repeatPassword == password && isValidPassword.isTrue);
+
+    passwordStrength.value = (strength == 5)
+        ? AppStrings.strongPassword.tr
+        : AppStrings.weakPassword.tr;
   }
 
   Color getColor(double value) {
-    if (value <= 0.25) {
+    if (value <= 0.2) {
       return AppColors.redLight;
-    } else if (value <= 0.50) {
+    } else if (value <= 0.4) {
       return AppColors.primary.withOpacity(0.5);
-    } else if (value <= 0.75) {
+    } else if (value <= 0.6) {
+      return AppColors.primary;
+    } else if (value <= 0.8) {
       return AppColors.primary;
     } else {
       return AppColors.green;
@@ -132,6 +130,7 @@ class PasswordController extends BaseController
               duration: const Duration(milliseconds: 500),
             );
           } else {
+            log(value.resultMessage);
             Get.snackbar(
               'Error',
               value.resultMessage,
@@ -180,18 +179,13 @@ class PasswordController extends BaseController
     return password.contains(RegExp(r'\W'));
   }
 
+  // Function to check for at least one number
+  bool hasNumber(String password) {
+    return password.contains(RegExp(r'[0-9]'));
+  }
+
 // Function to check for minimum length
   bool hasMinLength(String password, int length) {
     return password.length >= length;
-  }
-
-  onChangeInputs(String name, String value) {
-    if (name == 'password') {
-      password.value = value;
-      isValidConfirmPassword.value = repeatPassword.value == password.value;
-    } else {
-      repeatPassword.value = value;
-      isValidConfirmPassword.value = repeatPassword.value == password.value;
-    }
   }
 }

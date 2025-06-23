@@ -31,17 +31,12 @@ class VerificationController extends BaseController {
     super.onInit();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   /// INITIALISATION
   void initValues() {
     if (Get.arguments != null) {
-      id = Get.arguments[0];
-      fullName = Get.arguments[1];
-      phone = Get.arguments[2];
+      id = Get.arguments[0] ?? '';
+      fullName = Get.arguments[1] ?? '';
+      phone = Get.arguments[2] ?? '';
     }
     enabled = false;
     controller = CountDownController();

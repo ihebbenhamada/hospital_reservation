@@ -21,39 +21,43 @@ class HistoryScreen extends StatelessWidget {
       backgroundColor: _themeController.isDarkMode.value
           ? AppColors.dark2
           : AppColors.blueLight,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 56.h),
-        child: Column(
+      body: RefreshIndicator(
+        onRefresh: _historyController.handleRefresh,
+        color: AppColors.white,
+        backgroundColor: AppColors.primary,
+        edgeOffset: 150.h,
+        child: ListView(
           children: [
-            220.h.verticalSpace,
-            ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: _historyController
-                  .historicList.value.patientAppointments.length,
-              itemBuilder: (context, index) {
-                PatientAppointment item = _historyController
-                    .historicList.value.patientAppointments[index];
-                return HistoryItem(
-                  isCanceled: item.isCanceled,
-                  doctorName: Get.locale?.languageCode == 'en'
-                      ? item.docotorNameEn
-                      : item.docotorNameAr,
-                  speciality: Get.locale?.languageCode == 'en'
-                      ? item.docotorJobNameEn
-                      : item.doctorJobNameAr,
-                  date: DateFormat('MM/dd/yyyy hh:mm a',
-                          Get.locale?.languageCode ?? 'en')
-                      .format(DateTime.parse(item.appointmentDateStartTime)),
-                  isDarkMode: _themeController.isDarkMode.value,
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return 31.h.verticalSpace;
-              },
+            150.h.verticalSpace,
+            Obx(
+              () => ListView.separated(
+                padding: EdgeInsets.only(left: 40.0, right: 40.0, bottom: 80.h),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _historyController
+                    .historicList.value.patientAppointments.length,
+                itemBuilder: (context, index) {
+                  PatientAppointment item = _historyController
+                      .historicList.value.patientAppointments[index];
+                  return HistoryItem(
+                    isCanceled: item.isCanceled,
+                    doctorName: Get.locale?.languageCode == 'en'
+                        ? item.docotorNameEn
+                        : item.docotorNameAr,
+                    speciality: Get.locale?.languageCode == 'en'
+                        ? item.docotorJobNameEn ?? ''
+                        : item.doctorJobNameAr ?? '',
+                    date: DateFormat('MM/dd/yyyy hh:mm a',
+                            Get.locale?.languageCode ?? 'en')
+                        .format(DateTime.parse(item.appointmentDateStartTime)),
+                    isDarkMode: _themeController.isDarkMode.value,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return 28.h.verticalSpace;
+                },
+              ),
             ),
-            30.h.verticalSpace,
           ],
         ),
       ),

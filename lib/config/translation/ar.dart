@@ -24,7 +24,7 @@ class Ar {
         /// VERIFICATION PAGE
         'verify_account': 'التحقق من الحساب',
         'enter_verification_code':
-            'من فضلك أدخل رمز التحقق الذي أرسلناه إلى جوالك **',
+            'من فضلك أدخل رمز التحقق الذي أرسلناه إلى جوالك ',
         'seconds': 'ث',
         'resend_code': 'أعد إرسال الرمز',
         'wrong_code': 'رمز خاطئ',
@@ -121,6 +121,7 @@ class Ar {
         'id_10_digits': 'يجب أن يتكون المعرف من 10 أرقام بالضبط',
         'name_not_empty': 'الاسم لا يمكن أن يكون فارغاً',
         'invalid_number': 'رقم هاتف غير صالح',
-        'no_available_time': 'لا يوجد وقت متاح!'
+        'no_available_time': 'لا يوجد وقت متاح!',
+        'search_clinic': 'ابحث عن العيادة'
       };
 }

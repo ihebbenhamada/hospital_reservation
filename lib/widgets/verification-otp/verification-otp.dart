@@ -6,296 +6,109 @@ import '../../config/colors/colors.dart';
 
 class VerificationOTP extends StatefulWidget {
   const VerificationOTP({
-    Key? key,
+    super.key,
     required this.onCompleted,
     required this.onEditing,
     this.isDarkMode = false,
-  }) : super(key: key);
+  });
+
   final ValueChanged<String> onCompleted;
   final ValueChanged<bool> onEditing;
   final bool isDarkMode;
 
   @override
-  _VerificationCodeState createState() => _VerificationCodeState();
+  State<VerificationOTP> createState() => _VerificationCodeState();
 }
 
 class _VerificationCodeState extends State<VerificationOTP> {
-  TextEditingController input1Controller = TextEditingController();
-  TextEditingController input2Controller = TextEditingController();
-  TextEditingController input3Controller = TextEditingController();
-  TextEditingController input4Controller = TextEditingController();
+  final List<TextEditingController> _controllers =
+      List.generate(4, (_) => TextEditingController());
+  final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
 
-  FocusNode input1FocusNode = FocusNode();
-  FocusNode input2FocusNode = FocusNode();
-  FocusNode input3FocusNode = FocusNode();
-  FocusNode input4FocusNode = FocusNode();
+  @override
+  void dispose() {
+    for (final c in _controllers) {
+      c.dispose();
+    }
+    for (final f in _focusNodes) {
+      f.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onFieldChanged(String value, int index) {
+    if (value.length == 1 && index < _focusNodes.length - 1) {
+      _focusNodes[index + 1].requestFocus();
+    } else if (value.isEmpty && index > 0) {
+      _focusNodes[index - 1].requestFocus();
+    }
+
+    final code = _controllers.map((c) => c.text).join();
+    final allFilled = _controllers.every((c) => c.text.isNotEmpty);
+
+    if (allFilled) {
+      widget.onCompleted(code);
+      widget.onEditing(false);
+    } else {
+      widget.onEditing(true);
+    }
+  }
+
+  Widget _buildOtpField(int index) {
+    return SizedBox(
+      height: 43.h,
+      width: 38.h,
+      child: TextField(
+        controller: _controllers[index],
+        focusNode: _focusNodes[index],
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        maxLength: 1,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+          color: AppColors.black1,
+        ),
+        cursorColor: AppColors.primary,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(10),
+          counterText: "",
+          fillColor: widget.isDarkMode ? AppColors.dark1 : AppColors.white,
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(11),
+            borderSide: const BorderSide(color: AppColors.primary),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(11),
+            borderSide: const BorderSide(color: AppColors.primary),
+          ),
+        ),
+        onChanged: (value) => _onFieldChanged(value, index),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 43.h,
-            width: 38.h,
-            child: TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
+        children: List.generate(4 * 2 - 1, (i) {
+          if (i.isEven) {
+            return _buildOtpField(i ~/ 2);
+          } else {
+            return Row(
+              children: [
+                11.horizontalSpace,
+                Container(width: 3.5, height: 1.5.h, color: AppColors.gray1),
+                11.horizontalSpace,
               ],
-              maxLines: 1,
-              maxLength: 1,
-              controller: input1Controller,
-              focusNode: input1FocusNode,
-              showCursor: true,
-              cursorColor: AppColors.primary,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              autocorrect: false,
-              textAlign: TextAlign.end,
-              autofocus: false,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.gray1,
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(12),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                fillColor:
-                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
-                filled: true,
-                counterText: "",
-                errorMaxLines: 1,
-              ),
-              onChanged: (value) {
-                if (value.length == 1) {
-                  FocusScope.of(context).nextFocus();
-                }
-                if (input1Controller.value.text.isNotEmpty &&
-                    input2Controller.value.text.isNotEmpty &&
-                    input3Controller.value.text.isNotEmpty &&
-                    input4Controller.value.text.isNotEmpty) {
-                  widget.onCompleted(input1Controller.value.text +
-                      input2Controller.value.text +
-                      input3Controller.value.text +
-                      input4Controller.value.text);
-                  widget.onEditing(false);
-                } else {
-                  widget.onEditing(true);
-                }
-              },
-            ),
-          ),
-          11.horizontalSpace,
-          Container(
-            width: 3.5,
-            height: 1.5.h,
-            color: AppColors.gray1,
-          ),
-          11.horizontalSpace,
-          SizedBox(
-            height: 43.h,
-            width: 38.h,
-            child: TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              maxLines: 1,
-              maxLength: 1,
-              controller: input2Controller,
-              focusNode: input2FocusNode,
-              showCursor: true,
-              cursorColor: AppColors.primary,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              autocorrect: false,
-              textAlign: TextAlign.end,
-              autofocus: false,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.gray1,
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(10),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                fillColor:
-                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
-                filled: true,
-                counterText: "",
-                errorMaxLines: 1,
-              ),
-              onChanged: (value) {
-                if (value.length == 1) {
-                  FocusScope.of(context).nextFocus();
-                }
-                if (value.isEmpty) {
-                  FocusScope.of(context).previousFocus();
-                }
-                if (input1Controller.value.text.isNotEmpty &&
-                    input2Controller.value.text.isNotEmpty &&
-                    input3Controller.value.text.isNotEmpty &&
-                    input4Controller.value.text.isNotEmpty) {
-                  widget.onCompleted(input1Controller.value.text +
-                      input2Controller.value.text +
-                      input3Controller.value.text +
-                      input4Controller.value.text);
-                  widget.onEditing(false);
-                } else {
-                  widget.onEditing(true);
-                }
-              },
-            ),
-          ),
-          11.horizontalSpace,
-          Container(
-            width: 3.5,
-            height: 1.5.h,
-            color: AppColors.gray1,
-          ),
-          11.horizontalSpace,
-          SizedBox(
-            height: 43.h,
-            width: 38.h,
-            child: TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              maxLines: 1,
-              maxLength: 1,
-              controller: input3Controller,
-              focusNode: input3FocusNode,
-              showCursor: true,
-              cursorColor: AppColors.primary,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              autocorrect: false,
-              textAlign: TextAlign.end,
-              autofocus: false,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.gray1,
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(10),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                fillColor:
-                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
-                filled: true,
-                counterText: "",
-                errorMaxLines: 1,
-              ),
-              onChanged: (value) {
-                if (value.length == 1) {
-                  FocusScope.of(context).nextFocus();
-                }
-                if (value.isEmpty) {
-                  FocusScope.of(context).previousFocus();
-                }
-                if (input1Controller.value.text.isNotEmpty &&
-                    input2Controller.value.text.isNotEmpty &&
-                    input3Controller.value.text.isNotEmpty &&
-                    input4Controller.value.text.isNotEmpty) {
-                  widget.onCompleted(input1Controller.value.text +
-                      input2Controller.value.text +
-                      input3Controller.value.text +
-                      input4Controller.value.text);
-                  widget.onEditing(false);
-                } else {
-                  widget.onEditing(true);
-                }
-              },
-            ),
-          ),
-          11.horizontalSpace,
-          Container(
-            width: 3.5,
-            height: 1.5.h,
-            color: AppColors.gray1,
-          ),
-          11.horizontalSpace,
-          SizedBox(
-            height: 43.h,
-            width: 38.h,
-            child: TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              maxLines: 1,
-              maxLength: 1,
-              controller: input4Controller,
-              focusNode: input4FocusNode,
-              showCursor: true,
-              cursorColor: AppColors.primary,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              autocorrect: false,
-              textAlign: TextAlign.end,
-              autofocus: false,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: AppColors.gray1,
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(10),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.0),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
-                fillColor:
-                    widget.isDarkMode ? AppColors.dark1 : AppColors.white,
-                filled: true,
-                counterText: "",
-                errorMaxLines: 1,
-              ),
-              onChanged: (value) {
-                if (value.isEmpty) {
-                  FocusScope.of(context).previousFocus();
-                }
-                if (input1Controller.value.text.isNotEmpty &&
-                    input2Controller.value.text.isNotEmpty &&
-                    input3Controller.value.text.isNotEmpty &&
-                    input4Controller.value.text.isNotEmpty) {
-                  widget.onCompleted(input1Controller.value.text +
-                      input2Controller.value.text +
-                      input3Controller.value.text +
-                      input4Controller.value.text);
-                  widget.onEditing(false);
-                } else {
-                  widget.onEditing(true);
-                }
-              },
-            ),
-          ),
-        ],
+            );
+          }
+        }),
       ),
     );
   }

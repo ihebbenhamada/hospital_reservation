@@ -30,13 +30,21 @@ class HistoryController extends BaseController {
     super.dispose();
   }
 
-  /// INITIALISATION
-  void initValues() {
+  Future<void> handleRefresh() async {
+    getPatientsAppointments();
+  }
+
+  void getPatientsAppointments() {
     _historyService.getPatientsAppointments().then((value) {
       if (value != null) {
         historicList.value = value;
       }
     });
+  }
+
+  /// INITIALISATION
+  void initValues() {
+    getPatientsAppointments();
   }
 
   /// FUNCTIONS

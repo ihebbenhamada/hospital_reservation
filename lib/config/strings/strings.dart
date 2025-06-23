@@ -101,4 +101,5 @@ class AppStrings {
   static const String token = 'token';
   static const String user = 'user';
   static const String phone = 'phone';
+  static const String searchClinic = 'search_clinic';
 }

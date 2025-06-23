@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inn_tech_appointment/app/auth/signup/services/signup_service.dart';
 import 'package:inn_tech_appointment/app/auth/verification/screens/verification_screen.dart';
 import 'package:inn_tech_appointment/config/colors/colors.dart';
 
@@ -8,6 +11,8 @@ import '../../../../config/strings/strings.dart';
 import '../../login/screens/login_screen.dart';
 
 class SignUpController extends BaseController {
+  final SignUpService _signUpService = SignUpService();
+
   /// TEXT CONTROLLERS
   TextEditingController fullNameTextEditingController = TextEditingController();
   TextEditingController idTextEditingController = TextEditingController();
@@ -48,8 +53,17 @@ class SignUpController extends BaseController {
     isIdValid.value = id.value.length == 10;
     isNameValid.value = fullName.value.isNotEmpty;
     isPhoneNumberValid.value = RegExp(r'^(05)[0-9]{8}$').hasMatch(phone.value);
-
     if (isIdValid.value && isNameValid.value && isPhoneNumberValid.value) {
+      _signUpService.sendOTP(phone: phone.value).then((value) {
+        if (value != null) {
+          log("message : ${value.message}");
+          log("otp : ${value.otp}");
+          log("phoneNumber : ${value.phoneNumber}");
+        } else {
+          print('error');
+        }
+      });
+      clearInputs();
       Get.to(
         () => VerificationScreen(),
         transition: Transition.leftToRight,
@@ -68,7 +82,20 @@ class SignUpController extends BaseController {
     }
   }
 
+  clearInputs() {
+    idTextEditingController.clear();
+    fullNameTextEditingController.clear();
+    phoneNumberTextEditingController.clear();
+    id.value = '';
+    fullName.value = '';
+    phone.value = '';
+    isIdValid.value = false;
+    isNameValid.value = false;
+    isPhoneNumberValid.value = false;
+  }
+
   void handleClickSignIn() async {
+    clearInputs();
     Get.off(
       LoginScreen(),
       transition: Transition.rightToLeft,

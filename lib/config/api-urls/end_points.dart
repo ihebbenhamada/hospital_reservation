@@ -8,6 +8,9 @@ class EndPoints {
   /// CREATE PATIENT
   static const String CREATE_PATENT = '/Authentication/RegisterMobileUser';
 
+  /// CREATE PATIENT
+  static const String SEND_OTP = '/Authentication/SendOTP';
+
   /// GET PATIENT
   static const String GET_PATIENT_STATISTICS_CHART =
       '/PatientProfile/GetPatientStatisticsAndCharts';

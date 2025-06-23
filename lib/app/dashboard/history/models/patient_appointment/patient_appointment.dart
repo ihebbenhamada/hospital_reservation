@@ -13,8 +13,8 @@ class PatientAppointment {
   final int docotorJobId;
   final String docotorNameAr;
   final String docotorNameEn;
-  final String doctorJobNameAr;
-  final String docotorJobNameEn;
+  final String? doctorJobNameAr;
+  final String? docotorJobNameEn;
   final String departmentNameAr;
   final String departmentNameEn;
   final bool isCanceled;
@@ -33,8 +33,8 @@ class PatientAppointment {
     required this.docotorJobId,
     required this.docotorNameAr,
     required this.docotorNameEn,
-    required this.doctorJobNameAr,
-    required this.docotorJobNameEn,
+    this.doctorJobNameAr,
+    this.docotorJobNameEn,
     required this.departmentNameAr,
     required this.departmentNameEn,
     required this.isCanceled,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:inn_tech_appointment/widgets/information-input/information-input.dart';
@@ -79,6 +80,7 @@ class PatientInformationScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.38,
                         hintText: AppStrings.mrn.tr,
                         title: AppStrings.mrn.tr,
+                        enabled: false,
                       ),
                       InformationInput(
                         controller:
@@ -86,6 +88,7 @@ class PatientInformationScreen extends StatelessWidget {
                         height: 50.h,
                         width: MediaQuery.of(context).size.width * 0.38,
                         hintText: AppStrings.serial.tr,
+                        enabled: false,
                       ),
                     ],
                   ),
@@ -96,6 +99,7 @@ class PatientInformationScreen extends StatelessWidget {
                     height: 50.h,
                     width: double.infinity,
                     hintText: AppStrings.patientName.tr,
+                    enabled: false,
                   ),
                   35.h.verticalSpace,
                   InformationInput(
@@ -104,6 +108,11 @@ class PatientInformationScreen extends StatelessWidget {
                     height: 50.h,
                     width: double.infinity,
                     hintText: AppStrings.phoneNumber.tr,
+                    maxLength: 10,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    keyboardType: TextInputType.phone,
                   ),
                 ],
               ),

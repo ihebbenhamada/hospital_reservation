@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:inn_tech_appointment/app/dashboard/history/controllers/history_controller.dart';
 import 'package:inn_tech_appointment/app/dashboard/home/controllers/home_controller.dart';
 import 'package:inn_tech_appointment/app/dashboard/home/model/patient_statistic/patient_statistic.dart';
 import 'package:inn_tech_appointment/app/make-appointment/appointment-success/screens/appointment_success_screen.dart';
@@ -126,7 +127,7 @@ class DashboardController extends BaseController
     }
   }
 
-  void navigateToPage(int index, BuildContext context) {
+  navigateToPage(int index, BuildContext context) {
     Navigator.of(context).pop(); // Close the drawer if open
     selectedIndex = index;
     update();
@@ -147,56 +148,74 @@ class DashboardController extends BaseController
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
-  void bookNow() {
+  bookNow() {
     Get.bottomSheet(
       isScrollControlled: true,
-      Container(
-        width: MediaQuery.of(Get.context!).size.width,
-        color: _themeController.isDarkMode.value
-            ? AppColors.dark2
-            : AppColors.blueLight,
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: pageController,
-                pageSnapping: false,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (int index) {
-                  pageIndex.value = index;
-                },
-                children: <Widget>[
-                  AppointmentStepsScreen(),
-                  ClinicDoctorScreen(),
-                  DateTimeAppointmentScreen(),
-                  PatientInformationScreen(),
-                  AppointmentSuccessScreen()
-                ],
-              ),
+      GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(Get.context!).size.width,
+            height: MediaQuery.of(Get.context!).size.height,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(Get.context!).size.height,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Obx(
-                () => Column(
-                  children: [
-                    ReservationButton(
-                      text: firstButtonText.value.tr,
-                      onClick: onClickNext,
-                    ),
-                    20.h.verticalSpace,
-                    isBackVisible.isTrue
-                        ? ReservationButton(
-                            text: AppStrings.back.tr,
-                            isPrimary: false,
-                            onClick: onClickBack,
-                          )
-                        : const SizedBox(),
-                    80.h.verticalSpace
-                  ],
+            color: _themeController.isDarkMode.value
+                ? AppColors.dark2
+                : AppColors.blueLight,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(Get.context!).size.height * 0.79,
+                  ),
+                  child: PageView(
+                    controller: pageController,
+                    pageSnapping: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (int index) {
+                      pageIndex.value = index;
+                    },
+                    children: <Widget>[
+                      AppointmentStepsScreen(),
+                      ClinicDoctorScreen(),
+                      DateTimeAppointmentScreen(),
+                      PatientInformationScreen(),
+                      AppointmentSuccessScreen(),
+                    ],
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(Get.context!).viewInsets.bottom,
+                    right: 40,
+                    left: 40,
+                  ),
+                  child: Obx(
+                    () => Column(
+                      children: [
+                        ReservationButton(
+                          text: firstButtonText.value.tr,
+                          onClick: onClickNext,
+                        ),
+                        20.h.verticalSpace,
+                        isBackVisible.isTrue
+                            ? ReservationButton(
+                                text: AppStrings.back.tr,
+                                isPrimary: false,
+                                onClick: onClickBack,
+                              )
+                            : const SizedBox(),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
       barrierColor: AppColors.gray1,
@@ -225,7 +244,9 @@ class DashboardController extends BaseController
         isBackVisible.value = true;
         firstButtonText.value = AppStrings.startYourAppointment;
         HomeController homeController = Get.find();
+        HistoryController historyController = Get.find();
         homeController.getHomeInformation();
+        historyController.getPatientsAppointments();
         selectedDate.value = DateTime.now();
         break;
     }
@@ -236,11 +257,14 @@ class DashboardController extends BaseController
       Get.back();
       return;
     }
+    if (pageIndex.value == 2) {
+      selectedDate.value = DateTime.now();
+    }
     pageIndex.value--;
     animateTo(pageIndex.value);
   }
 
-  void handleClickNotifications() {
+  handleClickNotifications() {
     Get.to(
       () => NotificationsScreen(),
       transition: Transition.rightToLeft,
@@ -249,7 +273,7 @@ class DashboardController extends BaseController
     );
   }
 
-  void handleClickProfile() {
+  handleClickProfile() {
     Get.to(
       () => ProfileScreen(),
       transition: Transition.rightToLeft,
@@ -258,7 +282,7 @@ class DashboardController extends BaseController
     );
   }
 
-  void initViews() {
+  initViews() {
     if (GetStorage().read('patient') != null) {
       patient.value = PatientStatistics.fromJson(
         GetStorage().read('patient') as Map<String, dynamic>,
@@ -349,7 +373,7 @@ class DashboardController extends BaseController
   }
 
   ///DATE TIME APPOINTMENT
-  void selectDate(BuildContext context) async {
+  selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       builder: (context, child) {
         return Theme(
@@ -397,7 +421,7 @@ class DashboardController extends BaseController
     }
   }
 
-  void selectTime(DoctorSchedule doctorSchedule) {
+  selectTime(DoctorSchedule doctorSchedule) {
     selectedDoctorSchedule = doctorSchedule;
     update();
   }
@@ -421,8 +445,12 @@ class DashboardController extends BaseController
               GetStorage().read('mrn') ?? '';
           dataCreateAppointment.value.patientId = value.id;
           AppInterceptor.hideLoader();
-          loginResponse.value = LoginResponse.fromJson(
-              GetStorage().read('user') as Map<String, dynamic>);
+          if (GetStorage().read('user') is Map<String, dynamic>) {
+            loginResponse.value = LoginResponse.fromJson(
+                GetStorage().read('user') as Map<String, dynamic>);
+          } else if (GetStorage().read('user') is LoginResponse) {
+            loginResponse.value = GetStorage().read('user') as LoginResponse;
+          }
           mrnTextEditingController = TextEditingController();
           serialTextEditingController = TextEditingController();
           patientNameTextEditingController = TextEditingController();
@@ -475,5 +503,26 @@ class DashboardController extends BaseController
         );*/
       }
     });
+  }
+
+  Future<List<Clinic>> searchClinic(String value) async {
+    return clinicsList
+        .where(
+          (clinic) => Get.locale?.countryCode == 'en'
+              ? clinic.departmentNameEn
+                  .toLowerCase()
+                  .contains(value.toLowerCase())
+              : clinic.departmentNameAr.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ),
+        )
+        .toList();
+  }
+
+  Future<List<Doctor>> searchDoctor(String value) async {
+    return doctorsList
+        .where((doctor) =>
+            doctor.fullName.toLowerCase().contains(value.toLowerCase()))
+        .toList();
   }
 }

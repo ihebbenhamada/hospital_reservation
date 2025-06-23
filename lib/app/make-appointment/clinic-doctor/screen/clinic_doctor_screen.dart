@@ -1,3 +1,4 @@
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class ClinicDoctorScreen extends StatelessWidget {
       backgroundColor: _themeController.isDarkMode.value
           ? AppColors.dark2
           : AppColors.blueLight,
+      resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
@@ -28,7 +30,7 @@ class ClinicDoctorScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            100.h.verticalSpace,
+            85.h.verticalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,99 +73,218 @@ class ClinicDoctorScreen extends StatelessWidget {
                     ),
                   ),
                   28.h.verticalSpace,
-                  Container(
-                    width: double.infinity,
-                    height: 60.h,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 23,
-                    ),
-                    decoration: BoxDecoration(
-                      color: _themeController.isDarkMode.value
-                          ? AppColors.dark1
-                          : AppColors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Obx(
-                      () => DropdownButtonHideUnderline(
-                        child: DropdownButton<Clinic>(
-                          value: _dashboardController.selectedClinic.value,
+                  Obx(
+                    () => CustomDropdown<Clinic>.searchRequest(
+                      items: _dashboardController.clinicsList,
+                      listItemBuilder:
+                          (context, clinic, isSelected, onItemSelect) {
+                        return Text(
+                          Get.locale?.languageCode == 'en'
+                              ? clinic.departmentNameEn
+                              : clinic.departmentNameAr,
                           style: TextStyle(
-                            color: AppColors.gray5,
-                            fontSize: 12.sp,
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                          isExpanded: true,
-                          alignment: Alignment.bottomCenter,
-                          icon: Image.asset(
-                            AppImages.arrowDrop,
-                            height: 8.h,
+                        );
+                      },
+                      headerBuilder: (context, emp, isTrue) {
+                        return Text(
+                          Get.locale?.languageCode == 'en'
+                              ? _dashboardController
+                                      .selectedClinic.value?.departmentNameEn ??
+                                  ""
+                              : _dashboardController
+                                      .selectedClinic.value?.departmentNameAr ??
+                                  "",
+                          style: TextStyle(
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
                           ),
-                          onChanged: (Clinic? newValue) =>
-                              _dashboardController.onSelectClinic(newValue),
-                          items: _dashboardController.clinicsList
-                              .map<DropdownMenuItem<Clinic>>((Clinic value) {
-                            return DropdownMenuItem<Clinic>(
-                              value: value,
-                              child: Text(value.departmentNameEn),
-                            );
-                          }).toList(),
+                        );
+                      },
+                      closedHeaderPadding: EdgeInsets.symmetric(
+                        horizontal: 23,
+                        vertical: 18.h,
+                      ),
+                      initialItem: _dashboardController.selectedClinic.value,
+                      decoration: CustomDropdownDecoration(
+                        hintStyle: TextStyle(
+                          fontSize: 14.sp,
+                        ),
+                        closedSuffixIcon: Image.asset(
+                          AppImages.arrowDrop,
+                          height: 8.h,
+                          color: _themeController.isDarkMode.value
+                              ? AppColors.white
+                              : AppColors.gray5,
+                        ),
+                        closedBorderRadius: BorderRadius.circular(30),
+                        closedFillColor: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
+                        expandedFillColor: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
+                        expandedBorderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        closedShadow: [
+                          BoxShadow(
+                            color: const Color.fromRGBO(0, 0, 0, 0.1),
+                            offset: const Offset(0.0, 1),
+                            blurRadius: 10.0.h,
+                            spreadRadius: 0.h,
+                          ),
+                        ],
+                        expandedShadow: [
+                          BoxShadow(
+                            color: const Color.fromRGBO(0, 0, 0, 0.1),
+                            offset: const Offset(0.0, 1),
+                            blurRadius: 10.0.h,
+                            spreadRadius: 0.h,
+                          ),
+                        ],
+                        listItemDecoration: ListItemDecoration(
+                          selectedColor: _themeController.isDarkMode.value
+                              ? AppColors.dark1
+                              : AppColors.white,
+                          splashColor: _themeController.isDarkMode.value
+                              ? AppColors.dark2
+                              : AppColors.white,
+                          highlightColor: _themeController.isDarkMode.value
+                              ? AppColors.dark2
+                              : AppColors.white,
+                        ),
+                        searchFieldDecoration: SearchFieldDecoration(
+                          fillColor: _themeController.isDarkMode.value
+                              ? AppColors.dark1
+                              : AppColors.gray2,
+                          textStyle: TextStyle(
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          hintStyle: TextStyle(
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
+                      searchHintText: AppStrings.searchClinic.tr,
+                      futureRequest: (value) =>
+                          _dashboardController.searchClinic(value),
+                      onChanged: (Clinic? newValue) =>
+                          _dashboardController.onSelectClinic(newValue),
                     ),
                   ),
-                  40.h.verticalSpace,
-                  Container(
-                    width: double.infinity,
-                    height: 60.h,
-                    padding: const EdgeInsets.symmetric(horizontal: 23),
-                    decoration: BoxDecoration(
-                      color: _themeController.isDarkMode.value
-                          ? AppColors.dark1
-                          : AppColors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromRGBO(0, 0, 0, 0.1),
-                          offset: const Offset(0.0, 1),
-                          blurRadius: 10.0.h,
-                          spreadRadius: 0.h,
-                        ),
-                      ],
-                    ),
-                    child: Obx(
-                      () => DropdownButtonHideUnderline(
-                        child: DropdownButton<Doctor>(
-                          value: _dashboardController.selectedDoctor.value,
+                  28.h.verticalSpace,
+                  Obx(
+                    () => CustomDropdown<Doctor>(
+                      items: _dashboardController.doctorsList,
+                      hintText: "select_employee".tr,
+                      listItemBuilder:
+                          (context, doctor, isSelected, onItemSelect) {
+                        return Text(
+                          doctor.fullName,
                           style: TextStyle(
-                            color: AppColors.gray5,
-                            fontSize: 12.sp,
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                          isExpanded: true,
-                          alignment: Alignment.bottomCenter,
-                          icon: Image.asset(
-                            AppImages.arrowDrop,
-                            height: 8.h,
+                        );
+                      },
+                      headerBuilder: (context, emp, isTrue) {
+                        return Text(
+                          _dashboardController.selectedDoctor.value?.fullName ??
+                              "",
+                          style: TextStyle(
+                            color: _themeController.isDarkMode.value
+                                ? AppColors.white
+                                : AppColors.gray5,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
                           ),
-                          onChanged: (Doctor? newValue) =>
-                              _dashboardController.onSelectDoctor(newValue),
-                          items: _dashboardController.doctorsList
-                              .map<DropdownMenuItem<Doctor>>((Doctor value) {
-                            return DropdownMenuItem<Doctor>(
-                              value: value,
-                              child: Text(value.fullName),
-                            );
-                          }).toList(),
+                        );
+                      },
+                      closedHeaderPadding: EdgeInsets.symmetric(
+                        horizontal: 23,
+                        vertical: 18.h,
+                      ),
+                      initialItem: _dashboardController.selectedDoctor.value,
+                      decoration: CustomDropdownDecoration(
+                        hintStyle: TextStyle(
+                          fontSize: 14.sp,
+                        ),
+                        closedSuffixIcon: Image.asset(
+                          AppImages.arrowDrop,
+                          height: 8.h,
+                          color: _themeController.isDarkMode.value
+                              ? AppColors.white
+                              : AppColors.gray5,
+                        ),
+                        closedBorderRadius: BorderRadius.circular(30),
+                        closedFillColor: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
+                        expandedFillColor: _themeController.isDarkMode.value
+                            ? AppColors.dark1
+                            : AppColors.white,
+                        expandedBorderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        closedShadow: [
+                          BoxShadow(
+                            color: const Color.fromRGBO(0, 0, 0, 0.1),
+                            offset: const Offset(0.0, 1),
+                            blurRadius: 10.0.h,
+                            spreadRadius: 0.h,
+                          ),
+                        ],
+                        expandedShadow: [
+                          BoxShadow(
+                            color: const Color.fromRGBO(0, 0, 0, 0.1),
+                            offset: const Offset(0.0, 1),
+                            blurRadius: 10.0.h,
+                            spreadRadius: 0.h,
+                          ),
+                        ],
+                        listItemDecoration: ListItemDecoration(
+                          selectedColor: _themeController.isDarkMode.value
+                              ? AppColors.dark1
+                              : AppColors.white,
+                          splashColor: _themeController.isDarkMode.value
+                              ? AppColors.dark2
+                              : AppColors.white,
+                          highlightColor: _themeController.isDarkMode.value
+                              ? AppColors.dark2
+                              : AppColors.white,
                         ),
                       ),
+                      /*futureRequest: (value) =>
+                              _dashboardController.searchDoctor(value),*/
+                      onChanged: (Doctor? doctor) {
+                        _dashboardController.selectedDoctor.value = doctor!;
+                      },
                     ),
                   ),
                 ],
