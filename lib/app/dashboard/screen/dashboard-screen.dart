@@ -228,7 +228,7 @@ class DashboardScreen extends StatelessWidget {
                     behavior: HitTestBehavior.opaque,
                     child: Container(
                       height: 40.h,
-                      width: 134,
+                      width: 134.w,
                       decoration: BoxDecoration(
                         color: AppColors.primary,
                         borderRadius: BorderRadius.circular(26),
@@ -293,14 +293,14 @@ class DashboardScreen extends StatelessWidget {
                     BottomNavigationBarItem(
                       activeIcon: Image.asset(
                         AppImages.home,
-                        height: 29,
-                        width: 29,
+                        height: 29.h,
+                        width: 29.h,
                         color: AppColors.primary,
                       ),
                       icon: Image.asset(
                         AppImages.home,
-                        height: 29,
-                        width: 29,
+                        height: 29.h,
+                        width: 29.h,
                         color: themeController.isDarkMode.value
                             ? AppColors.gray1
                             : AppColors.gray3,
@@ -310,14 +310,14 @@ class DashboardScreen extends StatelessWidget {
                     BottomNavigationBarItem(
                       activeIcon: Image.asset(
                         AppImages.history,
-                        height: 26,
-                        width: 26,
+                        height: 26.h,
+                        width: 26.h,
                         color: AppColors.primary,
                       ),
                       icon: Image.asset(
                         AppImages.history,
-                        height: 26,
-                        width: 26,
+                        height: 26.h,
+                        width: 26.h,
                         color: themeController.isDarkMode.value
                             ? AppColors.gray1
                             : AppColors.gray3,
@@ -326,13 +326,13 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     BottomNavigationBarItem(
                       activeIcon: Container(
-                        height: 25,
-                        width: 23,
+                        height: 25.h,
+                        width: 23.h,
                         color: AppColors.white.withOpacity(0),
                       ),
                       icon: Container(
-                        height: 25,
-                        width: 23,
+                        height: 25.h,
+                        width: 23.h,
                         color: AppColors.white.withOpacity(0),
                       ),
                       label: AppStrings.bookNow2.tr,
@@ -340,14 +340,14 @@ class DashboardScreen extends StatelessWidget {
                     BottomNavigationBarItem(
                       activeIcon: Image.asset(
                         AppImages.settings,
-                        height: 23,
-                        width: 23,
+                        height: 23.h,
+                        width: 23.h,
                         color: AppColors.primary,
                       ),
                       icon: Image.asset(
                         AppImages.settings,
-                        height: 23,
-                        width: 23,
+                        height: 23.h,
+                        width: 23.h,
                         color: themeController.isDarkMode.value
                             ? AppColors.gray1
                             : AppColors.gray3,
@@ -357,14 +357,14 @@ class DashboardScreen extends StatelessWidget {
                     BottomNavigationBarItem(
                       activeIcon: Image.asset(
                         AppImages.logout,
-                        height: 21,
-                        width: 21,
+                        height: 21.h,
+                        width: 21.h,
                         color: AppColors.primary,
                       ),
                       icon: Image.asset(
                         AppImages.logout,
-                        height: 21,
-                        width: 21,
+                        height: 21.h,
+                        width: 21.h,
                         color: themeController.isDarkMode.value
                             ? AppColors.gray1
                             : AppColors.gray3,
@@ -404,13 +404,13 @@ class DashboardScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               AppImages.userPhoto,
-                              height: 50.h,
-                              width: 50.h,
+                              height: 50,
+                              width: 50,
                             ),
                             Image.asset(
                               AppImages.signupUserShape,
-                              height: 50.h,
-                              width: 50.h,
+                              height: 50,
+                              width: 50,
                             ),
                           ],
                         ),
@@ -608,7 +608,7 @@ class DashboardScreen extends StatelessWidget {
                     child: Image.asset(
                       AppImages.appointment,
                       height: 22.h,
-                      width: 25,
+                      width: 25.h,
                       color: themeController.isDarkMode.value
                           ? AppColors.gray1
                           : AppColors.gray3,
@@ -626,7 +626,7 @@ class DashboardScreen extends StatelessWidget {
                     fontSize: 13.sp,
                   ),
                 ),
-                9.h.verticalSpace,
+                9.verticalSpace,
               ],
             ),
           ),

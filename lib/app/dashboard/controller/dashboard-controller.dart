@@ -474,9 +474,14 @@ class DashboardController extends BaseController
               dataCreateAppointment.value.appointmentNo.toString();
           patientNameTextEditingController.text =
               GetStorage().read('patientName') ?? "";
-          mobileTextEditingController.text = (LoginResponse.fromJson(
-                  GetStorage().read('user') as Map<String, dynamic>))
-              .phoneNumber;
+          if (GetStorage().read('user') is Map<String, dynamic>) {
+            mobileTextEditingController.text = LoginResponse.fromJson(
+                    GetStorage().read('user') as Map<String, dynamic>)
+                .phoneNumber;
+          } else if (GetStorage().read('user') is LoginResponse) {
+            mobileTextEditingController.text =
+                (GetStorage().read('user') as LoginResponse).phoneNumber;
+          }
           pageIndex.value++;
           animateTo(pageIndex.value);
         }

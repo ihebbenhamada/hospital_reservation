@@ -28,10 +28,11 @@ class HistoryScreen extends StatelessWidget {
         edgeOffset: 150.h,
         child: ListView(
           children: [
-            150.h.verticalSpace,
+            150.verticalSpace,
             Obx(
               () => ListView.separated(
-                padding: EdgeInsets.only(left: 40.0, right: 40.0, bottom: 80.h),
+                padding:
+                    EdgeInsets.only(left: 40.0.w, right: 40.0.w, bottom: 80),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: _historyController

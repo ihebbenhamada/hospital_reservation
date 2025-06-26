@@ -5,14 +5,14 @@ import 'package:inn_tech_appointment/config/colors/colors.dart';
 
 class DashboardGridItem extends StatelessWidget {
   const DashboardGridItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.value,
     required this.title,
     required this.description,
     this.isPrimary = false,
     this.isDarkMode = false,
-  }) : super(key: key);
+  });
 
   final String icon;
   final String value;
@@ -51,8 +51,8 @@ class DashboardGridItem extends StatelessWidget {
             children: [
               Image.asset(
                 icon,
-                height: 28,
-                width: 28,
+                height: 28.h,
+                width: 28.h,
                 color:
                     isPrimary || isDarkMode ? AppColors.white : AppColors.gray3,
               ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:inn_tech_appointment/app/make-appointment/clinic-doctor/models/data_create_appointment/data_create_appointment.dart';
 import 'package:inn_tech_appointment/app/make-appointment/patient-information/services/patient_info_service.dart';
-import 'package:logger/logger.dart';
 
 import '../../../../config/controllerConfig/base_controller.dart';
 import '../../../auth/login/models/login_response.dart';
@@ -48,8 +47,12 @@ class PatientInformationController extends BaseController {
 
   /// INITIALISATION
   void initValues() {
-    loginResponse.value = LoginResponse.fromJson(
-        GetStorage().read('user') as Map<String, dynamic>);
+    if (GetStorage().read('user') is Map<String, dynamic>) {
+      loginResponse.value = LoginResponse.fromJson(
+          GetStorage().read('user') as Map<String, dynamic>);
+    } else if (GetStorage().read('user') is LoginResponse) {
+      loginResponse.value = GetStorage().read('user') as LoginResponse;
+    }
     mrnTextEditingController = TextEditingController();
     serialTextEditingController = TextEditingController();
     patientNameTextEditingController = TextEditingController();
@@ -65,10 +68,15 @@ class PatientInformationController extends BaseController {
           dataCreateAppointment.value.appointmentNo.toString();
       patientNameTextEditingController.text =
           GetStorage().read('patientName') ?? "";
-      Logger().e(GetStorage().read('user'));
-      mobileTextEditingController.text = (LoginResponse.fromJson(
-              GetStorage().read('user') as Map<String, dynamic>))
-          .phoneNumber;
+
+      if (GetStorage().read('user') is Map<String, dynamic>) {
+        mobileTextEditingController.text = LoginResponse.fromJson(
+                GetStorage().read('user') as Map<String, dynamic>)
+            .phoneNumber;
+      } else if (GetStorage().read('user') is LoginResponse) {
+        mobileTextEditingController.text =
+            (GetStorage().read('user') as LoginResponse).phoneNumber;
+      }
     }
   }
 }

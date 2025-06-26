@@ -29,8 +29,8 @@ class SettingsItem extends StatelessWidget {
     return GestureDetector(
       onTap: onToggleSwitch,
       child: Container(
-        height: 160.h,
-        width: 160.h,
+        height: 0.36.sw,
+        width: 0.36.sw,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: isDarkMode ? AppColors.dark1 : AppColors.white,
@@ -54,8 +54,8 @@ class SettingsItem extends StatelessWidget {
               children: [
                 Image.asset(
                   icon,
-                  height: 28,
-                  width: 28,
+                  height: 28.h,
+                  width: 28.h,
                   color: isDarkMode ? AppColors.white : AppColors.gray4,
                 ),
                 isEnabled != null

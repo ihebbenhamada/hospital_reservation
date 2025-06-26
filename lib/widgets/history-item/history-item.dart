@@ -36,7 +36,7 @@ class HistoryItem extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: isDarkMode ? AppColors.dark1 : AppColors.white,
-            borderRadius: BorderRadius.circular(35),
+            borderRadius: BorderRadius.circular(30.h),
             boxShadow: [
               BoxShadow(
                 color: const Color.fromRGBO(0, 0, 0, 0.1),

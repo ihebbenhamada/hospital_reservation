@@ -20,10 +20,10 @@ class SettingsScreen extends StatelessWidget {
           ? AppColors.dark2
           : AppColors.blueLight,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        padding: EdgeInsets.symmetric(horizontal: 40.0.w),
         child: Column(
           children: [
-            220.h.verticalSpace,
+            220.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               textDirection: TextDirection.ltr,

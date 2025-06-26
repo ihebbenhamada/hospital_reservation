@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              280.h.verticalSpace,
+              280.verticalSpace,
               Text(
                 AppStrings.signIn.tr.toUpperCase(),
                 style: TextStyle(
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                       : AppColors.black1,
                 ),
               ),
-              10.h.verticalSpace,
+              10.verticalSpace,
               Text(
                 AppStrings.fillCredentials.tr,
                 style: TextStyle(
@@ -55,10 +55,10 @@ class LoginScreen extends StatelessWidget {
                   color: AppColors.gray1,
                 ),
               ),
-              33.h.verticalSpace,
+              33.verticalSpace,
               ReservationInput(
                 controller: _authController.idTextEditingController,
-                height: 63.h,
+                height: 63,
                 width: double.infinity,
                 isDarkMode: themeController.isDarkMode.value,
                 hintText: AppStrings.idNumber.tr,
@@ -74,15 +74,15 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Image.asset(
                     AppImages.id,
-                    height: 20.h,
-                    width: 20.h,
+                    height: 20,
+                    width: 20,
                   ),
                 ),
               ),
-              37.h.verticalSpace,
+              37.verticalSpace,
               ReservationInput(
                 controller: _authController.passwordTextEditingController,
-                height: 63.h,
+                height: 63,
                 obscureText: true,
                 width: double.infinity,
                 hintText: AppStrings.password.tr,
@@ -94,12 +94,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Image.asset(
                     AppImages.password,
-                    height: 20.h,
-                    width: 20.h,
+                    height: 20,
+                    width: 20,
                   ),
                 ),
               ),
-              23.h.verticalSpace,
+              23.verticalSpace,
               GestureDetector(
                 onTap: _authController.handleClickForgetPassword,
                 child: Align(
@@ -114,12 +114,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              50.h.verticalSpace,
+              50.verticalSpace,
               ReservationButton(
                 text: AppStrings.signIn.tr.toUpperCase(),
                 onClick: _authController.handleClickSignIn,
               ),
-              47.h.verticalSpace,
+              47.verticalSpace,
               Center(
                 child: Text(
                   AppStrings.dontHaveAccount.tr,
@@ -130,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              15.h.verticalSpace,
+              15.verticalSpace,
               GestureDetector(
                 onTap: _authController.handleClickSignup,
                 child: Center(
